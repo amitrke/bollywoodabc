@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<!-- Layouts -->
+	<definition name="admin.layout" template="/WEB-INF/jsp/admin/adminBaseLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/admin/adminHeader.jsp" />
+		<put-attribute name="left"
+			value="/WEB-INF/jsp/admin/adminLeftMenu.jsp" />
+	</definition>
+
+	<definition name="admin.homepage" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/home.jsp" />
+	</definition>
+	
+	<definition name="admin.listCategories" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/listCategories.jsp" />
+	</definition>
+	<definition name="admin.updateCategory" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/updateCategory.jsp" />
+	</definition>
+	<definition name="admin.updateStory" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/updateStory.jsp" />
+	</definition>
+	<definition name="admin.listStories" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/listStories.jsp" />
+	</definition>
+	<definition name="admin.addPicsToGallery" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/addPicsToGallery.jsp" />
+	</definition>
+	<definition name="admin.listPhotogalleries" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/listPhotogalleries.jsp" />
+	</definition>
+	<definition name="admin.photoGalleryDetails" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/photoGalleryDetails.jsp" />
+	</definition>
+	
+	<definition name="admin.updatePicture" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/updatePicture.jsp" />
+	</definition>
+	<definition name="admin.listPictures" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/listPictures.jsp" />
+	</definition>
+	<definition name="admin.photoGalleryDetails" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/photoGalleryDetails.jsp" />
+	</definition>
+	
+</tiles-definitions>

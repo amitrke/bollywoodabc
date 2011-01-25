@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+<!-- Layouts -->
+<definition name="ui.layout" template="/WEB-INF/jsp/ui/layout.jsp">
+	<put-attribute name="googleAnalytics" value="/WEB-INF/jsp/ui/googleanalytics.jsp"/>
+	<put-attribute name="header" value="/WEB-INF/jsp/ui/header.jsp"/>
+	<put-attribute name="footer" value="/WEB-INF/jsp/ui/footer.jsp"/>
+</definition>
+
+<definition name="ui.baseLayout" extends="ui.layout">
+	<put-attribute name="body" value="/WEB-INF/jsp/ui/baseLayout.jsp"/>
+</definition>
+
+<definition name="ui.baseLayoutWithDefaultMenu" extends="ui.baseLayout">
+	<put-attribute name="leftMenu" value="/WEB-INF/jsp/ui/leftMenu.jsp" cascade="true"/>
+</definition>
+
+<definition name="ui.base.white" extends="ui.baseLayoutWithDefaultMenu">
+	<put-attribute name="backgroundColor" value="#FFFFFF" cascade="true"/>
+	<put-attribute name="contentStyle" value="whitecontent" cascade="true"/>
+</definition>
+
+<definition name="ui.base.red" extends="ui.baseLayoutWithDefaultMenu">
+	<put-attribute name="backgroundColor" value="#DB3F26" cascade="true"/>
+	<put-attribute name="contentStyle" value="redcontent" cascade="true"/>
+</definition>
+
+<!-- Home page -->
+<definition name="ui.homepage" extends="ui.layout">
+	<put-attribute name="body" value="/WEB-INF/jsp/ui/home.jsp"/>
+</definition>
+
+<!-- Story -->
+<definition name="ui.story.list" extends="ui.base.red">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/story-list.jsp" cascade="true"/>
+</definition>
+
+<definition name="ui.story.display" extends="ui.base.white">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/story.jsp" cascade="true"/>
+</definition>
+
+<definition name="ui.story.add" extends="ui.base.white">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/addNews.jsp" cascade="true"/>
+</definition>
+
+<!-- Others -->
+<definition name="ui.disclaimer" extends="ui.base.white">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/disclaimer.jsp" cascade="true"/>
+</definition>
+
+<!-- Photogallery -->
+<definition name="ui.photogallery.main" extends="ui.base.red">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/photogallery-main.jsp" cascade="true"/>
+</definition>
+
+<definition name="ui.photogallery.detail" extends="ui.base.red">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/photogallery-detail.jsp" cascade="true"/>
+</definition>
+
+<definition name="ui.photogallery.picpage" template="/WEB-INF/jsp/ui/photogallery-imagedisplay.jsp">
+	<put-attribute name="googleAnalytics" value="/WEB-INF/jsp/ui/googleanalytics.jsp"/>
+</definition>
+
+<!-- Forum -->
+<definition name="ui.forum.home" extends="ui.base.red">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/forum.jsp" cascade="true"/>
+</definition>
+</tiles-definitions>
