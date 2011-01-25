@@ -1,0 +1,56 @@
+/* CSS Document */
+
+body{margin:0px; background-image:url('images/bodyBG.gif')}
+
+td {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#333333; text-decoration:none;}
+
+.input{font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#333333; text-decoration:none;}
+
+.barBrd{border-top:1px solid #ffffff; border-bottom:1px solid #ffffff;}
+
+.whiteBrdImg{border:1px solid #ffffff; padding:1px;}
+
+.yellowBrdImg{border:1px solid #F9FFCF; padding:1px;}
+
+.yellowtxt {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#F9FFCF; text-decoration:none;}
+
+.whitetxt {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#Ffffff; text-decoration:none;}
+
+.yellowlink:link {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#F9FFCF; text-decoration:underline;}
+.yellowlink:visited  {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#F9FFCF; text-decoration:underline;}
+.yellowlink:hover{font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#F9FFCF; text-decoration:none;}
+
+.yellow1link:link {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px;  font-weight:bold; color:#F9FFCF; text-decoration:none;}
+.yellow1link:visited  {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; color:#F9FFCF; text-decoration:none;}
+.yellow1link:hover{font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; color:#F9FFCF; text-decoration:none;}
+
+.whitelink:link {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#ffffff; text-decoration:none;}
+.whitelink:visited  {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#ffffff; text-decoration:none;}
+.whitelink:hover{font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#ffffff; text-decoration:underline;}
+
+.help:link {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#333333; text-decoration:none;}
+.help:visited  {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#333333; text-decoration:none;}
+.help:hover{font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#333333; text-decoration:underline;}
+
+.bot:link {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#ffffff; text-decoration:none;}
+.bot:visited  {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#ffffff; text-decoration:none;}
+.bot:hover{font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#ffffff; text-decoration:underline;}
+
+.h1 {font-family:Verdana, Arial, Helvetica, sans-serif; font-size:17px;  font-weight:bold; color:#333333; text-decoration:none; }
+
+.quote {
+font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px;  font-weight:bold; color:#333333; text-decoration:none;
+}
+.story {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+img
+{  border-style: none;
+}
+
+.style3 {font-family: Arial, Helvetica, sans-serif; font-size: x-small; color: #FF0000; font-weight: bold; }
+.style4 {font-family: Arial, Helvetica, sans-serif; font-size: small; color: #FF0000; font-weight: bold; }
+		
+#redcontent h1 {font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px;  font-weight:bold; color:#F9FFCF; text-decoration:none; }
