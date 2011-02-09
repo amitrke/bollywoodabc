@@ -124,7 +124,7 @@ public class StoryDao extends AbstractBaseDao<StoryEntity> {
 	@Override
 	protected Query newQuery() {
 		Query query =  super.newQuery();
-		//query.addFilter("status", EQUAL, AppConstants.STATUS_ACTIVE);
+		query.addFilter("status", EQUAL, AppConstants.ENTITY_STATUS_ENABLED);
 		query.addSort("createDate", SortDirection.DESCENDING);
 		query.addSort("priority", SortDirection.DESCENDING);
 		return query;

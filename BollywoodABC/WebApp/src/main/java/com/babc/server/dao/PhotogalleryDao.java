@@ -18,6 +18,7 @@ import com.babc.server.model.StoryEntity;
 import com.babc.server.utils.EntityCache;
 import com.babc.server.utils.QueryCache;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 
 /**
  * @author amit
@@ -34,7 +35,8 @@ public class PhotogalleryDao extends AbstractBaseDao<Photogallery> {
 	@Override
 	protected Query newQuery() {
 		Query query = super.newQuery();
-		//query.addFilter("status", EQUAL, AppConstants.STATUS_ACTIVE);
+		query.addFilter("status", EQUAL, AppConstants.ENTITY_STATUS_ENABLED);
+		query.addSort("id", SortDirection.DESCENDING);
 		return query;
 	}
 	

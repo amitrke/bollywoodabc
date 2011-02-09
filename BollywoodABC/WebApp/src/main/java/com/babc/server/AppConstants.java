@@ -12,6 +12,7 @@ public class AppConstants {
 	public static final String HTML_DEFAULT_KEYWORDS = "Bollywood News, Bollywood Pictures, Gossips, Events, Movie Releases";
 	
 	public static final int DATA_DEFAULT_LIMIT = 10; 
+	
 	/*
 	 * Category Types
 	 */
@@ -29,6 +30,6 @@ public class AppConstants {
 	public static final Long CAT_HOLLYWOOD = 141009L;
 	public static final Long CAT_BOLLYWOOD = 1001L;
 	
-	public static final int ENTITY_STATUS_ENABLED = 45;
+	public static final int ENTITY_STATUS_ENABLED = 65;
 	public static final int ENTITY_STATUS_DISABLED = 46;
 }
