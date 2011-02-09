@@ -8,7 +8,7 @@
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td><a href="/admin/category/list.htm">List</a></td>
+		<td><a href="/admin/category/list/1.htm">List</a></td>
 	</tr>
 	<tr>
 		<td colspan="2">Story</td>
@@ -19,7 +19,7 @@
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td><a href="/admin/story/list.htm">List</a></td>
+		<td><a href="/admin/story/list/1.htm">List</a></td>
 	</tr>
 	<tr>
 		<td colspan="2">Picture</td>
