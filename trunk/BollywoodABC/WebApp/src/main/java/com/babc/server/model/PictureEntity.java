@@ -3,6 +3,7 @@ package com.babc.server.model;
 import static com.babc.server.utils.EntityUtil.getBlobProperty;
 import static com.babc.server.utils.EntityUtil.getDateProperty;
 import static com.babc.server.utils.EntityUtil.getStringProperty;
+import static com.babc.server.utils.EntityUtil.getIntegerProperty;
 
 import java.util.Date;
 
@@ -12,9 +13,13 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import static com.babc.server.utils.EntityUtil.setProperty;
+
+import com.babc.server.AppConstants;
 import com.babc.server.utils.AppUtils;
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class PictureEntity extends BaseEntityImpl{
@@ -38,7 +43,7 @@ public class PictureEntity extends BaseEntityImpl{
 	private Blob thumbData;
 	
 	@Persistent
-	private char status;
+	private int status;
 	
 	@Persistent
 	private Date createDate;
@@ -49,7 +54,7 @@ public class PictureEntity extends BaseEntityImpl{
 		this.id = id;
 	}
 
-	public PictureEntity(String filename, String caption, Blob data, char status) {
+	public PictureEntity(String filename, String caption, Blob data, int status) {
 		this.filename = filename;
 		this.caption = caption;
 		this.data = data;
@@ -110,7 +115,7 @@ public class PictureEntity extends BaseEntityImpl{
 		return thumbData;
 	}
 
-	public char getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
@@ -123,9 +128,20 @@ public class PictureEntity extends BaseEntityImpl{
 	}
 	
 	@Override
+	public void setKey(Key key) {
+		super.setKey(key);
+		id = key.getId();
+	}
+
+	@Override
 	public void save(Entity entity) {
-		// TODO Auto-generated method stub
 		super.save(entity);
+		setProperty(entity, "filename", filename, false);
+		setProperty(entity, "caption", caption, false);
+		setProperty(entity, "data", data.getBytes());
+		setProperty(entity, "thumbData", thumbData.getBytes());
+		setProperty(entity, "status", status, true);
+		setProperty(entity, "createDate", createDate, true);
 	}
 
 	@Override
@@ -136,7 +152,7 @@ public class PictureEntity extends BaseEntityImpl{
 		caption = getStringProperty(entity, "caption");
 		data = new Blob(getBlobProperty(entity, "data"));
 		thumbData = new Blob(getBlobProperty(entity, "thumbData"));
-		status = 'A';//getStringProperty(entity, "status");
+		status = getIntegerProperty(entity, "status", AppConstants.ENTITY_STATUS_ENABLED);
 		createDate = getDateProperty(entity, "createDate");
 	}
 

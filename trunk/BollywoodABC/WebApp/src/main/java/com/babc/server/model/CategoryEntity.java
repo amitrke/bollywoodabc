@@ -14,6 +14,7 @@ import javax.jdo.annotations.PrimaryKey;
 import com.babc.server.AppConstants;
 import com.babc.server.model.vo.CategoryVo;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
 
 /**
  * Category Entity class.
@@ -61,6 +62,12 @@ public class CategoryEntity extends BaseEntityImpl {
 		this.type = categoryEntity.getType();
 		this.picId = categoryEntity.getId();
 		this.status = categoryEntity.getStatus();
+	}
+	
+	@Override
+	public void setKey(Key key) {
+		super.setKey(key);
+		id = key.getId();
 	}
 	
 	public CategoryEntity(CategoryVo categoryVo) {

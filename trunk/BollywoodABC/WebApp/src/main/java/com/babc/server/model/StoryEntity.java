@@ -8,10 +8,13 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import static com.babc.server.utils.EntityUtil.setProperty;
 
+import com.babc.server.AppConstants;
 import com.babc.server.model.vo.StoryVo;
 import com.babc.server.utils.AppUtils;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Text;
 import static com.babc.server.utils.EntityUtil.getLongProperty;
 import static com.babc.server.utils.EntityUtil.getStringProperty;
@@ -49,7 +52,7 @@ public class StoryEntity extends BaseEntityImpl implements Serializable {
 	private int priority;
 	
 	@Persistent
-	private char status;
+	private int status;
 	
 	@Persistent
 	private Long pictureId;
@@ -60,8 +63,24 @@ public class StoryEntity extends BaseEntityImpl implements Serializable {
 	@Override
 	public void save(Entity entity) {
 		super.save(entity);
+		setProperty(entity, "title", title, false);
+		setProperty(entity, "authorId", authorId, true);
+		setProperty(entity, "categoryId", categoryId, true);
+		setProperty(entity, "body", body.getValue(), false);
+		setProperty(entity, "intro", intro, false);
+		setProperty(entity, "createDate", createDate, true);
+		setProperty(entity, "priority", priority, true);
+		setProperty(entity, "status", status, true);
+		setProperty(entity, "pictureId", pictureId, false);
+		setProperty(entity, "video", video, false);
 	}
-
+	
+	@Override
+	public void setKey(Key key) {
+		super.setKey(key);
+		id = key.getId();
+	}
+	
 	@Override
 	public void load(Entity entity) {
 		super.load(entity);
@@ -73,7 +92,7 @@ public class StoryEntity extends BaseEntityImpl implements Serializable {
 		intro = getStringProperty(entity, "intro");
 		createDate = getDateProperty(entity, "createDate");
 		priority = getIntegerProperty(entity, "priority", 10);
-		status = 'A';//getStringProperty(entity, "status");
+		status = getIntegerProperty(entity, "status", AppConstants.ENTITY_STATUS_ENABLED);
 		pictureId = getLongProperty(entity, "pictureId");
 		video = getStringProperty(entity, "video");
 	}
@@ -150,7 +169,7 @@ public class StoryEntity extends BaseEntityImpl implements Serializable {
 		return priority;
 	}
 
-	public char getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
