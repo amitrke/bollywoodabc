@@ -55,7 +55,7 @@ public class PhotogalleryController {
 		
 		Map<String, Object> home = new HashMap<String, Object>();
 		home.put("date", new Date());
-		home.put("galleries", categoryService.get("2", new Paging()));
+		home.put("galleries", categoryService.get("2", new Paging(Integer.MAX_VALUE, 0)));
 		
 		HtmlPage htmlPage = new HtmlPage("Bollywood Photogallery - wallpapers, Hi resolution pictures", 
 				"Bollywood Photogallery - wallpapers, Hi resolution pictures of Deepika Padukone, Ashwariya Rai, Kareena Kapoor, Sonam Kapoor", 
