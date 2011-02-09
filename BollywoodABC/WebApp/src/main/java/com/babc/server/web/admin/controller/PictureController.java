@@ -84,7 +84,7 @@ public class PictureController {
 	
 	@ModelAttribute("categories")
 	public List<KeyValuePair> getCategoriesList(){
-		return categoryService.getAsKeyVal("2", new Paging());
+		return categoryService.getAsKeyVal(AppConstants.CATEGORY_TYPE_IMAGE, new Paging(Integer.MAX_VALUE, 0));
 	}
 	
 	@RequestMapping(value="/update/{imageId}.htm", method = RequestMethod.GET)

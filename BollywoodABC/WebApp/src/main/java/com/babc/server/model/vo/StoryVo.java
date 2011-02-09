@@ -26,7 +26,7 @@ public class StoryVo {
 	
 	private int priority;
 	
-	private char status;
+	private int status;
 	
 	private PictureEntity picture;
 	
@@ -36,7 +36,7 @@ public class StoryVo {
 
 	public StoryVo(String title, Long categoryId, Long userId,
 			Text body, String intro, Date createDate, int priority,
-			char status, PictureEntity picture, String video) {
+			int status, PictureEntity picture, String video) {
 		super();
 		this.title = title;
 		this.category = new CategoryVo(categoryId);
@@ -111,7 +111,7 @@ public class StoryVo {
 		return priority;
 	}
 
-	public char getStatus() {
+	public int getStatus() {
 		return status;
 	}
 

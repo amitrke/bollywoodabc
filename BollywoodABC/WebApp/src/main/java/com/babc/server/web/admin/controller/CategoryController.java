@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,9 +41,12 @@ public class CategoryController{
 		this.categoryService = categoryService;
 	}
 	
-	@RequestMapping(value="/list.htm", method = RequestMethod.GET)
-	public ModelAndView categoryList(){
-		List<CategoryVo> categoryVos = categoryService.get(new Paging());
+	@RequestMapping(value="/list/{pageNo}.htm", method = RequestMethod.GET)
+	public ModelAndView categoryList(@PathVariable("pageNo") int pageNo){
+		List<CategoryVo> categoryVos = categoryService.get(
+				new Paging(AppConstants.DATA_DEFAULT_LIMIT, 
+						(pageNo-1)*AppConstants.DATA_DEFAULT_LIMIT));
+		
 		return new ModelAndView("admin.listCategories", "data", categoryVos);
 	}
 	
@@ -88,6 +91,6 @@ public class CategoryController{
 		CategoryVo categoryVo = new CategoryVo(name, description, type, pictureEntity, 'A');
 		categoryVo = categoryService.add(categoryVo);
 		
-		return "redirect:/admin/category/list.htm";
+		return "redirect:/admin/category/list/1.htm";
 	}
 }

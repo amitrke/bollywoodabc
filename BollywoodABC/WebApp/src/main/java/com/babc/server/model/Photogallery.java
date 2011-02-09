@@ -2,6 +2,7 @@ package com.babc.server.model;
 
 import static com.babc.server.utils.EntityUtil.getIntegerProperty;
 import static com.babc.server.utils.EntityUtil.getLongProperty;
+import static com.babc.server.utils.EntityUtil.setProperty;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -9,7 +10,9 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.babc.server.AppConstants;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Photogallery extends BaseEntityImpl{
@@ -30,7 +33,7 @@ public class Photogallery extends BaseEntityImpl{
 	private int hits;
 	
 	@Persistent
-	private char status;
+	private int status;
 
 	public Photogallery() {
 		super();
@@ -45,7 +48,13 @@ public class Photogallery extends BaseEntityImpl{
 	public Long getId() {
 		return id;
 	}
-
+	
+	@Override
+	public void setKey(Key key) {
+		super.setKey(key);
+		id = key.getId();
+	}
+	
 	public Long getCategoryId() {
 		return categoryId;
 	}
@@ -58,7 +67,7 @@ public class Photogallery extends BaseEntityImpl{
 		return hits;
 	}
 	
-	public char getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
@@ -68,8 +77,11 @@ public class Photogallery extends BaseEntityImpl{
 
 	@Override
 	public void save(Entity entity) {
-		// TODO Auto-generated method stub
 		super.save(entity);
+		setProperty(entity, "categoryId", categoryId, true);
+		setProperty(entity, "picId", picId, false);
+		setProperty(entity, "hits", hits, true);
+		setProperty(entity, "status", status, true);
 	}
 
 	@Override
@@ -79,7 +91,7 @@ public class Photogallery extends BaseEntityImpl{
 		categoryId = getLongProperty(entity, "categoryId");
 		picId = getLongProperty(entity, "picId");
 		hits = getIntegerProperty(entity, "hits", 0);
-		status = 'A';//getStringProperty(entity, "status");
+		status = getIntegerProperty(entity, "status", AppConstants.ENTITY_STATUS_ENABLED);
 	}
 
 	@Override
