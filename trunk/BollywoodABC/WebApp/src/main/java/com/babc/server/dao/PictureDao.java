@@ -1,5 +1,7 @@
 package com.babc.server.dao;
 
+import static com.google.appengine.api.datastore.Query.FilterOperator.EQUAL;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,11 @@ import com.babc.server.utils.EntityCache;
 import com.babc.server.utils.QueryCache;
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.Transform;
-
 @Repository("pictureDao")
 public class PictureDao extends AbstractBaseDao<PictureEntity> {
 	
@@ -33,7 +35,8 @@ public class PictureDao extends AbstractBaseDao<PictureEntity> {
 	@Override
 	protected Query newQuery() {
 		Query query = super.newQuery();
-		//query.addFilter("status", EQUAL, AppConstants.STATUS_ACTIVE);
+		query.addFilter("status", EQUAL, AppConstants.ENTITY_STATUS_ENABLED);
+		query.addSort("id", SortDirection.DESCENDING);
 		return query;
 	}	
 	

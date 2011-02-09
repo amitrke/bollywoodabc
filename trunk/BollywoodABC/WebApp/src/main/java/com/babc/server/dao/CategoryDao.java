@@ -13,6 +13,7 @@ import com.babc.server.model.Paging;
 import com.babc.server.utils.EntityCache;
 import com.babc.server.utils.QueryCache;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 
 @Repository("categoryDao")
 public class CategoryDao extends AbstractBaseDao<CategoryEntity>{
@@ -30,7 +31,8 @@ public class CategoryDao extends AbstractBaseDao<CategoryEntity>{
 	@Override
 	protected Query newQuery() {
 		Query query = super.newQuery();
-		//query.addFilter("status", EQUAL, AppConstants.STATUS_ACTIVE);
+		//query.addFilter("status", EQUAL, AppConstants.ENTITY_STATUS_ENABLED);
+		//query.addSort("id", SortDirection.DESCENDING);
 		return query;
 	}
 	
