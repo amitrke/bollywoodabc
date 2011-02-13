@@ -9,6 +9,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import static com.babc.server.utils.EntityUtil.setProperty;
+import static com.babc.server.utils.EntityUtil.setTextProperty;
 
 import com.babc.server.AppConstants;
 import com.babc.server.model.vo.StoryVo;
@@ -66,7 +67,7 @@ public class StoryEntity extends BaseEntityImpl implements Serializable {
 		setProperty(entity, "title", title, false);
 		setProperty(entity, "authorId", authorId, true);
 		setProperty(entity, "categoryId", categoryId, true);
-		setProperty(entity, "body", body.getValue(), false);
+		setTextProperty(entity, "body", body.getValue());
 		setProperty(entity, "intro", intro, false);
 		setProperty(entity, "createDate", createDate, true);
 		setProperty(entity, "priority", priority, true);
