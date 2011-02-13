@@ -124,12 +124,14 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 	protected List<T> select(Query query, String queryId, Object[] params, int limit, int offset) {
 		List<T> result = (List<T>) getQueryCache().getQuery(clazz, queryId, 
 				params);
-		if (result == null) {
+		if (true || result == null) {
+			System.out.println(query);
 			DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
 			PreparedQuery p = datastoreService.prepare(query);
 			result = createModels(p.asList(withLimit(limit).offset(offset)));
 			getQueryCache().putQuery(clazz, queryId, params, result);
 			logger.info(result);
+			System.out.println(result);
 		}
 		return result;
 	}

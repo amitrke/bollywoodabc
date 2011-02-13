@@ -10,15 +10,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import com.babc.server.AppConstants;
 import com.babc.server.model.Paging;
 import com.babc.server.model.Photogallery;
-import com.babc.server.model.StoryEntity;
 import com.babc.server.utils.EntityCache;
 import com.babc.server.utils.QueryCache;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.SortDirection;
 
 /**
  * @author amit
@@ -35,8 +32,8 @@ public class PhotogalleryDao extends AbstractBaseDao<Photogallery> {
 	@Override
 	protected Query newQuery() {
 		Query query = super.newQuery();
-		query.addFilter("status", EQUAL, AppConstants.ENTITY_STATUS_ENABLED);
-		query.addSort("id", SortDirection.DESCENDING);
+		//query.addFilter("status", EQUAL, AppConstants.ENTITY_STATUS_ENABLED);
+		//query.addSort("id", SortDirection.DESCENDING);
 		return query;
 	}
 	
