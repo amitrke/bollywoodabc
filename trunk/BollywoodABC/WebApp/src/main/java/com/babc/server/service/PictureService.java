@@ -26,7 +26,7 @@ public class PictureService {
 	
 	public List<List<PictureEntity>> getPhotogalleryGrid(Long id, int columns){
 		List<List<PictureEntity>> grid = new ArrayList<List<PictureEntity>>();
-		List<Photogallery> galleryPics = photogalleryDao.get(id, new Paging());
+		List<Photogallery> galleryPics = photogalleryDao.get(id, new Paging(Integer.MAX_VALUE,0));
 		int counter=0;
 		List<PictureEntity> row = new ArrayList<PictureEntity>();
 		for(Photogallery pic: galleryPics){
