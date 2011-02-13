@@ -91,7 +91,6 @@ public class StoryDao extends AbstractBaseDao<StoryEntity> {
 	 * @param category
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	private Integer getCountFromDatabase(Long category){
 		List<StoryEntity> storyEntities = get(category, new Paging());
 		return storyEntities.size();
@@ -130,7 +129,6 @@ public class StoryDao extends AbstractBaseDao<StoryEntity> {
 		return query;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<StoryEntity> get(Long category, Paging paging) {
 		Query q = newQuery();
 		q.addFilter("categoryId",EQUAL, category);

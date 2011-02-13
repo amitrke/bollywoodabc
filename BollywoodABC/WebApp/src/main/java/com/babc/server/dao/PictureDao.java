@@ -14,7 +14,6 @@ import com.babc.server.utils.EntityCache;
 import com.babc.server.utils.QueryCache;
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
@@ -36,7 +35,7 @@ public class PictureDao extends AbstractBaseDao<PictureEntity> {
 	protected Query newQuery() {
 		Query query = super.newQuery();
 		query.addFilter("status", EQUAL, AppConstants.ENTITY_STATUS_ENABLED);
-		query.addSort("id", SortDirection.DESCENDING);
+		//query.addSort("id", SortDirection.DESCENDING);
 		return query;
 	}	
 	
