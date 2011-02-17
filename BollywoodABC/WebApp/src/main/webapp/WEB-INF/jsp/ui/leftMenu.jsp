@@ -23,7 +23,7 @@
 
                   <TR>
                     <TD WIDTH="11%" HEIGHT="22" ALIGN="center"><IMG SRC="/images/arrowmenu.gif" WIDTH="5" HEIGHT="7"></TD>
-                    <TD WIDTH="89%"><A HREF="/forum/" CLASS="yellow1link">Forum</A></TD>
+                    <TD WIDTH="89%"><A HREF="/forum/main.htm" CLASS="yellow1link">Forum</A></TD>
                   </TR>
                   <TR>
                     <TD HEIGHT="1" COLSPAN="2" BACKGROUND="/images/dothorw.gif"></TD>
@@ -31,7 +31,7 @@
                   <TR>
 
                     <TD WIDTH="11%" HEIGHT="22" ALIGN="center"><IMG SRC="/images/arrowmenu.gif" WIDTH="5" HEIGHT="7"></TD>
-                    <TD WIDTH="89%"><A HREF="http://bollywoodabc.com/topstories-more.php" CLASS="yellow1link">Top Stories</A></TD>
+                    <TD WIDTH="89%"><A HREF="/news/latest/1.htm" CLASS="yellow1link">Top Stories</A></TD>
                   </TR>
                   <TR>
                     <TD HEIGHT="1" COLSPAN="2" BACKGROUND="/images/dothorw.gif"></TD>
@@ -39,14 +39,14 @@
                   <TR>
                     <TD HEIGHT="22" ALIGN="center"><IMG SRC="/images/arrowmenu.gif" WIDTH="5" HEIGHT="7"></TD>
 
-                    <TD><A HREF="http://bollywoodabc.com/bollywoodlinks-more.php" CLASS="yellow1link">Bollywood News</A></TD>
+                    <TD><A HREF="/news/bollywood/1.htm" CLASS="yellow1link">Bollywood News</A></TD>
                   </TR>
                   <TR>
                     <TD HEIGHT="1" COLSPAN="2" BACKGROUND="/images/dothorw.gif"></TD>
                   </TR>
                   <TR>
                     <TD HEIGHT="22" ALIGN="center"><IMG SRC="/images/arrowmenu.gif" WIDTH="5" HEIGHT="7"></TD>
-                    <TD><A HREF="http://bollywoodabc.com/hollywoodlinks-more.php" CLASS="yellow1link">Hollywood News</A></TD>
+                    <TD><A HREF="/news/hollywood/1.htm" CLASS="yellow1link">Hollywood News</A></TD>
 
                   </TR>
                   <TR>
