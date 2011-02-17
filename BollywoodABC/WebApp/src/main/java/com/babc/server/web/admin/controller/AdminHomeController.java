@@ -26,10 +26,17 @@ public class AdminHomeController {
 	}
 	
 	
-	@RequestMapping(value="/initTags.htm", method = RequestMethod.GET)
-	public String initTags() {
+	@RequestMapping(value="/addTag.htm", method = RequestMethod.GET)
+	public String addTag() {
 		TagEntity tagEntity = tagDao.save(new TagEntity("Kareena Kapoor", TagEntity.ACTOR,
 				new Date(), "Actress Kareena Kapoor", AppConstants.ENTITY_STATUS_ENABLED));
+		TagCrossRefEntity crossRefEntity = tagCrossRefDao.save(new TagCrossRefEntity(1L, 1L, 1, new Date(), 
+				AppConstants.ENTITY_STATUS_ENABLED));
+		return "admin.homepage";
+	}
+	
+	@RequestMapping(value="/addTagCrossRef.htm", method = RequestMethod.GET)
+	public String addTagCrossRef() {
 		TagCrossRefEntity crossRefEntity = tagCrossRefDao.save(new TagCrossRefEntity(1L, 1L, 1, new Date(), 
 				AppConstants.ENTITY_STATUS_ENABLED));
 		return "admin.homepage";
