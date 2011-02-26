@@ -25,8 +25,20 @@
 	<definition name="admin.updateStory" extends="admin.layout">
 		<put-attribute name="body" value="/WEB-INF/jsp/admin/updateStory.jsp" />
 	</definition>
+	<definition name="admin.updateTag" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/updateTag.jsp" />
+	</definition>
+	<definition name="admin.updateTagCrossRef" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/updateTagCrossRef.jsp" />
+	</definition>
 	<definition name="admin.listStories" extends="admin.layout">
 		<put-attribute name="body" value="/WEB-INF/jsp/admin/listStories.jsp" />
+	</definition>
+	<definition name="admin.listTags" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/listTags.jsp" />
+	</definition>
+	<definition name="admin.listTagCrossRef" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/listTagCrossRef.jsp" />
 	</definition>
 	<definition name="admin.addPicsToGallery" extends="admin.layout">
 		<put-attribute name="body" value="/WEB-INF/jsp/admin/addPicsToGallery.jsp" />
