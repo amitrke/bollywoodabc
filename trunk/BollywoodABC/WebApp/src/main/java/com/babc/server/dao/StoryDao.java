@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 
 import org.apache.log4j.Logger;
@@ -21,8 +20,6 @@ import com.babc.server.model.Paging;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.utils.EntityCache;
 import com.babc.server.utils.QueryCache;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 
@@ -107,17 +104,6 @@ public class StoryDao extends AbstractBaseDao<StoryEntity> {
 		}
 		
 		return response;
-	}
-	
-	public Long getImportOldToNewKey(Long oldKey){
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Key k = KeyFactory.createKey(DataImportKey.class.getSimpleName(), oldKey);
-		try{
-			return (pm.getObjectById(DataImportKey.class, k)).getCurrentSystemId();
-		}
-		catch(JDOObjectNotFoundException exception){
-			return -1L;
-		}
 	}
 	
 	@Override
