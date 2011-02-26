@@ -11,6 +11,25 @@
 		<td><a href="/admin/category/list/1.htm">List</a></td>
 	</tr>
 	<tr>
+		<td colspan="2">Tags</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a href="/admin/tag/new.htm">Add</a></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a href="/admin/tag/list/1.htm">List</a></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a href="/admin/tag/crossref/new.htm">Add Cross Reference</a></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a href="/admin/tag/crossref/list/1.htm">List Cross References</a></td>
+	</tr>
+	<tr>
 		<td colspan="2">Story</td>
 	</tr>
 	<tr>
