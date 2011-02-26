@@ -13,6 +13,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.babc.server.AppConstants;
 import com.babc.server.model.vo.CategoryVo;
+import com.babc.server.utils.AppUtils;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 
@@ -124,7 +125,10 @@ public class CategoryEntity extends BaseEntityImpl {
 	public int getStatus() {
 		return status;
 	}
-
+	
+	public String getGalleryUrl(){
+		return "/photogallery/"+id+"/"+AppUtils.urlFormat(name)+".htm";
+	}
 	
 	@Override
 	public int hashCode() {
