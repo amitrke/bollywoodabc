@@ -3,9 +3,7 @@ package com.babc.server.model;
 import static com.babc.server.utils.EntityUtil.getDateProperty;
 import static com.babc.server.utils.EntityUtil.getIntegerProperty;
 import static com.babc.server.utils.EntityUtil.getStringProperty;
-import static com.babc.server.utils.EntityUtil.getTextProperty;
 import static com.babc.server.utils.EntityUtil.setProperty;
-import static com.babc.server.utils.EntityUtil.setTextProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,6 +15,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.babc.server.AppConstants;
+import com.babc.server.web.admin.model.TagUpdtModel;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
@@ -25,7 +24,7 @@ public class TagEntity extends BaseEntityImpl implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public static final int ACTOR=1;
-	public static final int EVENT=2;
+	public static final int EVENT=2; // Movie or Party event
 	public static final int ALIAS=3;
 	
 	@PrimaryKey
@@ -75,7 +74,7 @@ public class TagEntity extends BaseEntityImpl implements Serializable {
 		setProperty(entity, "type", type, true);
 		setProperty(entity, "createDate", createDate, true);
 		setProperty(entity, "status", status, true);
-		setTextProperty(entity, "description", description);
+		setProperty(entity, "description", description, false);
 	}
 
 	@Override
@@ -86,9 +85,10 @@ public class TagEntity extends BaseEntityImpl implements Serializable {
 		type = getIntegerProperty(entity, "type", ALIAS);
 		status = getIntegerProperty(entity, "status", AppConstants.ENTITY_STATUS_ENABLED);
 		createDate = getDateProperty(entity, "createDate");
-		description = getTextProperty(entity, "description");
+		description = getStringProperty(entity, "description");
 	}
-
+	
+	
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -131,6 +131,15 @@ public class TagEntity extends BaseEntityImpl implements Serializable {
 
 	public TagEntity() {
 		super();
+	}
+	
+	public TagEntity(TagUpdtModel tagUpdtModel) {
+		super();
+		tag = tagUpdtModel.getTag();
+		type = tagUpdtModel.getType();
+		createDate = new Date();
+		description = tagUpdtModel.getDescription();
+		status = AppConstants.ENTITY_STATUS_ENABLED;
 	}
 
 	@Override

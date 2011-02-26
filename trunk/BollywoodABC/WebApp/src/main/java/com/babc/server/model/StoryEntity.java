@@ -138,6 +138,10 @@ public class StoryEntity extends BaseEntityImpl implements Serializable {
 		return AppUtils.urlFormat(title);
 	}
 	
+	public String getStoryUrl(){
+		return "/news/"+id+"/"+AppUtils.urlFormat(title)+".htm";
+	}
+	
 	public Long getId() {
 		return id;
 	}

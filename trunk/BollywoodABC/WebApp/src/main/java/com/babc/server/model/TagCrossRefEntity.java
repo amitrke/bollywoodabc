@@ -13,6 +13,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
 import com.babc.server.AppConstants;
+import com.babc.server.web.admin.model.TagCrossRefUpdtModel;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 
@@ -23,6 +24,7 @@ public class TagCrossRefEntity extends BaseEntityImpl implements Serializable{
 	
 	public static final int STORY = 1;
 	public static final int PICTURE = 2;
+	public static final int PHOTOGALLERY = 3;
 	
 	private Long id;
 	
@@ -119,6 +121,15 @@ public class TagCrossRefEntity extends BaseEntityImpl implements Serializable{
 
 	public TagCrossRefEntity() {
 		super();
+	}
+	
+	public TagCrossRefEntity(TagCrossRefUpdtModel crossRefUpdtModel) {
+		super();
+		tagId = crossRefUpdtModel.getTagId();
+		entityId = crossRefUpdtModel.getEntityId();
+		entityType = crossRefUpdtModel.getEntityType();
+		status = AppConstants.ENTITY_STATUS_ENABLED;
+		createDate = new Date();
 	}
 
 	public Long getTagId() {
