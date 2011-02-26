@@ -49,8 +49,30 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
                 </TR>
                 <TR>
                   <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">&nbsp;</TD>
-
                 </TR>
+                <c:if test="${!empty page.data.tags}">
+                
+                <TR>
+                  <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">
+                  
+                  <c:if test="${!empty page.data.relatedPhotogalleries}">
+                  	<B>Related Photo galleries:</B><br>
+                  	<c:forEach var="gallery" items="${page.data.relatedPhotogalleries}">
+                  		<A HREF='<c:out value="${gallery.galleryUrl}" />'><c:out value="${gallery.name}" /></A>
+                  	</c:forEach>
+                  </c:if>
+                  <BR>
+                  <c:if test="${!empty page.data.relatedStories}">
+                  	<B>Related Stories:</B><br>
+                  	<c:forEach var="story" items="${page.data.relatedStories}">
+                  		<A HREF='<c:out value="${story.storyUrl}" />'><c:out value="${story.title}" /></A><BR>
+                  	</c:forEach>
+                  </c:if>
+                  </TD>
+                </TR>
+                <br>
+                </c:if>
+                
                 <TR>
                   <TD VALIGN="top" CLASS="bot" STYLE="padding-left:12px; padding-right:12px;"> <SPAN CLASS="quote">If you have you a story idea, an article, a hi-res picture, be a citizen Journalist and send it to us at <A HREF="mailto:cj@bollywoodabc.com">cj@bollywoodabc.com</A></SPAN> </TD>
                 </TR>
