@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.babc.server.AppConstants;
+import com.babc.server.dao.ImportDataDao;
 import com.babc.server.dao.PictureDao;
 import com.babc.server.dao.StoryDao;
 import com.babc.server.dao.UserDao;
@@ -14,10 +15,13 @@ import com.babc.server.model.DataImportKey;
 import com.babc.server.model.Paging;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
+import com.babc.server.model.TagCrossRefEntity;
 import com.babc.server.model.UserEntity;
 import com.babc.server.model.vo.CategoryVo;
 import com.babc.server.model.vo.CommentVo;
 import com.babc.server.model.vo.StoryVo;
+import com.babc.server.model.vo.TagVo;
+import com.babc.server.utils.EntityCache;
 
 @Service("storyService")
 public class StoryService {
@@ -27,6 +31,8 @@ public class StoryService {
 	private @Autowired PictureDao pictureDao;
 	private @Autowired CategoryService categoryService;
 	private @Autowired CommentService commentService;
+	private @Autowired TagService tagService;
+	private @Autowired ImportDataDao importDataDao;
 	
 	/**
 	 * Gets the total number of stores in the database.
@@ -48,6 +54,7 @@ public class StoryService {
 	
 	public StoryVo get(Long id, Paging commentPaging){
 		StoryEntity storyEntity = get(id);
+		
 		return entityToVo(storyEntity, commentPaging);
 	}
 	
@@ -56,7 +63,7 @@ public class StoryService {
 	}
 	
 	public Long getImportOldToNewKey(Long oldKey){
-		return storyDao.getImportOldToNewKey(oldKey);
+		return importDataDao.getById(oldKey).getCurrentSystemId();
 	}
 	
 	public StoryEntity get(Long id){
@@ -91,7 +98,8 @@ public class StoryService {
 		UserEntity userEntity = new UserEntity("Amit Kumar", "amitrke@gmail.com", 'A', "User");
 		PictureEntity pictureEntity = pictureDao.getById(storyEntity.getPictureId());
 		List<CommentVo> commentVos = new ArrayList<CommentVo>();
-		return new StoryVo(storyEntity,categoryVo, userEntity, pictureEntity, commentVos);
+		List<TagVo> tags = tagService.getTags(storyEntity.getId(), TagCrossRefEntity.STORY);
+		return new StoryVo(storyEntity,categoryVo, userEntity, pictureEntity, commentVos, tags);
 	}
 	
 }
