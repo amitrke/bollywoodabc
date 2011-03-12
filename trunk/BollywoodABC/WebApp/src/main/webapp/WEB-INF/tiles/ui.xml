@@ -71,4 +71,9 @@
 <definition name="ui.forum.home" extends="ui.base.red">
 	<put-attribute name="content" value="/WEB-INF/jsp/ui/forum.jsp" cascade="true"/>
 </definition>
+
+<!-- Tag -->
+<definition name="ui.tag.display" extends="ui.base.white">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/tag.jsp" cascade="true"/>
+</definition>
 </tiles-definitions>
