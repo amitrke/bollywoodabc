@@ -8,15 +8,16 @@ import static com.babc.server.utils.EntityUtil.setProperty;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 import com.babc.server.AppConstants;
 import com.babc.server.web.admin.model.TagCrossRefUpdtModel;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
-
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class TagCrossRefEntity extends BaseEntityImpl implements Serializable{
 
@@ -26,6 +27,8 @@ public class TagCrossRefEntity extends BaseEntityImpl implements Serializable{
 	public static final int PICTURE = 2;
 	public static final int PHOTOGALLERY = 3;
 	
+	@PrimaryKey
+    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long id;
 	
 	@Persistent

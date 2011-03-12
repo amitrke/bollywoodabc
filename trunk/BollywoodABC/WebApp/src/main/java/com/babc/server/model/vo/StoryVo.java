@@ -8,6 +8,7 @@ import com.babc.server.model.CategoryEntity;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.model.UserEntity;
+import com.babc.server.web.admin.model.KeyValuePair;
 import com.google.appengine.api.datastore.Text;
 
 public class StoryVo {
@@ -152,6 +153,14 @@ public class StoryVo {
 			relatedStories.addAll(tagVo.getRelatedStories());
 		}
 		return relatedStories;
+	}
+	
+	public List<KeyValuePair> getTagLinks(){
+		List<KeyValuePair> tagList = new ArrayList<KeyValuePair>();
+		for(TagVo tag:tags){
+			tagList.add(new KeyValuePair(tag.getTagId(), tag.getTag()));
+		}
+		return tagList;
 	}
 	
 	@Override

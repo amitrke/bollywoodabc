@@ -4,10 +4,15 @@ import java.util.List;
 
 import com.babc.server.model.CategoryEntity;
 import com.babc.server.model.StoryEntity;
+import com.babc.server.model.TagEntity;
 
 public class TagVo {
 	
-	private int type;
+	private int type; //Tag Type e.g Actor, Alias, etc.
+	
+	private int entityType; //Cross Ref type e.g. story, picture, etc.
+	
+	private Long entityId;
 	
 	private Long tagId;
 	
@@ -36,11 +41,49 @@ public class TagVo {
 		this.tag = tag;
 	}
 
+	/**
+	 * @param type
+	 * @param crossRefType
+	 * @param tagId
+	 * @param description
+	 * @param tag
+	 */
+	public TagVo(int type, int entityType, Long tagId, Long entityId, 
+			String description,	String tag) {
+		super();
+		this.type = type;
+		this.entityType = entityType;
+		this.tagId = tagId;
+		this.description = description;
+		this.tag = tag;
+		this.entityId = entityId;
+	}
+
+	
+	public Long getEntityId() {
+		return entityId;
+	}
 
 	public Long getTagId() {
 		return tagId;
 	}
 
+	public String getTagTypeAsString(){
+		return TagEntity.getTypeAsString(type);
+	}
+	
+	public String getEntityTypeAsString(){
+		switch(type){
+			case 1: return "Story";
+			case 2: return "Picture";
+			case 3: return "Photogallery";
+		}
+		return "Not Mapped in Getter";
+	}
+	
+	public int getEntityType() {
+		return entityType;
+	}
 
 	public List<StoryEntity> getRelatedStories() {
 		return relatedStories;

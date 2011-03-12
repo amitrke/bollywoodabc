@@ -133,6 +133,19 @@ public class TagEntity extends BaseEntityImpl implements Serializable {
 		super();
 	}
 	
+	public static String getTypeAsString(int type){
+		switch(type){
+			case 1: return "Actor";
+			case 2: return "Event";
+			case 3: return "Alias";
+		}
+		return "Not Mapped in Getter";
+	}
+	
+	public String getTagLabel(){
+		return tag+" ("+getTypeAsString(type)+")";
+	}
+	
 	public TagEntity(TagUpdtModel tagUpdtModel) {
 		super();
 		tag = tagUpdtModel.getTag();

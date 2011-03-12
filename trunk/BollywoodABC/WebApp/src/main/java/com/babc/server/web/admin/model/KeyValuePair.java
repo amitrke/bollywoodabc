@@ -1,5 +1,7 @@
 package com.babc.server.web.admin.model;
 
+import com.babc.server.utils.AppUtils;
+
 public class KeyValuePair {
 	
 	private Long key;
@@ -17,6 +19,10 @@ public class KeyValuePair {
 
 	public String getValue() {
 		return value;
+	}
+	
+	public String getUrlEscapeValue(){
+		return AppUtils.urlFormat(value);
 	}
 
 	@Override

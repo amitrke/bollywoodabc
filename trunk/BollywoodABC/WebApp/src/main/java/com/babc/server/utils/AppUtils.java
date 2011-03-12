@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 public class AppUtils {
+	
+	private static String urlValidPattern = "[^a-zA-z0-9\\.\\s]";
+	
 	public static List<List<Long>> photoGalleryGrid(List<Long> values, int x){
 		List<List<Long>> returnData = new ArrayList<List<Long>>();
 		int counter=0;
@@ -25,7 +28,7 @@ public class AppUtils {
 	}
 	
 	public static String urlFormat(String inputString){
-		return inputString.replace(" ", "-").replace("\'", "").replace(":", "").replace(".", "");
+		return inputString.replaceAll(urlValidPattern, "").replaceAll("\\b[\\w']{1,2}\\b", "").replaceAll("\\s{2,}", " ").trim().replaceAll(" ", "-");
 	}
 	
 	/**
