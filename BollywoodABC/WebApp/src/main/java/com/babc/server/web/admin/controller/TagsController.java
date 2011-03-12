@@ -26,6 +26,9 @@ import com.babc.server.dao.TagDao;
 import com.babc.server.model.Paging;
 import com.babc.server.model.TagCrossRefEntity;
 import com.babc.server.model.TagEntity;
+import com.babc.server.model.vo.TagVo;
+import com.babc.server.service.TagService;
+import com.babc.server.web.admin.model.KeyValuePair;
 import com.babc.server.web.admin.model.TagCrossRefUpdtModel;
 import com.babc.server.web.admin.model.TagUpdtModel;
 
@@ -37,6 +40,7 @@ public class TagsController {
 	private @Autowired TagDao tagDao;
 	private @Autowired TagCrossRefDao tagCrossRefDao;
 	private @Autowired Validator validator;
+	private @Autowired TagService tagService;
 	
 	@InitBinder
 	protected void initBinder(HttpServletRequest request,
@@ -94,6 +98,11 @@ public class TagsController {
 		return "redirect:/admin/tag/list/1.htm";
 	}
 	
+	@ModelAttribute("taglist")
+	public List<TagEntity> getTagsList(){
+		return tagService.getTagList(new Paging(Integer.MAX_VALUE, 0));
+	}
+	
 	/**
 	 * process form post while creating a new tag cross reference
 	 * @param form
@@ -137,10 +146,10 @@ public class TagsController {
 	 */
 	@RequestMapping(value="/crossref/list/{pageNo}.htm", method = RequestMethod.GET)
 	public ModelAndView listTagCrossRef(@PathVariable("pageNo") int pageNo){
-		List<TagCrossRefEntity> tagCrossRefEntities = tagCrossRefDao.get(new Paging(
+		List<TagVo> tagVos = tagService.getTags(new Paging(
 				AppConstants.DATA_DEFAULT_LIMIT, 
 				(pageNo-1)*AppConstants.DATA_DEFAULT_LIMIT));
-		return new ModelAndView("admin.listTagCrossRef", "data", tagCrossRefEntities);
+		return new ModelAndView("admin.listTagCrossRef", "data", tagVos);
 	}
 	
 }

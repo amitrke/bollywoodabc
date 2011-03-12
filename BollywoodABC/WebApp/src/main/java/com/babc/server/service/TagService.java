@@ -11,6 +11,7 @@ import com.babc.server.dao.StoryDao;
 import com.babc.server.dao.TagCrossRefDao;
 import com.babc.server.dao.TagDao;
 import com.babc.server.model.CategoryEntity;
+import com.babc.server.model.Paging;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.model.TagCrossRefEntity;
 import com.babc.server.model.TagEntity;
@@ -45,6 +46,41 @@ public class TagService {
 		return tags;
 	}
 	
+	/**
+	 * Get tags
+	 * @param entityId
+	 * @return
+	 */
+	public TagVo getTagDetails(Long tagId){
+		TagEntity tagEntity = tagDao.getById(tagId);
+		TagVo tagVo = null;
+		tagVo = new TagVo(tagEntity.getType(), tagEntity.getId(), tagEntity.getDescription(),
+				tagEntity.getTag());
+		setRelatedPhotogalleries(tagVo);
+		setRelatedStories(tagVo);
+		return tagVo;
+	}
+	
+	public List<TagVo> getTags(Paging paging){
+		List<TagCrossRefEntity> tagCrossRefEntities = tagCrossRefDao.get(paging);
+		List<TagVo> tags = new ArrayList<TagVo>();
+		TagVo tagVo = null;
+		TagEntity tag = null;
+		for(TagCrossRefEntity crossRefEntity: tagCrossRefEntities){
+			tag = tagDao.getById(crossRefEntity.getTagId());
+			if (tag==null){
+				tagVo = new TagVo(0, crossRefEntity.getEntityType(),0L, 
+						crossRefEntity.getEntityId(), "", "");
+			}
+			else{
+				tagVo = new TagVo(tag.getType(), crossRefEntity.getEntityType(), 
+					crossRefEntity.getEntityId(), tag.getId(), tag.getDescription(), tag.getTag());
+			}
+			tags.add(tagVo);
+		}
+		return tags;
+	}
+	
 	private void setRelatedPhotogalleries(TagVo tag){
 		List<CategoryEntity> categoryEntities = new ArrayList<CategoryEntity>();
 		List<TagCrossRefEntity> crossRefEntities = tagCrossRefDao.getByTagId(tag.getTagId(), 
@@ -65,5 +101,14 @@ public class TagService {
 			relatedStories.add(storyDao.getById(crossRefEntity.getEntityId()));
 		}
 		tag.setRelatedStories(relatedStories);
+	}
+	
+	/**
+	 * Get list of tags
+	 * @param paging
+	 * @return
+	 */
+	public List<TagEntity> getTagList(Paging paging){
+		return tagDao.get(paging);
 	}
 }

@@ -90,7 +90,7 @@ public class Frontend {
 	
 	@RequestMapping(value="/latest/{pageNo}.htm", method = RequestMethod.GET)
 	public ModelAndView listStories(@PathVariable("pageNo") int pageNo){
-		Integer storyCount = storyService.getCount();
+		Integer storyCount = storyService.get(new Paging(Integer.MAX_VALUE, 0)).size();
 		Map<String, Object> home = new HashMap<String, Object>();
 		UiPaging uiPaging = new UiPaging();
 		uiPaging.setStoryUiPaging(pageNo, noOfStoriesPerPage, storyCount);
@@ -102,7 +102,8 @@ public class Frontend {
 	
 	@RequestMapping(value="/hollywood/{pageNo}.htm", method = RequestMethod.GET)
 	public ModelAndView listHollywoodStories(@PathVariable("pageNo") int pageNo){
-		Integer storyCount = storyService.getCount();
+		Integer storyCount = storyService.getByCategory(AppConstants.CAT_HOLLYWOOD, 
+				new Paging(Integer.MAX_VALUE, 0)).size();
 		Map<String, Object> home = new HashMap<String, Object>();
 		UiPaging uiPaging = new UiPaging();
 		uiPaging.setStoryUiPaging(pageNo, noOfStoriesPerPage, storyCount);
@@ -114,7 +115,8 @@ public class Frontend {
 	
 	@RequestMapping(value="/bollywood/{pageNo}.htm", method = RequestMethod.GET)
 	public ModelAndView listBollywoodStories(@PathVariable("pageNo") int pageNo){
-		Integer storyCount = storyService.getCount();
+		Integer storyCount =storyService.getByCategory(AppConstants.CAT_BOLLYWOOD, 
+				new Paging(Integer.MAX_VALUE, 0)).size();
 		Map<String, Object> home = new HashMap<String, Object>();
 		UiPaging uiPaging = new UiPaging();
 		uiPaging.setStoryUiPaging(pageNo, noOfStoriesPerPage, storyCount);

@@ -5,17 +5,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.babc.server.model.StoryEntity;
+import com.babc.server.model.vo.TagVo;
 import com.babc.server.service.StoryService;
+import com.babc.server.service.TagService;
 
 @Controller
 @RequestMapping("/")
 public class PhpController {
 	
 	private @Autowired StoryService storyService;
+	private @Autowired TagService tagService;
 	
 	@RequestMapping(value="/story.php", method = RequestMethod.GET)
 	public void displayStory(HttpServletRequest request, HttpServletResponse response){
@@ -39,5 +44,10 @@ public class PhpController {
 		response.setStatus(301);
 	}
 	
+	@RequestMapping(value="/t/{tagId}/*.htm", method = RequestMethod.GET)
+	public ModelAndView tag(@PathVariable("tagId") Long tagId){
+		TagVo tagVo = tagService.getTagDetails(tagId);
+		return new ModelAndView("ui.tag.display", "data", tagVo);
+	}
 	
 }
