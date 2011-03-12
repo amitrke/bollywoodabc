@@ -57,8 +57,9 @@ public class StoryDao extends AbstractBaseDao<StoryEntity> {
 	 * @param category
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public Integer getCount(Long category){
+		return getCountFromDatabase(category);
+		/*
 		Object countCache = getEntityCache().getEntity(HashMap.class, "storycount");
 		if (countCache != null){
 			Map<Long, Integer> countCacheMap = (Map<Long, Integer>) countCache;
@@ -72,6 +73,7 @@ public class StoryDao extends AbstractBaseDao<StoryEntity> {
 		else{
 			return refreshCountMapCache(new HashMap<Long, Integer>(), category);
 		}
+		*/
 	}
 	
 	private Integer refreshCountMapCache(Map<Long, Integer> countCacheMap, Long category){
@@ -89,7 +91,7 @@ public class StoryDao extends AbstractBaseDao<StoryEntity> {
 	 * @return
 	 */
 	private Integer getCountFromDatabase(Long category){
-		List<StoryEntity> storyEntities = get(category, new Paging());
+		List<StoryEntity> storyEntities = get(category, new Paging(Integer.MAX_VALUE,0));
 		return storyEntities.size();
 	}	
 	
