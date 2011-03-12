@@ -3,6 +3,7 @@
 prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@taglib prefix="form" uri="http://www.springframework.org/tags/form"
 %><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <form:form method="post" enctype="multipart/form-data" commandName="crossRefModel" >
+
 <table>
 	<tr>
 		<td>Entity Type</td>
@@ -17,7 +18,11 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@taglib prefix="form" uri=
 	</tr>
 	<tr>
 		<td>Tag Id</td>
-		<td><form:input path="tagId" size="8" /> <form:errors path="tagId" /></td>
+		<td>
+		<form:select path="tagId">
+			<form:options items="${taglist}" itemLabel="tagLabel" itemValue="id" />
+		</form:select>
+		<form:errors path="tagId" /></td>
 	</tr>
 	<tr>
 		<td>Entity Id</td>

@@ -17,7 +17,18 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
                   </TABLE></TD>
                 </TR>
                 <TR>
-                  <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">&nbsp;</TD>
+                  <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">
+                  <div ID="storyMeta"><p>
+                  <c:if test="${!empty page.data.tagLinks}">
+                  Keywords:
+                  <c:forEach var="tag" items="${page.data.tagLinks}">
+                  	<A HREF='/t/${tag.key}/${tag.urlEscapeValue}.htm'>${tag.value}</A> &nbsp;
+                  </c:forEach>
+                  <br>
+                  </c:if>
+                  <c:out value="${page.data.createDate}" /> 
+                  </p></div>
+                  </TD>
                 </TR>
                 <TR>
 
