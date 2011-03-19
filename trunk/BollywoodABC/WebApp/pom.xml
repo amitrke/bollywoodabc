@@ -24,11 +24,19 @@
 			<name>Maven Google App Engine Repository</name>
 			<url>http://maven-gae-plugin.googlecode.com/svn/repository/</url>
 		</repository>
-		
+		<!-- 
 		<repository>
 			<id>SpringSource Enterprise Bundle Repositories</id>
 			<url>http://repository.springsource.com/maven/bundles/milestone</url>
 		</repository>
+		-->
+		
+		<repository>
+			<id>com.springsource.repository.bundles.release</id>
+			<name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/release</url>
+		</repository> 
+		
 	</repositories>
 
 	<pluginRepositories>
@@ -194,7 +202,19 @@
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-
+		 
+		<dependency>
+		     <groupId>org.springframework</groupId> 
+		     <artifactId>org.springframework.context</artifactId> 
+		     <version>${org.springframework.version}</version>
+		     <exclusions>
+		     	<exclusion>
+		     		<artifactId>com.springsource.org.aopalliance</artifactId>
+		     		<groupId>org.aopalliance</groupId>
+		     	</exclusion>
+		     </exclusions>
+		</dependency>
+		
 		<!-- Various Application Context utilities, including EhCache, JavaMail, 
 			Quartz, and Freemarker integration Define this if you need any of these integrations -->
 		<dependency>
@@ -397,8 +417,8 @@
 		<!-- Upload to http://test.latest.<applicationName>.appspot.com by default -->
 		<gae.application.version>test</gae.application.version>
 
-		<org.springframework.version>3.0.3.RELEASE</org.springframework.version>
-		<gae.home>D:\amit\apps\java\appengine-java-sdk-1.4.0</gae.home>
+		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+		<gae.home>/home/amit/me/apps/java/appengine-java-sdk-1.4.0</gae.home>
 	</properties>
 
 	<profiles>

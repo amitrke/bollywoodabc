@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.babc.server.AppConstants;
 import com.babc.server.dao.ImportDataDao;
 import com.babc.server.dao.PictureDao;
 import com.babc.server.dao.StoryDao;
@@ -21,7 +20,6 @@ import com.babc.server.model.vo.CategoryVo;
 import com.babc.server.model.vo.CommentVo;
 import com.babc.server.model.vo.StoryVo;
 import com.babc.server.model.vo.TagVo;
-import com.babc.server.utils.EntityCache;
 
 @Service("storyService")
 public class StoryService {

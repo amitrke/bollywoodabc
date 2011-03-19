@@ -30,7 +30,9 @@
      <bean id="messageSource"  
          class="org.springframework.context.support.ResourceBundleMessageSource"  
          p:basenames="errors"/>
-           
+    
+    <bean id="applicationContextProvider" class="com.babc.server.utils.ApplicationContextProvider"></bean>
+    
 	<!-- Tiles -->
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 	  <property name="definitions">
