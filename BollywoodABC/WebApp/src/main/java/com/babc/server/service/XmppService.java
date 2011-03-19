@@ -1,9 +1,10 @@
 package com.babc.server.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.babc.server.dao.StoryDao;
 import com.babc.server.model.Paging;
@@ -15,17 +16,18 @@ import com.google.appengine.api.xmpp.SendResponse;
 import com.google.appengine.api.xmpp.XMPPService;
 import com.google.appengine.api.xmpp.XMPPServiceFactory;
 
+@Service("xmppService")
 public class XmppService {
 	
 	private transient static final Logger LOGGER = Logger.getLogger(XmppService.class.getName());
 	
-	//private final StoryDao storyDao = new StoryDao();
+	private @Autowired StoryDao storyDao;
 	
 	public void onMessage(JID jid, String body){
 		
 		StringBuilder stringBuilder = new StringBuilder();
 		if (body.equals("headlines")){
-			List<StoryEntity> storyEntities = new ArrayList<StoryEntity>();//storyDao.get(new Paging(5,0));
+			List<StoryEntity> storyEntities = storyDao.get(new Paging(5,0));
 			
 			for(StoryEntity storyEntity: storyEntities){
 				stringBuilder.append(storyEntity.getTitle());

@@ -40,7 +40,7 @@ public class TagService {
 			tag = tagDao.getById(crossRefEntity.getTagId());
 			tagVo = new TagVo(tag.getType(), tag.getId(), tag.getDescription(), tag.getTag());
 			setRelatedPhotogalleries(tagVo);
-			setRelatedStories(tagVo);
+			setRelatedStories(tagVo, entityId);
 			tags.add(tagVo);
 		}
 		return tags;
@@ -57,7 +57,7 @@ public class TagService {
 		tagVo = new TagVo(tagEntity.getType(), tagEntity.getId(), tagEntity.getDescription(),
 				tagEntity.getTag());
 		setRelatedPhotogalleries(tagVo);
-		setRelatedStories(tagVo);
+		setRelatedStories(tagVo, 0L);
 		return tagVo;
 	}
 	
@@ -92,13 +92,16 @@ public class TagService {
 		tag.setRelatedPhotogalleries(categoryEntities);
 	}
 	
-	private void setRelatedStories(TagVo tag){
+	private void setRelatedStories(TagVo tag, Long storyToSkip){
 		List<StoryEntity> relatedStories = new ArrayList<StoryEntity>();
 		List<TagCrossRefEntity> crossRefEntities = tagCrossRefDao.getByTagId(tag.getTagId(), 
 				TagCrossRefEntity.STORY);
 		
 		for(TagCrossRefEntity crossRefEntity: crossRefEntities){
-			relatedStories.add(storyDao.getById(crossRefEntity.getEntityId()));
+			StoryEntity storyEntity = storyDao.getById(crossRefEntity.getEntityId());
+			if (!relatedStories.contains(storyEntity) &&  storyEntity.getId()!=storyToSkip ){
+				relatedStories.add(storyEntity);
+			}
 		}
 		tag.setRelatedStories(relatedStories);
 	}
