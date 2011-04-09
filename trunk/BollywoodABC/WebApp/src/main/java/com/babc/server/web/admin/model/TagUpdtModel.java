@@ -3,7 +3,11 @@ package com.babc.server.web.admin.model;
 import org.springmodules.validation.bean.conf.loader.annotation.handler.Min;
 import org.springmodules.validation.bean.conf.loader.annotation.handler.NotBlank;
 
+import com.babc.server.model.TagEntity;
+
 public class TagUpdtModel {
+	
+	private Long id;
 	
 	@Min(value=1, message="Please select a type.")
 	private int type;
@@ -41,6 +45,21 @@ public class TagUpdtModel {
 	 * 
 	 */
 	public TagUpdtModel() {
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public TagUpdtModel(TagEntity tagEntity) {
+		id=tagEntity.getId();
+		type=tagEntity.getType();
+		tag=tagEntity.getTag();
+		description=tagEntity.getDescription();
 	}
 
 	@Override

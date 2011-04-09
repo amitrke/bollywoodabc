@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.babc.server.AppConstants;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.model.vo.TagVo;
 import com.babc.server.service.StoryService;
 import com.babc.server.service.TagService;
+import com.babc.server.web.model.HtmlPage;
 
 @Controller
 @RequestMapping("/")
@@ -47,7 +49,11 @@ public class PhpController {
 	@RequestMapping(value="/t/{tagId}/*.htm", method = RequestMethod.GET)
 	public ModelAndView tag(@PathVariable("tagId") Long tagId){
 		TagVo tagVo = tagService.getTagDetails(tagId);
-		return new ModelAndView("ui.tag.display", "data", tagVo);
+		HtmlPage htmlPage = new HtmlPage(tagVo.getTag(),
+				tagVo.getDescription(), tagVo.getTag()+", bollywood, news, gossip",
+				AppConstants.metaExpiryNextYear, 
+				"BollywoodABC", tagVo);
+		return new ModelAndView("ui.tag.display", "page", htmlPage);
 	}
 	
 }

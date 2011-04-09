@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.flex.remoting.RemotingDestination;
+import org.springframework.flex.remoting.RemotingInclude;
 import org.springframework.stereotype.Service;
 
 import com.babc.server.dao.CategoryDao;
@@ -15,6 +17,7 @@ import com.babc.server.model.vo.CategoryVo;
 import com.babc.server.web.admin.model.KeyValuePair;
 
 @Service("categoryService")
+@RemotingDestination(channels={"my-amf","my-secure-amf"})
 public class CategoryService {
 	
 	private CategoryDao categoryDao;
@@ -25,7 +28,8 @@ public class CategoryService {
 		this.categoryDao = categoryDao;
 		this.pictureDao = pictureDao;
 	}
-
+	
+	@RemotingInclude
 	public CategoryVo get(Long id){
 		CategoryEntity categoryEntity = categoryDao.getById(id);
 		return entityToVo(categoryEntity);
@@ -36,13 +40,35 @@ public class CategoryService {
 		return entityToVo(categoryEntities);
 	}
 	
+	@RemotingInclude
 	public List<CategoryEntity> getEntityList(Paging paging){
 		return categoryDao.get(paging);
+	}
+	
+	@RemotingInclude
+	public List<CategoryEntity> getEntityList(){
+		return categoryDao.get(new Paging());
+	}
+	
+	@RemotingInclude
+	public KeyValuePair getAsKeyVal(Long id){
+		CategoryEntity categoryEntity = categoryDao.getById(id);
+		return new KeyValuePair(categoryEntity.getId(), categoryEntity.getName());
 	}
 	
 	public List<CategoryVo> get(String type, Paging paging){
 		List<CategoryEntity> categoryEntities = categoryDao.get(type, paging);
 		return entityToVo(categoryEntities);
+	}
+	
+	@RemotingInclude
+	public List<KeyValuePair> getAsKeyVal(){
+		List<CategoryEntity> categoryEntities = categoryDao.get(new Paging());
+		List<KeyValuePair> keyValuePairs = new ArrayList<KeyValuePair>();
+		for(CategoryEntity categoryEntity: categoryEntities){
+			keyValuePairs.add(new KeyValuePair(categoryEntity.getId(), categoryEntity.getName()));
+		}
+		return keyValuePairs;
 	}
 	
 	public List<KeyValuePair> getAsKeyVal(String type, Paging paging){

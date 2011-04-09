@@ -6,12 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.babc.server.AppConstants;
 import com.babc.server.dao.CategoryDao;
+import com.babc.server.dao.PictureDao;
 import com.babc.server.dao.StoryDao;
 import com.babc.server.dao.TagCrossRefDao;
 import com.babc.server.dao.TagDao;
 import com.babc.server.model.CategoryEntity;
 import com.babc.server.model.Paging;
+import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.model.TagCrossRefEntity;
 import com.babc.server.model.TagEntity;
@@ -24,6 +27,7 @@ public class TagService {
 	private @Autowired TagCrossRefDao tagCrossRefDao;
 	private @Autowired CategoryDao categoryDao;
 	private @Autowired StoryDao storyDao;
+	private @Autowired PictureDao pictureDao;
 	
 	/**
 	 * Get tags
@@ -58,6 +62,8 @@ public class TagService {
 				tagEntity.getTag());
 		setRelatedPhotogalleries(tagVo);
 		setRelatedStories(tagVo, 0L);
+		setFacePic(tagVo);
+		setRelatedPictures(tagVo);
 		return tagVo;
 	}
 	
@@ -81,10 +87,27 @@ public class TagService {
 		return tags;
 	}
 	
+	private void setFacePic(TagVo tag){
+		List<TagCrossRefEntity> facePics = tagCrossRefDao.getByTagId(AppConstants.TAG_FACEPIC, 
+				TagCrossRefEntity.PICTURE, Integer.MAX_VALUE);
+		List<TagCrossRefEntity> tagPics = tagCrossRefDao.getByTagId(tag.getTagId(), 
+				TagCrossRefEntity.PICTURE, Integer.MAX_VALUE);
+		
+		for(TagCrossRefEntity facePic: facePics){
+			for(TagCrossRefEntity tagPic: tagPics){
+				if (facePic.getEntityId().equals(tagPic.getEntityId())){
+					tag.setFacePic(facePic.getEntityId());
+					break;
+				}
+				if (tag.getFacePic()!=null) break;
+			}
+		}
+	}
+	
 	private void setRelatedPhotogalleries(TagVo tag){
 		List<CategoryEntity> categoryEntities = new ArrayList<CategoryEntity>();
 		List<TagCrossRefEntity> crossRefEntities = tagCrossRefDao.getByTagId(tag.getTagId(), 
-				TagCrossRefEntity.PHOTOGALLERY);
+				TagCrossRefEntity.PHOTOGALLERY, 5);
 		
 		for(TagCrossRefEntity crossRefEntity: crossRefEntities){
 			categoryEntities.add(categoryDao.getById(crossRefEntity.getEntityId()));
@@ -92,14 +115,32 @@ public class TagService {
 		tag.setRelatedPhotogalleries(categoryEntities);
 	}
 	
+	private void setRelatedPictures(TagVo tag){
+		List<PictureEntity> pictureEntities = new ArrayList<PictureEntity>();
+		List<TagCrossRefEntity> crossRefEntities = tagCrossRefDao.getByTagId(tag.getTagId(), 
+				TagCrossRefEntity.PICTURE, AppConstants.DATA_DEFAULT_LIMIT);
+		
+		for(TagCrossRefEntity crossRefEntity: crossRefEntities){
+			if (tag.getFacePic()!=null && crossRefEntity.getEntityId().equals(tag.getFacePic())){
+				continue;
+			}
+			if (pictureEntities.size() >= 10){
+				break;
+			}
+			pictureEntities.add(pictureDao.getById(crossRefEntity.getEntityId()));
+		}
+		tag.setRelatedPictures(pictureEntities);
+	}
+	
 	private void setRelatedStories(TagVo tag, Long storyToSkip){
 		List<StoryEntity> relatedStories = new ArrayList<StoryEntity>();
 		List<TagCrossRefEntity> crossRefEntities = tagCrossRefDao.getByTagId(tag.getTagId(), 
-				TagCrossRefEntity.STORY);
+				TagCrossRefEntity.STORY, 5);
 		
 		for(TagCrossRefEntity crossRefEntity: crossRefEntities){
 			StoryEntity storyEntity = storyDao.getById(crossRefEntity.getEntityId());
-			if (!relatedStories.contains(storyEntity) &&  storyEntity.getId()!=storyToSkip ){
+			if (!relatedStories.contains(storyEntity) &&  storyEntity!=null && 
+					storyEntity.getId()!=storyToSkip ){
 				relatedStories.add(storyEntity);
 			}
 		}

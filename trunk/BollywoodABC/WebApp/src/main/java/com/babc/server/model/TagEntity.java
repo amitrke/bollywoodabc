@@ -148,6 +148,9 @@ public class TagEntity extends BaseEntityImpl implements Serializable {
 	
 	public TagEntity(TagUpdtModel tagUpdtModel) {
 		super();
+		if (tagUpdtModel.getId()!=null){
+			id=tagUpdtModel.getId();
+		}
 		tag = tagUpdtModel.getTag();
 		type = tagUpdtModel.getType();
 		createDate = new Date();
