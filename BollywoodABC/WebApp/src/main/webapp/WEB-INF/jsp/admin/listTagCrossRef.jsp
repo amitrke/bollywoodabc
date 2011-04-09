@@ -9,8 +9,8 @@
  	</tr>
 	 <c:forEach var="crossRef" items="${data}">
  	<tr>
- 		<td>${crossRef.tagTypeAsString}-${crossRef.tagId}-${crossRef.tag}</td>
- 		<td>${crossRef.entityTypeAsString}-${crossRef.entityId}</td>
+ 		<td>${crossRef.tagTypeAsString}-${crossRef.tag}(${crossRef.entityId})</td>
+ 		<td>${crossRef.entityTypeAsString}-${crossRef.tagId}</td>
  		<td>[Edit][Delete]</td>
  	</tr>
 	 </c:forEach>

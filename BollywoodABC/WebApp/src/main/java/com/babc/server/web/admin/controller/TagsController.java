@@ -64,6 +64,19 @@ public class TagsController {
 	}
 	
 	/**
+	 * Update Tag
+	 * @param model
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/update/{tagId}.htm", method = RequestMethod.GET)
+	public String updateTag(@PathVariable("tagId") Long tagId, @SuppressWarnings("rawtypes") Map model){
+		TagEntity tagEntity = tagDao.getById(tagId);
+		model.put("tagModel", new TagUpdtModel(tagEntity));
+		return "admin.updateTag";
+	}
+	
+	/**
 	 * Create new Tag Cross reference
 	 * @param model
 	 * @return

@@ -24,6 +24,7 @@
 	              <role-name>admin</role-name>
 	       </auth-constraint>
 	</security-constraint>
+	
 	<!-- GAE Data Export - Ends -->
 
 	<!-- Default page to serve -->
@@ -44,21 +45,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<!-- 
-	<servlet>
-        <servlet-name>org.jabsorb.JSONRPCServlet</servlet-name>
-        <servlet-class>org.jabsorb.JSONRPCServlet</servlet-class>
-        <init-param>
-            <param-name>gzip_threshold</param-name>
-            <param-value>200</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>org.jabsorb.JSONRPCServlet</servlet-name>
-        <url-pattern>/JSON-RPC/*</url-pattern>
-    </servlet-mapping>
-	 -->
-    
+	
 	<servlet-mapping>
 		<servlet-name>babcSpring</servlet-name>
 		<url-pattern>*.htm</url-pattern>
@@ -71,6 +58,10 @@
 		<servlet-name>babcSpring</servlet-name>
 		<url-pattern>*.php</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>babcSpring</servlet-name>
+		<url-pattern>/messagebroker/amf</url-pattern>
+	</servlet-mapping>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>applicationContext-service.xml</param-value>
@@ -80,9 +71,5 @@
 			contextConfigLocation </param-name>
 		<param-value>/WEB-INF/applicationContext-service.xml</param-value>
 	</context-param>
-	<listener>
-		<listener-class>
-			org.springframework.web.context.ContextLoaderListener
-		</listener-class>
-	</listener>
+	
 </web-app>

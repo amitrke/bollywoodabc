@@ -30,6 +30,10 @@ public class AppConstants {
 	public static final Long CAT_HOLLYWOOD = 141009L;
 	public static final Long CAT_BOLLYWOOD = 1001L;
 	
+	public static final Long TAG_FACEPIC = 567001L;
+	
 	public static final int ENTITY_STATUS_ENABLED = 65;
 	public static final int ENTITY_STATUS_DISABLED = 46;
+	
+	
 }

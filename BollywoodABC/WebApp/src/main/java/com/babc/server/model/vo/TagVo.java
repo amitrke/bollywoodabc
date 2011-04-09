@@ -3,6 +3,7 @@ package com.babc.server.model.vo;
 import java.util.List;
 
 import com.babc.server.model.CategoryEntity;
+import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.model.TagEntity;
 
@@ -22,9 +23,13 @@ public class TagVo {
 	
 	private String url;
 	
+	private Long facePic;
+	
 	private List<StoryEntity> relatedStories;
 	
 	private List<CategoryEntity> relatedPhotogalleries;
+	
+	private List<PictureEntity> relatedPictures;
 		
 
 	/**
@@ -58,8 +63,23 @@ public class TagVo {
 		this.tag = tag;
 		this.entityId = entityId;
 	}
-
 	
+	public List<PictureEntity> getRelatedPictures() {
+		return relatedPictures;
+	}
+
+	public void setRelatedPictures(List<PictureEntity> relatedPictures) {
+		this.relatedPictures = relatedPictures;
+	}
+
+	public Long getFacePic() {
+		return facePic;
+	}
+
+	public void setFacePic(Long facePic) {
+		this.facePic = facePic;
+	}
+
 	public Long getEntityId() {
 		return entityId;
 	}
@@ -73,7 +93,7 @@ public class TagVo {
 	}
 	
 	public String getEntityTypeAsString(){
-		switch(type){
+		switch(entityType){
 			case 1: return "Story";
 			case 2: return "Picture";
 			case 3: return "Photogallery";

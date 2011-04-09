@@ -8,7 +8,7 @@
  		<td>${tag.tag}</td>
  		<td>${tag.description}</td>
  		<td>${tag.type}</td>
- 		<td>[Edit][Delete]</td>
+ 		<td>[<A HREF="/admin/tag/update/${tag.id}.htm">Edit</A>][<A HREF="/admin/tag/delete/${tag.id}.htm">Delete</A>]</td>
  	</tr>
 	 </c:forEach>
 </table>
