@@ -1,14 +1,11 @@
 package com.babc.server.model.vo;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.babc.server.model.CategoryEntity;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.model.UserEntity;
-import com.babc.server.web.admin.model.KeyValuePair;
 import com.google.appengine.api.datastore.Text;
 
 public class StoryVo {
@@ -37,7 +34,7 @@ public class StoryVo {
 	
 	private List<CommentVo> comments;
 	
-	private List<TagVo> tags;
+	private TagListVo tags;
 
 	public StoryVo(String title, Long categoryId, Long userId,
 			Text body, String intro, Date createDate, int priority,
@@ -71,14 +68,10 @@ public class StoryVo {
 		this.picture = pictureEntity;
 		this.video = storyEntity.getVideo();
 		this.comments = commentVos;
-		this.tags = tags;
+		this.tags = new TagListVo(tags);
 	}
 	
-	public List<TagVo> getTags() {
-		return tags;
-	}
-
-
+	
 	public void setPicture(PictureEntity picture) {
 		this.picture = picture;
 	}
@@ -139,30 +132,11 @@ public class StoryVo {
 		return category;
 	}
 	
-	public List<CategoryEntity> getRelatedPhotogalleries(){
-		List<CategoryEntity> relatedPhotogalleries = new ArrayList<CategoryEntity>();
-		for (TagVo tagVo:tags){
-			relatedPhotogalleries.addAll(tagVo.getRelatedPhotogalleries());
-		}
-		return relatedPhotogalleries;
+	public TagListVo getTags() {
+		return tags;
 	}
-	
-	public List<StoryEntity> getRelatedStories(){
-		List<StoryEntity> relatedStories = new ArrayList<StoryEntity>();
-		for (TagVo tagVo:tags){
-			relatedStories.addAll(tagVo.getRelatedStories());
-		}
-		return relatedStories;
-	}
-	
-	public List<KeyValuePair> getTagLinks(){
-		List<KeyValuePair> tagList = new ArrayList<KeyValuePair>();
-		for(TagVo tag:tags){
-			tagList.add(new KeyValuePair(tag.getTagId(), tag.getTag()));
-		}
-		return tagList;
-	}
-	
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

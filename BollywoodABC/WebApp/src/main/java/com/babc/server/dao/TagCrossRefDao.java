@@ -53,4 +53,20 @@ public class TagCrossRefDao extends AbstractBaseDao<TagCrossRefEntity> {
 				limit, 0);
 	}
 	
+	public List<TagCrossRefEntity> getByTagIdEntIdEntTyp(Long tagId, Long entityId, int entityType){
+		Query query = newQuery();
+		query.addFilter("tagId", EQUAL, tagId);
+		query.addFilter("entityType", EQUAL, entityType);
+		query.addFilter("entityId", EQUAL, entityId);
+		return super.select(query, "getByTagIdEntIdEntTyp", params(tagId, entityId, entityType), 
+				AppConstants.DATA_DEFAULT_LIMIT, 0);
+	}
+	
+	public List<TagCrossRefEntity> getByTagType(int entityType, int limit){
+		Query query = newQuery();
+		query.addFilter("entityType", EQUAL, entityType);
+		return super.select(query, "getTagCrossRefByTgEnTyp", params(entityType), 
+				limit, 0);
+	}
+	
 }

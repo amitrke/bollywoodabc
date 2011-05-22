@@ -11,7 +11,8 @@ public class AppConstants {
 	public static final String HTML_DEFAULT_DESCRIPTION = HTML_DEFAULT_TITLE;
 	public static final String HTML_DEFAULT_KEYWORDS = "Bollywood News, Bollywood Pictures, Gossips, Events, Movie Releases";
 	
-	public static final int DATA_DEFAULT_LIMIT = 10; 
+	public static final int DATA_DEFAULT_LIMIT = 10;
+	public static final int RELATED_PICS_LIMIT = 25;
 	
 	/*
 	 * Category Types
