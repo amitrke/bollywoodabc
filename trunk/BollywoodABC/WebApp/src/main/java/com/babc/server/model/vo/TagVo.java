@@ -6,6 +6,7 @@ import com.babc.server.model.CategoryEntity;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.model.TagEntity;
+import com.babc.server.utils.AppUtils;
 
 public class TagVo {
 	
@@ -128,7 +129,10 @@ public class TagVo {
 	public String getUrl() {
 		return url;
 	}
-
+	
+	public String getTagUrlEscape(){
+		return AppUtils.urlFormat(tag);
+	}
 
 
 	public void setUrl(String url) {

@@ -11,12 +11,14 @@ import com.babc.server.dao.PictureDao;
 import com.babc.server.model.Paging;
 import com.babc.server.model.Photogallery;
 import com.babc.server.model.PictureEntity;
+import com.babc.server.model.vo.CategoryVo;
 
 @Service("pictureService")
 public class PictureService {
 	
 	private @Autowired PhotogalleryDao photogalleryDao;
 	private @Autowired PictureDao pictureDao;
+	private @Autowired CategoryService categoryService;
 	
 	public void addPicsToAlbum(List<Photogallery> pictures){
 		for(Photogallery picture: pictures){
@@ -34,6 +36,26 @@ public class PictureService {
 			if(counter >= columns){
 				grid.add(row);
 				row = new ArrayList<PictureEntity>();
+				counter = -1;
+			}
+			counter++;
+		}
+		if (row.size() > 0){
+			grid.add(row);
+		}
+		return grid;
+	}
+	
+	public List<List<CategoryVo>> getMainGrid(int columns){
+		List<List<CategoryVo>> grid = new ArrayList<List<CategoryVo>>();
+		List<CategoryVo> gridElements = categoryService.get("2", new Paging(Integer.MAX_VALUE, 0));
+		int counter=0;
+		List<CategoryVo> row = new ArrayList<CategoryVo>();
+		for(CategoryVo gridElement: gridElements){
+			row.add(gridElement);
+			if(counter >= columns){
+				grid.add(row);
+				row = new ArrayList<CategoryVo>();
 				counter = -1;
 			}
 			counter++;

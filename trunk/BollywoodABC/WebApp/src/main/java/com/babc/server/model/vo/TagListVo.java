@@ -3,6 +3,7 @@ package com.babc.server.model.vo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.babc.server.model.CategoryEntity;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
 
@@ -40,6 +41,14 @@ public class TagListVo {
 			}
 		}
 		return storyEntities;
+	}
+	
+	public List<CategoryEntity> getRelatedPhotogalleries(){
+		List<CategoryEntity> relatedPhotogalleries = new ArrayList<CategoryEntity>();
+		for (TagVo tagVo:tags){
+			relatedPhotogalleries.addAll(tagVo.getRelatedPhotogalleries());
+		}
+		return relatedPhotogalleries;
 	}
 	
 	public String tagCsv(){
