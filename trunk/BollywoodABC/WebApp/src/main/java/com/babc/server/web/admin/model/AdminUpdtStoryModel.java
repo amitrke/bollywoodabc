@@ -1,5 +1,7 @@
 package com.babc.server.web.admin.model;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springmodules.validation.bean.conf.loader.annotation.handler.Max;
 import org.springmodules.validation.bean.conf.loader.annotation.handler.Min;
@@ -10,18 +12,22 @@ public class AdminUpdtStoryModel {
 	@Min(value=1, message="Please select a category.")
 	private Long category;
 	
+	private Long primaryTag;
+	
+	private List<Long> secondaryTags;
+	
 	@NotBlank(message="Please enter a title")
 	private String title;
 	
 	@Min(value=1, message="Author Id should be > 1")
-	private Long author;
+	private Long author = 1L;
 	
 	@NotBlank(message="Introduction is required.")
 	private String intro;
 	
 	@Min(value=1, message="Priority should be > 1")
 	@Max(value=10, message="Priority should be < 10")
-	private Integer priority;
+	private Integer priority = 1;
 	
 	@NotBlank(message="Body cannot be blank")
 	private String body;
@@ -38,6 +44,22 @@ public class AdminUpdtStoryModel {
 		author=0L;
 		priority=10;
 		imageId=0L;
+	}
+
+	public List<Long> getSecondaryTags() {
+		return secondaryTags;
+	}
+
+	public void setSecondaryTags(List<Long> secondaryTags) {
+		this.secondaryTags = secondaryTags;
+	}
+
+	public Long getPrimaryTag() {
+		return primaryTag;
+	}
+
+	public void setPrimaryTag(Long primaryTag) {
+		this.primaryTag = primaryTag;
 	}
 
 	public Long getCategory() {

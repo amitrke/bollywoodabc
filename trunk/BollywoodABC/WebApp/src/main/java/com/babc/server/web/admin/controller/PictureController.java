@@ -2,6 +2,7 @@ package com.babc.server.web.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +24,10 @@ import com.babc.server.AppConstants;
 import com.babc.server.model.Paging;
 import com.babc.server.model.Photogallery;
 import com.babc.server.model.PictureEntity;
+import com.babc.server.model.TagCrossRefEntity;
 import com.babc.server.service.CategoryService;
 import com.babc.server.service.PictureService;
+import com.babc.server.service.TagService;
 import com.babc.server.web.admin.model.AdminAddPicsToGlryModel;
 import com.babc.server.web.admin.model.AdminUpdtPictModel;
 import com.babc.server.web.admin.model.KeyValuePair;
@@ -37,6 +40,7 @@ public class PictureController {
 	private @Autowired Validator validator;
 	private @Autowired CategoryService categoryService;
 	private @Autowired PictureService pictureService;
+	private @Autowired TagService tagService;
 	
 	private final int noOfPicsPerPage = 10;
 	
@@ -87,12 +91,18 @@ public class PictureController {
 		return categoryService.getAsKeyVal(AppConstants.CATEGORY_TYPE_IMAGE, new Paging(Integer.MAX_VALUE, 0));
 	}
 	
+	@ModelAttribute("tagList")
+	public List<KeyValuePair> getTags(){
+		return tagService.getTagsAsKeyVal();
+	}
+	
 	@RequestMapping(value="/update/{imageId}.htm", method = RequestMethod.GET)
 	public ModelAndView newPicture(@PathVariable("imageId") Long picId){
 		PictureEntity pictureEntity = pictureService.getPicture(picId);
 		AdminUpdtPictModel adminUpdtPictModel = new AdminUpdtPictModel();
 		adminUpdtPictModel.setCaption(pictureEntity.getCaption());
 		adminUpdtPictModel.setExistingPicId(pictureEntity.getId());
+		adminUpdtPictModel.setTags(tagService.getTagIds(picId, TagCrossRefEntity.PICTURE));
 		return new ModelAndView("admin.updatePicture", "pictureModel", adminUpdtPictModel);
 	}
 	
@@ -106,11 +116,21 @@ public class PictureController {
 			return "admin.updatePicture";
 		}
 		
-		PictureEntity pictureEntity = new PictureEntity(pictModel.getFile().getName(), 
-				pictModel.getCaption(), new Blob(pictModel.getFile().getBytes()), 'A');
-		pictureEntity.setId(picId);
+		if (pictModel.getFile().getName()!=null && pictModel.getFile().getName().trim().length()>0){
+			PictureEntity pictureEntity = new PictureEntity(pictModel.getFile().getName(), 
+					pictModel.getCaption(), new Blob(pictModel.getFile().getBytes()), 'A');
+			pictureEntity.setId(picId);
+			
+			PictureEntity entity = pictureService.savePicture(pictureEntity);
+		}
+		//Save Tags
+		for(Long tagId: pictModel.getTags()){
+			TagCrossRefEntity crossRefEntity = new TagCrossRefEntity(tagId, 
+					picId, TagCrossRefEntity.PICTURE, new Date(), 
+					AppConstants.ENTITY_STATUS_ENABLED);
+			tagService.saveCrossRef(crossRefEntity);
+		}
 		
-		pictureService.savePicture(pictureEntity);
 		return "redirect:/admin/picture/list/1.htm";
 	}
 	
@@ -135,7 +155,14 @@ public class PictureController {
 		}
 		
 		PictureEntity pictureEntity = new PictureEntity(pictModel.getFile().getName(), pictModel.getCaption(), new Blob(pictModel.getFile().getBytes()), 'A');
-		pictureService.savePicture(pictureEntity);
+		PictureEntity entity = pictureService.savePicture(pictureEntity);
+		//Save Tags
+		for(Long tagId: pictModel.getTags()){
+			TagCrossRefEntity crossRefEntity = new TagCrossRefEntity(tagId, 
+					entity.getId(), TagCrossRefEntity.PICTURE, new Date(), 
+					AppConstants.ENTITY_STATUS_ENABLED);
+			tagService.saveCrossRef(crossRefEntity);
+		}
 		return "redirect:/admin/picture/list/1.htm";
 	}
 }

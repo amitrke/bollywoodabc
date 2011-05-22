@@ -2,6 +2,7 @@ package com.babc.server.web.admin.model;
 
 import org.springmodules.validation.bean.conf.loader.annotation.handler.Min;
 import org.springmodules.validation.bean.conf.loader.annotation.handler.NotBlank;
+import org.springmodules.validation.bean.conf.loader.annotation.handler.NotNull;
 
 import com.babc.server.model.TagEntity;
 

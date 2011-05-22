@@ -28,7 +28,6 @@ import com.babc.server.model.TagCrossRefEntity;
 import com.babc.server.model.TagEntity;
 import com.babc.server.model.vo.TagVo;
 import com.babc.server.service.TagService;
-import com.babc.server.web.admin.model.KeyValuePair;
 import com.babc.server.web.admin.model.TagCrossRefUpdtModel;
 import com.babc.server.web.admin.model.TagUpdtModel;
 
@@ -96,13 +95,17 @@ public class TagsController {
 	 * @throws IOException
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String addNew(@ModelAttribute("storyModel") TagUpdtModel form, BindingResult result)throws IOException{
+	public String addNew(@ModelAttribute("tagModel") TagUpdtModel form, BindingResult result)throws IOException{
 		
 		validator.validate(form, result);
 		
-		if(result.hasErrors()){  
-			return "admin.updateTag";  
-		}  
+//		if(result.hasErrors()){  
+//			return "admin.updateTag";  
+//		}  
+		
+//		if (form.getId().equals(0)){
+//			form.setId(null);
+//		}
 		
 		TagEntity tagEntity = new TagEntity(form);
 		

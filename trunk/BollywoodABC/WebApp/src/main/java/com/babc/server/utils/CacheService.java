@@ -16,6 +16,8 @@ import javax.cache.CacheStatistics;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.google.appengine.api.memcache.MemcacheServiceException;
+
 @Service("cacheService")
 public class CacheService implements Cache {
 	
@@ -156,7 +158,14 @@ public class CacheService implements Cache {
 	@SuppressWarnings("unchecked")
 	public Object put(Object arg0, Object arg1) {
 		localCache.put((String)arg0, arg1);
-		return cache.put(arg0, arg1);
+		Object o = null;
+		try{
+			o = cache.put(arg0, arg1);
+		}
+		catch(MemcacheServiceException memcacheServiceException){
+			LOGGER.error(memcacheServiceException.getMessage());
+		}
+		return o;
 	}
 
 	

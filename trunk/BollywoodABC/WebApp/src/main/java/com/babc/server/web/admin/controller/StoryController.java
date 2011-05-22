@@ -25,9 +25,12 @@ import com.babc.server.AppConstants;
 import com.babc.server.model.Paging;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
+import com.babc.server.model.TagCrossRefEntity;
 import com.babc.server.model.vo.StoryVo;
 import com.babc.server.service.CategoryService;
 import com.babc.server.service.StoryService;
+import com.babc.server.service.TagService;
+import com.babc.server.service.TwitterService;
 import com.babc.server.web.admin.model.AdminUpdtStoryModel;
 import com.babc.server.web.admin.model.KeyValuePair;
 import com.google.appengine.api.datastore.Blob;
@@ -40,6 +43,8 @@ public class StoryController {
 	private @Autowired StoryService storyService;	
 	private @Autowired CategoryService categoryService;
 	private @Autowired Validator validator;
+	private @Autowired TagService tagService;
+	private @Autowired TwitterService twitterService;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value="/new.htm", method = RequestMethod.GET)
@@ -51,6 +56,16 @@ public class StoryController {
 	@ModelAttribute("categories")
 	public List<KeyValuePair> getCategoriesList(){
 		return categoryService.getAsKeyVal(AppConstants.CATEGORY_TYPE_CONTENT, new Paging());
+	}
+	
+	@ModelAttribute("facePics")
+	public List<KeyValuePair> getFacePics(){
+		return tagService.getFacePicsAsKeyVal();
+	}
+	
+	@ModelAttribute("tags")
+	public List<KeyValuePair> getTags(){
+		return tagService.getTagsAsKeyVal();
 	}
 	
 	@InitBinder
@@ -72,7 +87,7 @@ public class StoryController {
 		}  
 		
 		PictureEntity pictureEntity = null;
-		if (form.getImageData().getName().length() > 0){
+		if (form.getImageData()!=null && form.getImageData().getName().length() > 0){
 			pictureEntity = new PictureEntity(form.getImageData().getOriginalFilename(),
 					form.getImageCaption(), new Blob(form.getImageData().getBytes()), 
 					AppConstants.ENTITY_STATUS_ENABLED);
@@ -85,8 +100,28 @@ public class StoryController {
 				new Text(form.getBody()), form.getIntro(), new Date(), form.getPriority(),
 				AppConstants.ENTITY_STATUS_ENABLED, pictureEntity, form.getVideo());
 		
-		storyService.add(storyVo);
+		StoryEntity storyEntity = storyService.add(storyVo);
 		
+		twitterService.post(storyVo.getTitle()+" http://www.bollywoodabc.com/news/"+storyEntity.getId()+"/s.htm");
+		//Save tags
+		//Primary
+		TagCrossRefEntity crossRefEntity = new TagCrossRefEntity(form.getPrimaryTag(), 
+				storyEntity.getId(), TagCrossRefEntity.STORY, new Date(), 
+				AppConstants.ENTITY_STATUS_ENABLED);
+		tagService.saveCrossRef(crossRefEntity);
+		
+		if (form.getSecondaryTags()!=null){
+		//Secondary
+		for(Long tagId: form.getSecondaryTags()){
+			if (tagId.equals(form.getPrimaryTag())){
+				continue;
+			}
+			crossRefEntity = new TagCrossRefEntity(tagId, 
+					storyEntity.getId(), TagCrossRefEntity.STORY, new Date(), 
+					AppConstants.ENTITY_STATUS_ENABLED);
+			tagService.saveCrossRef(crossRefEntity);
+		}
+		}
 		return "redirect:/admin/story/list/1.htm";
 	}
 	
