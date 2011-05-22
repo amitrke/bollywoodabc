@@ -76,4 +76,9 @@
 <definition name="ui.tag.display" extends="ui.base.white">
 	<put-attribute name="content" value="/WEB-INF/jsp/ui/tag.jsp" cascade="true"/>
 </definition>
+
+<!-- Tweet -->
+<definition name="ui.tweet.display" extends="ui.base.white">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/tweets.jsp" cascade="true"/>
+</definition>
 </tiles-definitions>
