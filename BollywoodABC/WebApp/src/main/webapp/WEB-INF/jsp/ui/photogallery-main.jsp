@@ -7,14 +7,16 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
                 </TR>
                 <TR>
                   <TD HEIGHT="2" COLSPAN="2" BACKGROUND="/images/div2.gif"><IMG SRC="/images/spacer.gif" WIDTH="1" HEIGHT="1"></TD>
-                </TR>		      
-		<c:forEach var="gallery" items="${page.data.galleries}">
-  		<tr>
-			<td height="31" colspan="2" class="yellowtxt"><strong><A HREF='/photogallery/${gallery.id}/${gallery.titleUrl}.htm' CLASS='yellowtxt'>${gallery.name}</A></strong></td>
-		</tr>
+                </TR>	
+        <c:forEach var="galleryRow" items="${page.data.galleries}">
 		<tr>
-			<td width="1"><A HREF='/photogallery/${gallery.id}/${gallery.titleUrl}.htm'><img src="/dimage/thumb/${gallery.picture.id}.htm" alt="gallery.picture.caption" /></A></td>
-			<td valign="top" class="whitetxt"><A HREF='/photogallery/${gallery.id}/${gallery.titleUrl}.htm' class="whitetxt">${gallery.description}</A></td>
+			<c:forEach var="gallery" items="${galleryRow}">
+			<td width="1">
+			<A HREF='/photogallery/${gallery.id}/${gallery.titleUrl}.htm'><img src="/dimage/thumb/${gallery.picture.id}.htm" alt="gallery.picture.caption" /></A>
+			<br>
+			<strong><A HREF='/photogallery/${gallery.id}/${gallery.titleUrl}.htm' CLASS='yellowtxt'>${gallery.name}</A></strong>
+			</td>
+			</c:forEach>
 		</tr>
 		</c:forEach>
   <TR >

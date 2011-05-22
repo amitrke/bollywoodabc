@@ -19,6 +19,17 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
     <TR>
       <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">
       <p><c:out value="${page.data.description}" /></p>
+      <script type="text/javascript"><!--
+google_ad_client = "ca-pub-1068930101706447";
+/* babc-story-content */
+google_ad_slot = "0292172899";
+google_ad_width = 468;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
               </TD>
     </TR>
 	<TR>
@@ -26,6 +37,9 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
       <TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
       	<tr valign="top">
       		<td valign="top">
+      		<c:if test="${!empty page.data.facePic}">
+      				<IMG SRC="<c:out value="/dimage/${page.data.facePic}.htm"/>" HSPACE="5" VSPACE="5" ALIGN="right">
+      			</c:if>
         	<c:if test="${!empty page.data.relatedPhotogalleries}">
         	<B>Photo Gallery:</B>
         	<c:forEach var="gallery" items="${page.data.relatedPhotogalleries}">
@@ -40,11 +54,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
         		<c:out value="${story.intro}" /></p>
         	</c:forEach>
         </c:if>
-      		</td>
-      		<td>
-      			<c:if test="${!empty page.data.facePic}">
-      				<IMG SRC="<c:out value="/dimage/${page.data.facePic}.htm"/>" HSPACE="5" VSPACE="5" ALIGN="right">
-      			</c:if>
       		</td>
       	</tr>
       </TABLE>
