@@ -139,31 +139,15 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
               
               <TR>
                 <TD HEIGHT="228" VALIGN="top"><TABLE WIDTH="96%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0">
+                  <c:forEach var="tweet" items="${page.data.twitterTimeline}">
                   <tr>
                     <td width="15" valign="top"><img src="/images/yellowArrow.gif" width="12" height="7" vspace="4"></td>
-                    <td height="30"><a href="http://www.bollywoodabc.com/story.php?id=391" class="whitelink">Simon Cowell has the 'worst celebrity hair'</a></td>
-                  </tr><tr>
-                    <td width="15" valign="top"><img src="/images/yellowArrow.gif" width="12" height="7" vspace="4"></td>
-
-                    <td height="30"><a href="http://www.bollywoodabc.com/story.php?id=337" class="whitelink">Selina goes topless</a></td>
-                  </tr><tr>
-                    <td width="15" valign="top"><img src="/images/yellowArrow.gif" width="12" height="7" vspace="4"></td>
-                    <td height="30"><a href="http://www.bollywoodabc.com/story.php?id=335" class="whitelink">Rumour has it Kareena, Shah Rukh out</a></td>
-                  </tr><tr>
-                    <td width="15" valign="top"><img src="/images/yellowArrow.gif" width="12" height="7" vspace="4"></td>
-                    <td height="30"><a href="http://www.bollywoodabc.com/story.php?id=334" class="whitelink">Sameera Reddy wants to be tough Bollywood babe</a></td>
-
-                  </tr><tr>
-                    <td width="15" valign="top"><img src="/images/yellowArrow.gif" width="12" height="7" vspace="4"></td>
-                    <td height="30"><a href="http://www.bollywoodabc.com/story.php?id=333" class="whitelink">When Mika kissed Rakhi, but that is her version</a></td>
-                  </tr><tr>
-                    <td width="15" valign="top"><img src="/images/yellowArrow.gif" width="12" height="7" vspace="4"></td>
-                    <td height="30"><a href="http://www.bollywoodabc.com/story.php?id=339" class="whitelink">Once a hot date Dino, hooks off now</a></td>
+                    <td height="30" CLASS="yellowtxt">${tweet}</td>
                   </tr>
-				  <TR>
+                  </c:forEach>
 
                     <TD WIDTH="15" VALIGN="top"></TD>
-                    <TD HEIGHT="30" ALIGN="RIGHT"><A HREF="bollywoodlinks-more.php" CLASS="whitelink">More >></A></TD>
+                    <TD HEIGHT="30" ALIGN="RIGHT"><A HREF="/news/tweets.htm" CLASS="whitelink">More >></A></TD>
                   </TR>
                 </TABLE></TD>
               </TR>

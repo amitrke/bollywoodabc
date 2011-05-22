@@ -24,6 +24,14 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@taglib prefix="form" uri=
 		<td><input type="file" name="file"> </td>
 	</tr>
 	<tr>
+		<td>Tags</td>
+		<td>
+			<form:select path="tags" multiple="true" size="15">
+				<form:options items="${tagList}" itemLabel="value" itemValue="key" />
+			</form:select>
+		</td>
+	</tr>
+	<tr>
 		<td>
 			&nbsp;	
 		</td>

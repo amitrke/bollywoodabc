@@ -19,14 +19,26 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
                 <TR>
                   <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">
                   <div ID="storyMeta"><p>
-                  <c:if test="${!empty page.data.tagLinks}">
+                  <c:if test="${!empty page.data.tags.tags}">
                   Keywords:
-                  <c:forEach var="tag" items="${page.data.tagLinks}">
-                  	<A HREF='/t/${tag.key}/${tag.urlEscapeValue}.htm'>${tag.value}</A> &nbsp;
+                  <c:forEach var="tag" items="${page.data.tags.tags}">
+                  	<A HREF='/t/${tag.tagId}/${tag.tagUrlEscape}.htm' title='${tag.description}'>${tag.tag}</A> &nbsp;
                   </c:forEach>
-                  <br>
+<br>
                   </c:if>
                   <c:out value="${page.data.createDate}" /> 
+                  <br>
+                  <script type="text/javascript"><!--
+google_ad_client = "ca-pub-1068930101706447";
+/* babc-story-content */
+google_ad_slot = "0292172899";
+google_ad_width = 468;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
                   </p></div>
                   </TD>
                 </TR>
@@ -62,23 +74,35 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
                   <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">&nbsp;</TD>
                 </TR>
                 <c:if test="${!empty page.data.tags}">
-                
                 <TR>
                   <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">
                   
-                  <c:if test="${!empty page.data.relatedPhotogalleries}">
-                  	<B>Related Photo galleries:</B><br>
-                  	<c:forEach var="gallery" items="${page.data.relatedPhotogalleries}">
-                  		<A HREF='<c:out value="${gallery.galleryUrl}" />'><c:out value="${gallery.name}" /></A>
-                  	</c:forEach>
-                  </c:if>
+                  <c:if test="${!empty page.data.tags.relatedPhotogalleries}">
+		        	<B>Photo Gallery:</B>
+		        	<c:forEach var="gallery" items="${page.data.tags.relatedPhotogalleries}">
+		        		<A HREF='<c:out value="${gallery.galleryUrl}" />'><c:out value="${gallery.name}" /></A>&nbsp;
+		        	</c:forEach>
+		        </c:if>
                   <BR>
-                  <c:if test="${!empty page.data.relatedStories}">
-                  	<B>Related Stories:</B><br>
-                  	<c:forEach var="story" items="${page.data.relatedStories}">
-                  		<A HREF='<c:out value="${story.storyUrl}" />'><c:out value="${story.title}" /></A><BR>
-                  	</c:forEach>
-                  </c:if>
+                   <c:if test="${!empty page.data.tags.relatedStories}">
+		        	<br><B>Related Stories:</B><br>
+		        	<c:forEach var="story" items="${page.data.tags.relatedStories}">
+		        		<p><A HREF='<c:out value="${story.storyUrl}" />'><c:out value="${story.title}" /></A><br>
+		        		<c:out value="${story.intro}" /></p>
+		        	</c:forEach>
+		          </c:if>
+        		<c:if test="${!empty page.data.tags.relatedPictures}">
+			    <tr>
+			    	<td VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">
+			    		<B>Recent pics:</B><br>
+			    		<c:forEach var="picture" items="${page.data.tags.relatedPictures}">
+			    			<A HREF="/photogallery/wallpaper/${picture.urlCaption}/${picture.id}.htm" style="border-style: none"/>
+			    			<IMG SRC="<c:out value="/dimage/thumb/${picture.id}.htm"/>" HSPACE="5" VSPACE="5" ALIGN="left">
+			    			</A>
+			    		</c:forEach>
+			    	</td>
+			    </tr>
+			    </c:if>
                   </TD>
                 </TR>
                 <br>

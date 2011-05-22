@@ -17,34 +17,22 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
             		</TR>
         		</TABLE>
         	</TD>
-        	<TD VALIGN="top" WIDTH="12">&nbsp;</TD>
-        	<TD WIDTH="170" ALIGN="center" VALIGN="top" BGCOLOR="#E9F0F2">
-	        	<DIV ALIGN="center">
-	        		<SPAN CLASS="help">Advertisment</SPAN>
-					<TABLE WIDTH="120" BORDER="0" CELLSPACING="0" CELLPADDING="0">
-	  					<TR>
-	    					<TD></TD>
+        	<TD WIDTH="120" ALIGN="center" VALIGN="top" BGCOLOR="#E9F0F2">
+	        	
+					
+	    					<script type="text/javascript"><!--
+							google_ad_client = "ca-pub-1068930101706447";
+							/* babc-right */
+							google_ad_slot = "2591682899";
+							google_ad_width = 120;
+							google_ad_height = 600;
+							//-->
+							</script>
+							<script type="text/javascript"
+							src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+							</script>
+
+	    					</TD>
 						</TR>
-						<TR>
-							<TD></TD>
-						</TR>
-						<TR>
-							<TD></TD>
-						</TR>
-						<TR>
-							<TD></TD>
-						</TR>
-						<TR>
-							<TD></TD>
-						</TR>
-						<TR>
-							<TD></TD>
-						</TR>
-						<TR>
-							<TD>&nbsp;</TD>
-						</TR>
-					</TABLE>
-				</DIV>
-			</TD>
-		</TR>
+			
 	</TABLE>
