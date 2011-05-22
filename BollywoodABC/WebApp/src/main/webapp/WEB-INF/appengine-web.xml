@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
 	<application>bollywoodabc1</application>
-	<version>16</version>
+	<version>22</version>
 	<sessions-enabled>true</sessions-enabled>
 	<!-- Configure java.util.logging -->
 	<system-properties>
@@ -10,4 +10,5 @@
 	<inbound-services>
     	<service>xmpp_message</service>
   	</inbound-services>
+  	<threadsafe>true</threadsafe>
 </appengine-web-app>

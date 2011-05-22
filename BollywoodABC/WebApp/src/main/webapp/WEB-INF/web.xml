@@ -46,6 +46,15 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
+	 <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
 	<servlet-mapping>
 		<servlet-name>babcSpring</servlet-name>
 		<url-pattern>*.htm</url-pattern>

@@ -23,6 +23,7 @@ import com.babc.server.model.Paging;
 import com.babc.server.model.vo.StoryVo;
 import com.babc.server.service.CategoryService;
 import com.babc.server.service.StoryService;
+import com.babc.server.service.TwitterService;
 import com.babc.server.web.admin.model.AdminUpdtStoryModel;
 import com.babc.server.web.admin.model.KeyValuePair;
 import com.babc.server.web.model.HtmlPage;
@@ -36,6 +37,7 @@ public class Frontend {
 	
 	private @Autowired StoryService storyService;
 	private @Autowired CategoryService categoryService;
+	private @Autowired TwitterService twitterService;
 	
 	private final int noOfStoriesPerPage = 10;
 	
@@ -80,12 +82,26 @@ public class Frontend {
 		home.put("date", new Date());
 		home.put("homePageStories", storyService.get(new Paging(AppConstants.noOfStoriesOnFirstPage, 0)));
 		home.put("babcExtra", (storyService.get(new Paging(1, AppConstants.noOfStoriesOnFirstPage+1))).get(0));
+		home.put("twitterTimeline", twitterService.getTimeline(3));
 		
 		HtmlPage htmlPage = new HtmlPage("Bollywood News - Wallpapers, Songs, Videos, Movies, Stars", 
 				"Latest Bollywood gossip news. Get the latest celebrity gossip, entertainment gossip, celeb gossip news, new movie trailers, TV, movie reviews from Bollywood", 
 				"Bollywood, News, Hollywood, Wallpapers, Hi Resolution pics", 
 				AppConstants.metaExpiryExpired, "BollywoodABC", home);
 		return new ModelAndView("ui.homepage", "page", htmlPage);
+	}
+	
+	@RequestMapping(value="/tweets.htm", method = RequestMethod.GET)
+	public ModelAndView displayTweets(){
+		Map<String, Object> home = new HashMap<String, Object>();
+		home.put("date", new Date());
+		home.put("twitterTimeline", twitterService.getTimeline(Integer.MAX_VALUE));
+		
+		HtmlPage htmlPage = new HtmlPage("Bollywood Tweets", 
+				"Latest Bollywood gossip news. Get the latest celebrity gossip, entertainment gossip, celeb gossip news, new movie trailers, TV, movie reviews from Bollywood", 
+				"Bollywood, News, Hollywood, Wallpapers, Hi Resolution pics", 
+				AppConstants.metaExpiryExpired, "BollywoodABC", home);
+		return new ModelAndView("ui.tweet.display", "page", htmlPage);
 	}
 	
 	@RequestMapping(value="/latest/{pageNo}.htm", method = RequestMethod.GET)
