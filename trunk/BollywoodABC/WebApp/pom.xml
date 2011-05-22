@@ -37,6 +37,19 @@
 			<url>http://repository.springsource.com/maven/bundles/release</url>
 		</repository> 
 		
+		
+      
+		<repository>
+         <id>twitter4j.org</id>
+         <name>twitter4j.org Repository</name>
+         <url>http://twitter4j.org/maven2</url>
+         <releases>
+            <enabled>true</enabled>
+         </releases>
+         <snapshots>
+            <enabled>true</enabled>
+         </snapshots>
+      </repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -79,7 +92,8 @@
 			<artifactId>datanucleus-appengine</artifactId>
 			<version>1.0.7.final</version>
 		</dependency>
-
+		
+      	
 		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>datanucleus-core</artifactId>
@@ -314,6 +328,13 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-core</artifactId>
+			<version>2.2.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -426,13 +447,13 @@
 
 		<!-- Specify AppEngine version for your project. It should match SDK version 
 			pointed to by ${gae.home} property (Typically, one used by your Eclipse plug-in) -->
-		<gae.version>1.4.0</gae.version>
+		<gae.version>1.4.3</gae.version>
 
 		<!-- Upload to http://test.latest.<applicationName>.appspot.com by default -->
 		<gae.application.version>test</gae.application.version>
 
 		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
-		<gae.home>/home/amit/me/apps/java/appengine-java-sdk-1.4.0</gae.home>
+		<gae.home>/home/amit/me/apps/java/appengine-java-sdk-1.4.3</gae.home>
 	</properties>
 
 	<profiles>
