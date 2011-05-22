@@ -1,5 +1,7 @@
 package com.babc.server.web.admin.model;
 
+import java.util.List;
+
 import org.springmodules.validation.bean.conf.loader.annotation.handler.Min;
 
 public class AdminAddPicsToGlryModel {
@@ -11,7 +13,7 @@ public class AdminAddPicsToGlryModel {
 
 	public AdminAddPicsToGlryModel() {
 	}
-
+	
 	public String getCategoryId() {
 		return categoryId;
 	}
