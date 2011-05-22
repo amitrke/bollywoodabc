@@ -3,6 +3,7 @@ package com.babc.server.web.ui.controller;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.babc.server.AppConstants;
-import com.babc.server.model.Paging;
 import com.babc.server.model.PictureEntity;
+import com.babc.server.model.TagCrossRefEntity;
 import com.babc.server.model.vo.CategoryVo;
+import com.babc.server.model.vo.TagListVo;
+import com.babc.server.model.vo.TagVo;
 import com.babc.server.service.CategoryService;
 import com.babc.server.service.PictureService;
+import com.babc.server.service.TagService;
 import com.babc.server.web.model.HtmlPage;
 
 @Controller
@@ -28,6 +32,7 @@ public class PhotogalleryController {
 	
 	private @Autowired CategoryService categoryService;
 	private @Autowired PictureService pictureService;
+	private @Autowired TagService tagService;
 	
 	@RequestMapping(value="/{imageId}/*.jpeg", method = RequestMethod.GET)
 	public void loadImage(@PathVariable("imageId") Long picId,
@@ -46,7 +51,12 @@ public class PhotogalleryController {
 	public ModelAndView loadImagePage(@PathVariable("imageId") Long picId,
 			HttpServletResponse response) throws Exception {
 		PictureEntity pictureEntity = pictureService.getPicture(picId);
-		HtmlPage htmlPage = new HtmlPage(pictureEntity.getCaption(), pictureEntity.getCaption(), pictureEntity.getCaption(), AppConstants.metaExpiryNextYear, "BollywoodABC", pictureEntity);
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("picture", pictureEntity);
+		TagListVo tags = tagService.getTagsList(picId, TagCrossRefEntity.PICTURE);
+		data.put("tags", tags);
+		HtmlPage htmlPage = new HtmlPage(pictureEntity.getCaption(), pictureEntity.getCaption(), tags.tagCsv(), 
+				AppConstants.metaExpiryNextYear, "BollywoodABC", data);
 		return new ModelAndView("ui.photogallery.picpage", "page", htmlPage);
 	}
 	
@@ -55,7 +65,7 @@ public class PhotogalleryController {
 		
 		Map<String, Object> home = new HashMap<String, Object>();
 		home.put("date", new Date());
-		home.put("galleries", categoryService.get("2", new Paging(Integer.MAX_VALUE, 0)));
+		home.put("galleries", pictureService.getMainGrid(5));
 		
 		HtmlPage htmlPage = new HtmlPage("Bollywood Photogallery - wallpapers, Hi resolution pictures", 
 				"Bollywood Photogallery - wallpapers, Hi resolution pictures of Deepika Padukone, Ashwariya Rai, Kareena Kapoor, Sonam Kapoor", 
