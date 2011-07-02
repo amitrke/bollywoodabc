@@ -6,7 +6,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
       <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">&nbsp;</TD>
     </TR>
     <TR>
-      <TD HEIGHT="22" VALIGN="middle" CLASS="h1" STYLE="padding-left:12px; padding-right:12px;"><c:out value="${page.data.tag}"/></TD>
+      <TD HEIGHT="22" VALIGN="middle" CLASS="h1" STYLE="padding-left:12px; padding-right:12px;"><c:out value="${page.data.tag}"/><g:plusone></g:plusone></TD>
     </TR>
     <TR>
       <TD STYLE="padding-left:12px; padding-right:12px;"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">

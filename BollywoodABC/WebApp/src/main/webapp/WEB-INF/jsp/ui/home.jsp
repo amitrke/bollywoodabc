@@ -8,7 +8,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
             <TD><A HREF="/photogallery/main.htm"><IMG SRC="/dimage/14001.htm" WIDTH="190" HEIGHT="295" BORDER="0"></A></TD>
           </TR>
           <TR>
-            <TD HEIGHT="23" BACKGROUND="/images/hrdBG.gif"><A HREF="/photogallery/main.htm"><IMG SRC="/images/babeweekHrd.gif" WIDTH="122" HEIGHT="15" HSPACE="11" BORDER="0"></A></TD>
+            <TD HEIGHT="23" BACKGROUND="/images/hrdBG.gif"><A HREF="/photogallery/main.htm"><IlatestnewsHrd.gifMG SRC="/images/babeweekHrd.gif" WIDTH="122" HEIGHT="15" HSPACE="11" BORDER="0"></A></TD>
           </TR>
           <TR>
             <TD HEIGHT="116" ALIGN="center" BGCOLOR="#434945"><A HREF="/photogallery/main.htm"><IMG SRC="/images/hotgallImmg.jpg" WIDTH="156" HEIGHT="97" BORDER="0" CLASS="whiteBrdImg"></A></TD>
@@ -60,7 +60,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
               
               <TR>
                 <TD HEIGHT="32" VALIGN="bottom" width="10"><IMG SRC="/images/latestnewsHrd.gif" WIDTH="85" HEIGHT="16" VSPACE="3"></TD>
-                <TD HEIGHT="32" ALIGN="right" VALIGN="top" CLASS="yellowtxt">&nbsp;</TD>
+                <TD HEIGHT="32" ALIGN="right" VALIGN="middle" CLASS="yellowtxt"><g:plusone></g:plusone></TD>
               </TR>
 
 			 <c:forEach var="top3item" items="${page.data.homePageStories}">

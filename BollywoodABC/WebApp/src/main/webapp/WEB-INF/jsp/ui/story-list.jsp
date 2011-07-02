@@ -6,7 +6,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
               
               <TABLE WIDTH="100%"  BORDER="0" CELLSPACING="0" CELLPADDING="2">
                 <TR>
-                  <TD HEIGHT="32" VALIGN="bottom" COLSPAN="2"><IMG SRC="/images/latestnewsHrd.gif" WIDTH="85" HEIGHT="16" VSPACE="3"></TD>
+                  <TD HEIGHT="32" VALIGN="bottom" COLSPAN="2"><IMG SRC="/images/latestnewsHrd.gif" WIDTH="85" HEIGHT="16" VSPACE="3"> <g:plusone></g:plusone></TD>
                 </TR>
                 <TR>
                   <TD HEIGHT="2" COLSPAN="2" BACKGROUND="/images/div2.gif"><IMG SRC="/images/spacer.gif" WIDTH="1" HEIGHT="1"></TD>
