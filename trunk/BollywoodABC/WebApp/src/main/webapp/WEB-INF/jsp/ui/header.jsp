@@ -3,7 +3,7 @@
         <TD WIDTH="32%"><A HREF="/"><IMG SRC="/images/bollywoodabc.gif" ALT="Welcome to BollywoodABC" WIDTH="199" HEIGHT="90" BORDER="0"></A></TD>
 
         <TD WIDTH="68%" ALIGN="right" VALIGN="top">
-        
+        <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 			<script type="text/javascript"><!--
 google_ad_client = "ca-pub-1068930101706447";
 /* babc-head */

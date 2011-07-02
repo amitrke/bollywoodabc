@@ -38,7 +38,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
     Keywords:<c:forEach var="tag" items="${page.data.tags.tags}">
                   	<A HREF='/t/${tag.tagId}/${tag.tagUrlEscape}.htm' title='${tag.description}'>${tag.tag}</A> &nbsp;
                   </c:forEach>
-    </td>
+    <g:plusone></g:plusone></td>
   </tr>
 </table>
 

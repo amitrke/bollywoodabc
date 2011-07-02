@@ -3,11 +3,15 @@
 prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
               <TABLE WIDTH="100%"  BORDER="0" CELLSPACING="0" CELLPADDING="2">
                 <TR>
-                  <TD HEIGHT="32" VALIGN="bottom" COLSPAN="2"><h1>Photo Gallery</h1></TD>
+                  <TD HEIGHT="32" width="20%"><h1>Photo Gallery</td>
+                  <td align="right" width="80%"><g:plusone></g:plusone></h1></TD>
                 </TR>
                 <TR>
                   <TD HEIGHT="2" COLSPAN="2" BACKGROUND="/images/div2.gif"><IMG SRC="/images/spacer.gif" WIDTH="1" HEIGHT="1"></TD>
-                </TR>	
+                </TR>
+                <tr>
+                <td colspan="2">
+                <table WIDTH="100%"  BORDER="0" CELLSPACING="0" CELLPADDING="2">	
         <c:forEach var="galleryRow" items="${page.data.galleries}">
 		<tr>
 			<c:forEach var="gallery" items="${galleryRow}">
@@ -19,6 +23,9 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 			</c:forEach>
 		</tr>
 		</c:forEach>
+		</table>
+		</td>
+		</tr>
   <TR >
     <TD HEIGHT="1" COLSPAN="2" BACKGROUND="/images/dotHorizontal.gif"></TD>
   </TR>
