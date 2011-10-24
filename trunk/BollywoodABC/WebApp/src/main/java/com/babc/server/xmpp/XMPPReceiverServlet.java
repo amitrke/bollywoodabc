@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.babc.server.service.XmppService;
+import com.babc.server.utils.ApplicationContextProvider;
 import com.google.appengine.api.xmpp.JID;
 import com.google.appengine.api.xmpp.Message;
 import com.google.appengine.api.xmpp.XMPPService;
@@ -35,8 +36,7 @@ public class XMPPReceiverServlet extends HttpServlet{
           throws IOException {
 		
 		if (applicationContext == null){
-			System.out.println("setting context in get");
-			applicationContext = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+			applicationContext = ApplicationContextProvider.getCtx();
 			xmppService = (XmppService) applicationContext.getBean("xmppService");
 		}
 		
@@ -45,7 +45,7 @@ public class XMPPReceiverServlet extends HttpServlet{
 
         JID fromJid = message.getFromJid();
         String body = message.getBody();
-        LOGGER.info("xmpp message from "+fromJid.getId()+" - "+body);
+        LOGGER.debug("xmpp message from "+fromJid.getId()+" - "+body);
         xmppService.onMessage(fromJid, body);
     }
 }
