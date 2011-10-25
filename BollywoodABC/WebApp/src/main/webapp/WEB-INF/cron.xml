@@ -5,4 +5,9 @@
     <description>Keep jetty hot</description>
     <schedule>every 1 minutes</schedule>
   </cron>
+  <cron>
+    <url>/batch/downloadTwitterTimeline.htm</url>
+    <description>Download Twitter timeline to DB</description>
+    <schedule>every 30 minutes</schedule>
+  </cron>
 </cronentries>
