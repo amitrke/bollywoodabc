@@ -5,7 +5,11 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.babc.server.dao.TweetsDao;
+import com.babc.server.model.TweetEntity;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -15,6 +19,8 @@ import twitter4j.conf.ConfigurationBuilder;
 
 @Service("twitterService")
 public class TwitterService {
+	
+	private @Autowired TweetsDao tweetsDao;
 	
 	protected static final Log logger = LogFactory.getLog(TwitterService.class);
 	
@@ -39,6 +45,28 @@ public class TwitterService {
 		} catch (TwitterException e) {
 			logger.error(e.getMessage());
 			return false;
+		}
+	}
+	
+	public void downloadTimelineToDb(int limit){
+		Twitter twitter = getTwitterInstance();
+	    List<Status> statuses;
+	    int count = 0;
+		try {
+			statuses = twitter.getFriendsTimeline();
+			logger.debug("Fetched "+statuses.size()+" statuses from Twitter, will try to process "
+					+limit+" of them as per the limit set.");
+		    for (Status status : statuses) {
+		    	
+		    	tweetsDao.save(new TweetEntity(status));
+		    	
+		    	count++;
+		    	if (count>=limit){
+		    		break;
+		    	}
+		    }
+		} catch (TwitterException e) {
+			logger.error(e);
 		}
 	}
 	

@@ -53,6 +53,8 @@ public class XmppService {
 	
 	private void sendMessage(JID jid, String msgBody){
 		
+		LOGGER.debug("Sending chat message to:"+jid.getId()+", message:"+msgBody);
+		
         Message msg = new MessageBuilder()
             .withRecipientJids(jid)
             .withBody(msgBody)
