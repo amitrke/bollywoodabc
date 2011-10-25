@@ -1,15 +1,15 @@
 package com.babc.server.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import static com.babc.server.utils.EntityUtil.getDateProperty;
+import static com.babc.server.utils.EntityUtil.getIntegerProperty;
+import static com.babc.server.utils.EntityUtil.getLongProperty;
+import static com.babc.server.utils.EntityUtil.getStringProperty;
+import static com.babc.server.utils.EntityUtil.getTextProperty;
 import static com.babc.server.utils.EntityUtil.setProperty;
 import static com.babc.server.utils.EntityUtil.setTextProperty;
+
+import java.io.Serializable;
+import java.util.Date;
 
 import com.babc.server.AppConstants;
 import com.babc.server.model.vo.StoryVo;
@@ -17,51 +17,33 @@ import com.babc.server.utils.AppUtils;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Text;
-import static com.babc.server.utils.EntityUtil.getLongProperty;
-import static com.babc.server.utils.EntityUtil.getStringProperty;
-import static com.babc.server.utils.EntityUtil.getTextProperty;
-import static com.babc.server.utils.EntityUtil.getDateProperty;
-import static com.babc.server.utils.EntityUtil.getIntegerProperty;
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
+
 public class StoryEntity extends BaseEntityImpl implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Long id;
 	
-	@Persistent
 	private String title;
 	
-	@Persistent
 	private Long authorId;
 	
-	@Persistent
 	private Long categoryId;
 	
-	@Persistent
 	private Text body;
 	
-	@Persistent
 	private String intro;
 	
-	@Persistent
 	private Date createDate;
 	
-	@Persistent
 	private int priority;
 	
-	@Persistent
 	private int status;
 	
-	@Persistent
 	private Long pictureId;
 	
-	@Persistent
 	private String video;
 	
-	@Override
 	public void save(Entity entity) {
 		super.save(entity);
 		setProperty(entity, "title", title, false);
