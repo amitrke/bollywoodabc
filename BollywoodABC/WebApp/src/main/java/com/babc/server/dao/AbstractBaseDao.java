@@ -49,6 +49,7 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 	}
 	
 	public T save(T model) {
+		
 		getQueryCache().removeQueries(clazz);
 		Entity entity = null;
 		if (model.getId() != null) {
@@ -63,11 +64,17 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 			}
 		}
 		if (entity == null) {
-			entity = new Entity(getKind());
+			if (model.getId()!=null){
+				entity = new Entity(getKind(), model.getId());
+			}
+			else{
+				entity = new Entity(getKind());
+			}
 		}
 		model.save(entity);
 		DatastoreServiceFactory.getDatastoreService().put(entity);
 		model.setKey(entity.getKey());
+		logger.debug("Object persisted: "+model.toString());
 		return model;
 	}
 	
@@ -129,7 +136,7 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 			PreparedQuery p = datastoreService.prepare(query);
 			result = createModels(p.asList(withLimit(limit).offset(offset)));
 			getQueryCache().putQuery(clazz, queryId, params, result);
-			logger.info(result);
+			logger.debug("Data Read from DB:"+result.toString());
 		}
 		return result;
 	}
@@ -183,7 +190,7 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 			return model;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 			return null;
 		}
 	}

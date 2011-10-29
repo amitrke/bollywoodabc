@@ -1,4 +1,4 @@
-<table width="100%" border="1">
+<table width="100px" border="1">
 	<tr>
 		<td colspan="2">Category</td>
 	</tr>
@@ -59,5 +59,11 @@
 		<td>&nbsp;</td>
 		<td><a href="/admin/picture/album/list/1.htm">Album List</a></td>
 	</tr>
-	
+	<tr>
+		<td colspan="2">Twitter</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a href="/admin/twitter/list/1.htm">List</a></td>
+	</tr>
 </table>

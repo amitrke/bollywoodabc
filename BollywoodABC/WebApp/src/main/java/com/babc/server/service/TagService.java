@@ -20,6 +20,7 @@ import com.babc.server.model.TagCrossRefEntity;
 import com.babc.server.model.TagEntity;
 import com.babc.server.model.vo.TagListVo;
 import com.babc.server.model.vo.TagVo;
+import com.babc.server.model.vo.TweetsVo;
 import com.babc.server.web.admin.model.KeyValuePair;
 
 @Service("tagService")
@@ -30,6 +31,7 @@ public class TagService {
 	private @Autowired CategoryDao categoryDao;
 	private @Autowired StoryDao storyDao;
 	private @Autowired PictureDao pictureDao;
+	private @Autowired TwitterService twitterService;
 	
 	/**
 	 * Get tags
@@ -94,6 +96,7 @@ public class TagService {
 		setRelatedStories(tagVo, 0L);
 		setFacePic(tagVo);
 		setRelatedPictures(tagVo);
+		tagVo.setTweetsVo(getTwitterDetails(tagId));
 		return tagVo;
 	}
 	
@@ -117,7 +120,7 @@ public class TagService {
 		return tags;
 	}
 	
-	private void setFacePic(TagVo tag){
+	public void setFacePic(TagVo tag){
 		List<TagCrossRefEntity> facePics = tagCrossRefDao.getByTagId(AppConstants.TAG_FACEPIC, 
 				TagCrossRefEntity.PICTURE, Integer.MAX_VALUE);
 		List<TagCrossRefEntity> tagPics = tagCrossRefDao.getByTagId(tag.getTagId(), 
@@ -136,7 +139,6 @@ public class TagService {
 	
 	private List<TagCrossRefEntity> getFacePics(){
 		List<TagCrossRefEntity> intersectedResult = new ArrayList<TagCrossRefEntity>();
-		List<TagCrossRefEntity> result = new ArrayList<TagCrossRefEntity>();
 		List<TagCrossRefEntity> facePics = tagCrossRefDao.getByTagId(AppConstants.TAG_FACEPIC, 
 				TagCrossRefEntity.PICTURE, Integer.MAX_VALUE);
 		List<TagCrossRefEntity> tagPics = tagCrossRefDao.getByTagType(TagCrossRefEntity.PICTURE, 
@@ -181,6 +183,25 @@ public class TagService {
 			categoryEntities.add(categoryDao.getById(crossRefEntity.getEntityId()));
 		}
 		tag.setRelatedPhotogalleries(categoryEntities);
+	}
+	
+	private Long getTwitterUserId(Long tagid){
+		List<TagCrossRefEntity> crossRefEntities = tagCrossRefDao.getByTagId(tagid, 
+				TagCrossRefEntity.TWITTER_USER, 1);
+		if (crossRefEntities.size()>0){
+			return crossRefEntities.get(0).getEntityId();
+		}
+		else{
+			return null;
+		}
+	}
+	
+	public TweetsVo getTwitterDetails(Long tagId){
+		Long twitterUserId = getTwitterUserId(tagId);
+		if (twitterUserId==null){
+			return null;
+		}
+		return twitterService.getUserTweets(twitterUserId);
 	}
 	
 	private void setRelatedPictures(TagVo tag){

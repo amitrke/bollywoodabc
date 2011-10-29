@@ -6,13 +6,14 @@ import static com.babc.server.utils.EntityUtil.getLongProperty;
 import static com.babc.server.utils.EntityUtil.getStringProperty;
 import static com.babc.server.utils.EntityUtil.setProperty;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import twitter4j.Status;
 
 import com.google.appengine.api.datastore.Entity;
 
-public class TweetEntity extends BaseEntityImpl {
+public class TweetEntity extends BaseEntityImpl implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -26,19 +27,26 @@ public class TweetEntity extends BaseEntityImpl {
 	
 	private int favorited;
 	
-	private String user;
+	private Long userId;
 	
 	private int retweet;
 	
 	private int retweetedByMe;
 	
+	public TweetEntity() {
+		super();
+	}
 	
+	public Long getUserId() {
+		return userId;
+	}
+
 	public TweetEntity(Status status) {
+		this.setId(status.getId());
 		this.createdAt = status.getCreatedAt();
 		this.text = status.getText();
 		this.inReplyToStatusId = status.getInReplyToStatusId();
 		this.inReplyToUserId = status.getInReplyToUserId();
-		
 		if (status.isFavorited()){
 			this.favorited = 1;
 		}
@@ -46,7 +54,7 @@ public class TweetEntity extends BaseEntityImpl {
 			this.favorited = 0;
 		}
 		
-		this.user = status.getUser().getScreenName();
+		this.userId = status.getUser().getId();
 		
 		if (status.isRetweet()){
 			this.retweet = 1;
@@ -62,17 +70,18 @@ public class TweetEntity extends BaseEntityImpl {
 			this.retweetedByMe = 0;
 		}
 	}
-
+	
+	
 	@Override
 	public void save(Entity entity) {
 		super.save(entity);
 		setProperty(entity, "createdAt", createdAt, true);
 		setProperty(entity, "text", text, false);
 		setProperty(entity, "inReplyToStatusId", inReplyToStatusId, false);
-		setProperty(entity, "inReplyToUserId", inReplyToUserId, false);
-		setProperty(entity, "favorited", favorited, false);
-		setProperty(entity, "user", user, false);
-		setProperty(entity, "retweet", retweet, false);
+		setProperty(entity, "inReplyToUserId", inReplyToUserId, true);
+		setProperty(entity, "favorited", favorited, true);
+		setProperty(entity, "userId", userId, true);
+		setProperty(entity, "retweet", retweet, true);
 		setProperty(entity, "retweetedByMe", retweetedByMe, true);
 	}
 
@@ -84,7 +93,7 @@ public class TweetEntity extends BaseEntityImpl {
 		inReplyToStatusId = getLongProperty(entity, "inReplyToStatusId");
 		inReplyToUserId = getLongProperty(entity, "inReplyToUserId");
 		favorited = getIntegerProperty(entity, "favorited", 0);
-		user = getStringProperty(entity, "user");
+		userId = getLongProperty(entity, "userId");
 		retweet = getIntegerProperty(entity, "retweet", 0);
 		retweetedByMe = getIntegerProperty(entity, "retweetedByMe", 0);
 	}
@@ -109,10 +118,6 @@ public class TweetEntity extends BaseEntityImpl {
 		return favorited;
 	}
 
-	public String getUser() {
-		return user;
-	}
-
 	public int getRetweet() {
 		return retweet;
 	}
@@ -128,11 +133,6 @@ public class TweetEntity extends BaseEntityImpl {
 		if (text != null) {
 			builder.append("text=");
 			builder.append(text);
-			builder.append(", ");
-		}
-		if (user != null) {
-			builder.append("user=");
-			builder.append(user);
 			builder.append(", ");
 		}
 		if (getId() != null) {

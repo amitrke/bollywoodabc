@@ -91,11 +91,12 @@ public class Frontend {
 		return new ModelAndView("ui.homepage", "page", htmlPage);
 	}
 	
-	@RequestMapping(value="/tweets.htm", method = RequestMethod.GET)
-	public ModelAndView displayTweets(){
+	@RequestMapping(value="/tweets/{pageNo}.htm", method = RequestMethod.GET)
+	public ModelAndView displayTweets(@PathVariable("pageNo") int pageNo){
 		Map<String, Object> home = new HashMap<String, Object>();
 		home.put("date", new Date());
-		home.put("twitterTimeline", twitterService.getTimeline(Integer.MAX_VALUE));
+		Paging paging = new Paging(noOfStoriesPerPage, (((pageNo-1)*noOfStoriesPerPage))+AppConstants.noOfStoriesOnFirstPage);
+		home.put("tweets", twitterService.getTweetList(paging));
 		
 		HtmlPage htmlPage = new HtmlPage("Bollywood Tweets", 
 				"Latest Bollywood gossip news. Get the latest celebrity gossip, entertainment gossip, celeb gossip news, new movie trailers, TV, movie reviews from Bollywood", 
@@ -103,6 +104,7 @@ public class Frontend {
 				AppConstants.metaExpiryExpired, "BollywoodABC", home);
 		return new ModelAndView("ui.tweet.display", "page", htmlPage);
 	}
+	
 	
 	@RequestMapping(value="/latest/{pageNo}.htm", method = RequestMethod.GET)
 	public ModelAndView listStories(@PathVariable("pageNo") int pageNo){

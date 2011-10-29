@@ -147,7 +147,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
                   </c:forEach>
 
                     <TD WIDTH="15" VALIGN="top"></TD>
-                    <TD HEIGHT="30" ALIGN="RIGHT"><A HREF="/news/tweets.htm" CLASS="whitelink">More >></A></TD>
+                    <TD HEIGHT="30" ALIGN="RIGHT"><A HREF="/news/tweets/1.htm" CLASS="whitelink">More >></A></TD>
                   </TR>
                 </TABLE></TD>
               </TR>

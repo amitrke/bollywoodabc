@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.babc.server.dao.ImportDataDao;
 import com.babc.server.dao.PictureDao;
 import com.babc.server.dao.StoryDao;
-import com.babc.server.dao.UserDao;
 import com.babc.server.model.DataImportKey;
 import com.babc.server.model.Paging;
 import com.babc.server.model.PictureEntity;
@@ -20,15 +19,14 @@ import com.babc.server.model.vo.CategoryVo;
 import com.babc.server.model.vo.CommentVo;
 import com.babc.server.model.vo.StoryVo;
 import com.babc.server.model.vo.TagVo;
+import com.babc.server.model.vo.TweetsVo;
 
 @Service("storyService")
 public class StoryService {
 	
 	private @Autowired StoryDao storyDao;
-	private @Autowired UserDao userDao;
 	private @Autowired PictureDao pictureDao;
 	private @Autowired CategoryService categoryService;
-	private @Autowired CommentService commentService;
 	private @Autowired TagService tagService;
 	private @Autowired ImportDataDao importDataDao;
 	
@@ -97,7 +95,15 @@ public class StoryService {
 		PictureEntity pictureEntity = pictureDao.getById(storyEntity.getPictureId());
 		List<CommentVo> commentVos = new ArrayList<CommentVo>();
 		List<TagVo> tags = tagService.getTags(storyEntity.getId(), TagCrossRefEntity.STORY);
-		return new StoryVo(storyEntity,categoryVo, userEntity, pictureEntity, commentVos, tags);
+		StoryVo storyVo = new StoryVo(storyEntity,categoryVo, userEntity, pictureEntity, commentVos, tags);
+		if (tags.size() > 0){
+			List<TweetsVo> tweetsVos = new ArrayList<TweetsVo>();
+			for(TagVo tag: tags){
+				tweetsVos.add(tagService.getTwitterDetails(tag.getTagId()));
+			}
+			storyVo.setTweetsVos(tweetsVos);
+		}
+		return storyVo;
 	}
 	
 }
