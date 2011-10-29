@@ -31,7 +31,17 @@ public class TagVo {
 	private List<CategoryEntity> relatedPhotogalleries;
 	
 	private List<PictureEntity> relatedPictures;
-		
+	
+	private TweetsVo tweetsVo;
+	
+	
+	/**
+	 * @param tagId
+	 */
+	public TagVo(Long tagId) {
+		super();
+		this.tagId = tagId;
+	}
 
 	/**
 	 * @param type
@@ -45,6 +55,14 @@ public class TagVo {
 		this.tagId = tagId;
 		this.description = description;
 		this.tag = tag;
+	}
+	
+	public TweetsVo getTweetsVo() {
+		return tweetsVo;
+	}
+
+	public void setTweetsVo(TweetsVo tweetsVo) {
+		this.tweetsVo = tweetsVo;
 	}
 
 	/**
@@ -98,8 +116,9 @@ public class TagVo {
 			case 1: return "Story";
 			case 2: return "Picture";
 			case 3: return "Photogallery";
+			case 4: return "Twitter User";
 		}
-		return "Not Mapped in Getter";
+		return "Not Mapped in TagVo Getter";
 	}
 	
 	public int getEntityType() {

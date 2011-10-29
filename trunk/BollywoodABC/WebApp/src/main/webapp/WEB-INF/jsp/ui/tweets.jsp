@@ -18,13 +18,21 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
                 </TR>
                 <TR>
                   <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">
-                  <c:forEach var="tweet" items="${page.data.twitterTimeline}">
+                  <table width="100%" border="0">
+                  <c:forEach var="tweet" items="${page.data.tweets}">
                   <tr>
-                    <td width="15" valign="top"><img src="/images/yellowArrow.gif" width="12" height="7" vspace="4">
-                    ${tweet}<br>
-                    </td>
+                  	<td width="20%">
+                  	<c:if test="${!empty tweet.facePic}"><A HREF='/t/${tweet.tagId}/${tweet.titleUrl}.htm' style="text-decoration:none" title="${tweet.tweetDesc}">
+                  	<IMG width="40" height="40" SRC="<c:out value="/dimage/${tweet.facePic}.htm"/>" HSPACE="1" VSPACE="1" ALIGN="left">
+                  	</A>
+                  	<br>
+                  	</c:if>
+                  	<c:out value="${tweet.name}"/>
+                  	</td>
+                  	<td><c:out value="${tweet.tweet}"/></td>
                   </tr>
                   </c:forEach>
+                  </table>
                   </TD>
                 </TR>
                 
@@ -32,7 +40,8 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
                 <TR>
                   <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;"></TD>
                 </TR>
-
+				
+				
                 <TR>
                   <TD STYLE="padding-left:12px; padding-right:12px;"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
                       <TR>

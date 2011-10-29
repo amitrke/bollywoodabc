@@ -8,8 +8,16 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.babc.server.dao.TagCrossRefDao;
 import com.babc.server.dao.TweetsDao;
+import com.babc.server.dao.TwitterUserDetailDao;
+import com.babc.server.model.Paging;
+import com.babc.server.model.TagCrossRefEntity;
 import com.babc.server.model.TweetEntity;
+import com.babc.server.model.TwitterUserDetailEntity;
+import com.babc.server.model.vo.TagVo;
+import com.babc.server.model.vo.TweetListVo;
+import com.babc.server.model.vo.TweetsVo;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -21,6 +29,9 @@ import twitter4j.conf.ConfigurationBuilder;
 public class TwitterService {
 	
 	private @Autowired TweetsDao tweetsDao;
+	private @Autowired TwitterUserDetailDao twitterUserDetailDao;
+	private @Autowired TagService tagService;
+	private @Autowired TagCrossRefDao tagCrossRefDao;
 	
 	protected static final Log logger = LogFactory.getLog(TwitterService.class);
 	
@@ -33,6 +44,11 @@ public class TwitterService {
 		  .setOAuthAccessTokenSecret("SrMqtTiEjbN3AVp2YhdBfvn7guHai3NZkiFxIpnjDA8");
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		return tf.getInstance();
+	}
+	
+	public TweetsVo getUserTweets(Long userId){
+		return new TweetsVo(twitterUserDetailDao.getById(userId), 
+				tweetsDao.getByUserId(userId, new Paging(10, 0)));
 	}
 	
 	public boolean post(String message){
@@ -48,6 +64,34 @@ public class TwitterService {
 		}
 	}
 	
+	public List<TweetListVo> getTweetList(Paging paging){
+		List<TweetListVo> tweetListVos = new ArrayList<TweetListVo>();
+		List<TweetEntity> tweetEntities = tweetsDao.get(paging);
+		for(TweetEntity tweetEntity: tweetEntities){
+			TwitterUserDetailEntity twitterUserDetailEntity = twitterUserDetailDao.getById(tweetEntity.getUserId());
+			List<TagCrossRefEntity> tagCrossRefEntities = tagCrossRefDao.getByEntIdEntTyp(tweetEntity.getUserId(), TagCrossRefEntity.TWITTER_USER);
+			if (tagCrossRefEntities.size() > 0){
+				Long tagId = tagCrossRefEntities.get(0).getTagId();
+				TagVo tagVo = new TagVo(tagId);
+				tagService.setFacePic(tagVo);
+				TweetListVo tweetListVo = new TweetListVo(twitterUserDetailEntity.getName(),
+						tagVo.getFacePic(), tagId, tweetEntity.getText(),
+						twitterUserDetailEntity.getDescription());
+				tweetListVos.add(tweetListVo);
+			}
+			else{
+				TweetListVo tweetListVo = new TweetListVo(twitterUserDetailEntity.getName(), null, null, 
+						tweetEntity.getText(), twitterUserDetailEntity.getDescription());
+				tweetListVos.add(tweetListVo);
+			}
+		}
+		return tweetListVos;
+	}
+	
+	public List<TweetEntity> getDbTweets(Paging paging){
+		return tweetsDao.get(paging);
+	}
+	
 	public void downloadTimelineToDb(int limit){
 		Twitter twitter = getTwitterInstance();
 	    List<Status> statuses;
@@ -59,6 +103,7 @@ public class TwitterService {
 		    for (Status status : statuses) {
 		    	
 		    	tweetsDao.save(new TweetEntity(status));
+		    	twitterUserDetailDao.save(new TwitterUserDetailEntity(status));
 		    	
 		    	count++;
 		    	if (count>=limit){

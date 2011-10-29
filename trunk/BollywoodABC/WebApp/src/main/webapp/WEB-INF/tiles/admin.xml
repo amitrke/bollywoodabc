@@ -59,5 +59,10 @@
 	<definition name="admin.photoGalleryDetails" extends="admin.layout">
 		<put-attribute name="body" value="/WEB-INF/jsp/admin/photoGalleryDetails.jsp" />
 	</definition>
-	
+	<definition name="admin.message" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/message.jsp" />
+	</definition>
+	<definition name="admin.listTweets" extends="admin.layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/admin/listTweets.jsp" />
+	</definition>
 </tiles-definitions>

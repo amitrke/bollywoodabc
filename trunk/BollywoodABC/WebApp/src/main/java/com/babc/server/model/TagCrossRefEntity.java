@@ -26,6 +26,7 @@ public class TagCrossRefEntity extends BaseEntityImpl implements Serializable{
 	public static final int STORY = 1;
 	public static final int PICTURE = 2;
 	public static final int PHOTOGALLERY = 3;
+	public static final int TWITTER_USER = 4;
 	
 	@PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)

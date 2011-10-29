@@ -72,6 +72,18 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
     	</td>
     </tr>
     </c:if>
+    <c:if test="${!empty page.data.tweetsVo}">
+    <tr>
+    	<td VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">
+    		<B>Recent Tweets:</B><br>
+    		<ul>
+    		<c:forEach var="tweet" items="${page.data.tweetsVo.tweets}">
+    			<li><c:out value="${tweet.text}"/></li>
+    		</c:forEach>
+    		</ul>
+    	</td>
+    </tr>
+    </c:if>
     <TR>
       <TD STYLE="padding-left:12px; padding-right:12px;"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
           <TR>

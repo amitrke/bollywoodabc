@@ -6,6 +6,7 @@ import java.util.List;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.model.UserEntity;
+import com.babc.server.utils.AppUtils;
 import com.google.appengine.api.datastore.Text;
 
 public class StoryVo {
@@ -35,7 +36,9 @@ public class StoryVo {
 	private List<CommentVo> comments;
 	
 	private TagListVo tags;
-
+	
+	private List<TweetsVo> tweetsVos;
+	
 	public StoryVo(String title, Long categoryId, Long userId,
 			Text body, String intro, Date createDate, int priority,
 			int status, PictureEntity picture, String video) {
@@ -70,14 +73,23 @@ public class StoryVo {
 		this.comments = commentVos;
 		this.tags = new TagListVo(tags);
 	}
-	
-	
+
+	public List<TweetsVo> getTweetsVos() {
+		return tweetsVos;
+	}
+
+
+	public void setTweetsVos(List<TweetsVo> tweetsVos) {
+		this.tweetsVos = tweetsVos;
+	}
+
+
 	public void setPicture(PictureEntity picture) {
 		this.picture = picture;
 	}
 	
 	public String getTitleUrl(){
-		return title.replace(" ", "-").replace("\'", "");
+		return AppUtils.urlFormat(title);
 	}
 	
 	public String getBodyNl2br(){

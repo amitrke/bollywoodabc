@@ -40,6 +40,10 @@
 	<servlet>
 		<servlet-name>babcSpring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>log4j-properties-location</param-name>
+			<param-value>WEB-INF/classes/log4j.properties</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	    

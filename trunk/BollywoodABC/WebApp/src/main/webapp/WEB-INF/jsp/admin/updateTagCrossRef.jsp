@@ -12,6 +12,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@taglib prefix="form" uri=
 				<form:option value="1">Story</form:option>
 				<form:option value="2">Picture</form:option>
 				<form:option value="3">Photo Gallery</form:option>
+				<form:option value="4">Twitter User</form:option>
 			</form:select>
 			<form:errors path="entityType" />
 		</td>
