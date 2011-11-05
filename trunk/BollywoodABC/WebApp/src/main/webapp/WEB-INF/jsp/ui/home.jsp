@@ -60,7 +60,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
               
               <TR>
                 <TD HEIGHT="32" VALIGN="bottom" width="10"><IMG SRC="/images/latestnewsHrd.gif" WIDTH="85" HEIGHT="16" VSPACE="3"></TD>
-                <TD HEIGHT="32" ALIGN="right" VALIGN="middle" CLASS="yellowtxt"><g:plusone></g:plusone></TD>
+                <TD HEIGHT="32" ALIGN="right" VALIGN="middle" CLASS="yellowtxt"><g:plusone></g:plusone> &nbsp;
+                <A HREF='/feed/rss.htm' style="text-decoration:none">
+                	<img width="28" height="28" src="/images/feed-icon-28x28.png" alt="RSS Feed" style="border-style: none"></A>
+                 </TD>
               </TR>
 
 			 <c:forEach var="top3item" items="${page.data.homePageStories}">
