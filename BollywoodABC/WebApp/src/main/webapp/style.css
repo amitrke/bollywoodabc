@@ -57,3 +57,20 @@ img
 
 #storyMeta p {color: gray;}
 #storyMeta a {color: gray;}
+
+#tweetList
+{
+	background: #fff;
+	border-collapse: collapse;
+	text-align: left;
+}
+#tweetList td
+{
+	border-bottom: 1px solid #F0B2B2;
+	padding: 6px 8px;
+}
+
+#storyTable a
+{
+	color: #B20000;
+}
