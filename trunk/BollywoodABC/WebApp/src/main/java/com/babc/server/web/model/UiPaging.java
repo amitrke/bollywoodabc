@@ -45,6 +45,29 @@ public class UiPaging {
 		}
 	}
 
+public void setTweetsUiPaging(int currentPageNo, int noOfRecPerPg, int totalNoOfRecs){
+		
+		this.previousPageNo = currentPageNo - 1;
+		int totalNoOfPages = totalNoOfRecs/noOfRecPerPg;
+		this.totalRecCount = totalNoOfRecs;
+		
+		if (currentPageNo == 1){
+			this.startRecCount = 0;
+			this.endRecCount = this.startRecCount + noOfRecPerPg;
+			this.nextPageNo = currentPageNo + 1;
+		}
+		else if (currentPageNo == totalNoOfPages){
+			this.startRecCount = ((currentPageNo-1)*noOfRecPerPg);
+			this.endRecCount = this.startRecCount + noOfRecPerPg;
+			this.nextPageNo = 0;
+		}
+		else{
+			this.startRecCount = ((currentPageNo-1)*noOfRecPerPg);
+			this.endRecCount = this.startRecCount + noOfRecPerPg;
+			this.nextPageNo = currentPageNo + 1;
+		}
+	}
+
 	public int getPreviousPageNo() {
 		return previousPageNo;
 	}

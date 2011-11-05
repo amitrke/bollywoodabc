@@ -40,6 +40,7 @@ public class Frontend {
 	private @Autowired TwitterService twitterService;
 	
 	private final int noOfStoriesPerPage = 10;
+	private final int noOfTweetsPerPage = 20;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value="/add.htm", method = RequestMethod.GET)
@@ -93,11 +94,16 @@ public class Frontend {
 	
 	@RequestMapping(value="/tweets/{pageNo}.htm", method = RequestMethod.GET)
 	public ModelAndView displayTweets(@PathVariable("pageNo") int pageNo){
-		Map<String, Object> home = new HashMap<String, Object>();
-		home.put("date", new Date());
-		Paging paging = new Paging(noOfStoriesPerPage, (((pageNo-1)*noOfStoriesPerPage))+AppConstants.noOfStoriesOnFirstPage);
-		home.put("tweets", twitterService.getTweetList(paging));
 		
+		Integer tweetCount = twitterService.getTweetList(new Paging(Integer.MAX_VALUE, 0)).size();
+		Map<String, Object> home = new HashMap<String, Object>();
+		UiPaging uiPaging = new UiPaging();
+		uiPaging.setTweetsUiPaging(pageNo, noOfTweetsPerPage, tweetCount);
+		home.put("paging", uiPaging);
+		Paging paging = new Paging(noOfTweetsPerPage, ((pageNo-1)*noOfTweetsPerPage));
+		home.put("storyList", storyService.getByCategory(AppConstants.CAT_HOLLYWOOD, paging));
+		home.put("date", new Date());
+		home.put("tweets", twitterService.getTweetList(paging));
 		HtmlPage htmlPage = new HtmlPage("Bollywood Tweets", 
 				"Latest Bollywood gossip news. Get the latest celebrity gossip, entertainment gossip, celeb gossip news, new movie trailers, TV, movie reviews from Bollywood", 
 				"Bollywood, News, Hollywood, Wallpapers, Hi Resolution pics", 
