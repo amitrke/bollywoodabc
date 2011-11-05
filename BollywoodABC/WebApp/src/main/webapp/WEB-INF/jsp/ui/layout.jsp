@@ -11,9 +11,8 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><!DOCTYPE html PUBLIC 
 	<meta name="keywords" content='${page.keywords}'/> 
 	<meta HTTP-EQUIV="EXPIRES" CONTENT='${page.expires}'>
 	<META NAME="ROBOTS" CONTENT="ALL"> 
-	
+	<link rel="alternate" type="application/rss+xml" title="Bollywood News" href="http://www.bollywoodabc.com/feed/rss.htm" />
 	<LINK HREF="/style.css" REL="stylesheet" TYPE="text/css">
-	<link rel="alternate" type="application/rss+xml" href="/feed/rss.htm">
 </HEAD>
 <BODY>
 	<tiles:insertAttribute name="googleAnalytics"/>

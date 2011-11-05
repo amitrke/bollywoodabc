@@ -1,7 +1,7 @@
 <%@page import="java.net.URL"%>
 <%@page isELIgnored="false" %><%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@taglib 
 prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@taglib 
-uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
+uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE id="storyTable" WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
                 <!-- <TR>
                   <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">&nbsp;</TD>
                 </TR>
@@ -67,6 +67,14 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
                 <TR>
                   <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">
                   Comment on this story<BR>
+                  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
                   <div id="fb-root"></div>
 <div class="fb-comments" data-href='http://www.bollywoodabc.com/news/<c:out value="${page.data.id}"/>/<c:out value="${page.data.titleUrl}"/>.htm' data-num-posts="6" data-width="500"></div>
                   </TD>
