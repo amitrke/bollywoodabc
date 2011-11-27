@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
+import com.google.appengine.api.taskqueue.TaskOptions.Method;
 
 @Controller
 @RequestMapping("/mq")
@@ -24,4 +25,11 @@ public class TaskQueueController {
 		return new ModelAndView("admin.message", "message", "Batch Process Initiated.");
 	}
 	
+	@RequestMapping(value="/sessionCleanup.htm", method = RequestMethod.GET)
+	public ModelAndView sessionCleanup(){
+		Queue queue = QueueFactory.getDefaultQueue();
+		logger.debug("Batch Process to clean session table Initiated.");
+		queue.add(TaskOptions.Builder.withUrl("/_ah/sessioncleanup?clear").method(Method.GET));
+		return new ModelAndView("admin.message", "message", "Batch Process Initiated.");
+	}
 }

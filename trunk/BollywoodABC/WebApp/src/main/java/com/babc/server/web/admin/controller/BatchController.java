@@ -18,7 +18,7 @@ public class BatchController {
 	
 	private @Autowired TwitterService twitterService;
 	
-	@RequestMapping(value="/downloadTwitterTimeline.htm", method = RequestMethod.GET)
+	@RequestMapping(value="/downloadTwitterTimeline.htm", method = RequestMethod.POST)
 	public ModelAndView downloadTwitterTimeline(){
 		logger.debug("Downloading Twitter timeline STARTED.");
 		twitterService.downloadTimelineToDb(50);

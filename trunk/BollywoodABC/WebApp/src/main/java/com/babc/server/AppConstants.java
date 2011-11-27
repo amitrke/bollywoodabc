@@ -1,6 +1,8 @@
 package com.babc.server;
 
+
 public class AppConstants {
+	
 	
 	public static final String APP_NAME = "BollywoodABC.com";
 	
@@ -25,9 +27,6 @@ public class AppConstants {
 	
 	public static final int noOfStoriesOnFirstPage = 4;
 	
-	public static final String metaExpiryNextYear = "Mon, 22 Jul 2011 11:12:01 GMT";
-	public static final String metaExpiryExpired = "0";
-	
 	public static final Long CAT_HOLLYWOOD = 141009L;
 	public static final Long CAT_BOLLYWOOD = 1001L;
 	
@@ -36,5 +35,5 @@ public class AppConstants {
 	public static final int ENTITY_STATUS_ENABLED = 65;
 	public static final int ENTITY_STATUS_DISABLED = 46;
 	
-	
+	public static final long BROWSER_CACHE_DEF_EXPIRY = 7*24*60*60*1000;
 }

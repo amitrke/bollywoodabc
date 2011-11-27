@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.babc.server.AppConstants;
 import com.babc.server.dao.PictureDao;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
@@ -32,7 +33,7 @@ public class ViewImage {
 	private @Autowired EntityCache entityCache;
 	private @Autowired QueryCache queryCache;
 	
-	@RequestMapping(value="/{imageId}.htm", method = RequestMethod.GET)
+	@RequestMapping(value="/{imageId}.jpeg", method = RequestMethod.GET)
 	public void loadImage(@PathVariable("imageId") Long picId,
 			HttpServletResponse response) throws Exception {
 
@@ -41,11 +42,13 @@ public class ViewImage {
 			byte[] bytes = pictureEntity.getData().getBytes();
 			OutputStream os = response.getOutputStream();
 			response.setContentType("image/jpg");
+			response.setDateHeader("Expires",
+					   System.currentTimeMillis(  ) + AppConstants.BROWSER_CACHE_DEF_EXPIRY);
 			os.write(bytes);
 		}
 	}
 	
-	@RequestMapping(value="/thumb/{imageId}.htm", method = RequestMethod.GET)
+	@RequestMapping(value="/thumb/{imageId}.jpeg", method = RequestMethod.GET)
 	public void loadThumb(@PathVariable("imageId") Long picId,
 			HttpServletResponse response) throws Exception {
 		
@@ -69,6 +72,8 @@ public class ViewImage {
 		}
 		
 		OutputStream os = response.getOutputStream();
+		response.setDateHeader("Expires",
+				   System.currentTimeMillis(  ) + AppConstants.BROWSER_CACHE_DEF_EXPIRY);
 		response.setContentType("image/jpg");
 		os.write(bytes);
 	}

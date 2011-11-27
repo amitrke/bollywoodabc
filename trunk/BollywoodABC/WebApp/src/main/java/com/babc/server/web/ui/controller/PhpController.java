@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.babc.server.AppConstants;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.model.vo.TagVo;
 import com.babc.server.service.StoryService;
@@ -51,7 +50,7 @@ public class PhpController {
 		TagVo tagVo = tagService.getTagDetails(tagId);
 		HtmlPage htmlPage = new HtmlPage(tagVo.getTag(),
 				tagVo.getDescription(), tagVo.getTag()+", bollywood, news, gossip",
-				AppConstants.metaExpiryNextYear, 
+				10, 
 				"BollywoodABC", tagVo);
 		return new ModelAndView("ui.tag.display", "page", htmlPage);
 	}
