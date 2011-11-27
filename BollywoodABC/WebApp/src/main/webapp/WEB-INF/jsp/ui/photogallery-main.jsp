@@ -16,7 +16,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<tr>
 			<c:forEach var="gallery" items="${galleryRow}">
 			<td width="1">
-			<A HREF='/photogallery/${gallery.id}/${gallery.titleUrl}.htm'><img src="/dimage/thumb/${gallery.picture.id}.htm" alt="gallery.picture.caption" /></A>
+			<A HREF='/photogallery/${gallery.id}/${gallery.titleUrl}.htm'><img src="/dimage/thumb/${gallery.picture.id}.jpeg" alt="gallery.picture.caption" /></A>
 			<br>
 			<strong><A HREF='/photogallery/${gallery.id}/${gallery.titleUrl}.htm' CLASS='yellowtxt'>${gallery.name}</A></strong>
 			</td>

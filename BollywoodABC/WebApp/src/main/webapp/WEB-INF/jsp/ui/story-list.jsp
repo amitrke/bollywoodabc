@@ -16,7 +16,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
 			<td height="31" colspan="2" class="yellowtxt"><strong><A HREF='/news/${story.id}/${story.titleUrl}.htm' CLASS='yellowtxt'>${story.title}</A></strong></td>
 		</tr>
 		<tr>
-			<td width="1"><img src="/dimage/thumb/${story.pictureId}.htm" alt="" /></td>
+			<td width="1"><img src="/dimage/thumb/${story.pictureId}.jpeg" alt="" /></td>
 			<td valign="top" class="whitetxt">${story.intro}</td>
 		</tr>
 		</c:forEach>

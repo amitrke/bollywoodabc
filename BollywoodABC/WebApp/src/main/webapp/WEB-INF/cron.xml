@@ -3,11 +3,16 @@
   <cron>
     <url>/news/jetty.htm</url>
     <description>Keep jetty hot</description>
-    <schedule>every 1 minutes</schedule>
+    <schedule>every 25 minutes</schedule>
   </cron>
   <cron>
-    <url>/batch/downloadTwitterTimeline.htm</url>
+    <url>/mq/downloadTwitterTimeline.htm</url>
     <description>Download Twitter timeline to DB</description>
     <schedule>every 30 minutes</schedule>
   </cron>
+  <cron>
+    <url>/mq/sessionCleanup.htm</url>
+    <description>Clean up sessions</description>
+    <schedule>every day 00:00</schedule>
+  </cron> 
 </cronentries>

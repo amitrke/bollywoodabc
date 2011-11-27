@@ -15,7 +15,7 @@
  	<tr>
  		<td>${category.id}</td>
  		<td>${category.name}</td>
- 		<td><img src="/dimage/thumb/${category.picture.id}.htm"></td>
+ 		<td><img src="/dimage/thumb/${category.picture.id}.jpeg"></td>
  	</tr>
 	 </c:forEach>
 </table>

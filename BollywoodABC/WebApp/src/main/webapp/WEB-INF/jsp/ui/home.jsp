@@ -5,7 +5,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
         <TD WIDTH="190"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
 
           <TR>
-            <TD><A HREF="/photogallery/main.htm"><IMG SRC="/dimage/14001.htm" WIDTH="190" HEIGHT="295" BORDER="0"></A></TD>
+            <TD><A HREF="/photogallery/main.htm"><IMG SRC="/dimage/14001.jpeg" WIDTH="190" HEIGHT="295" BORDER="0"></A></TD>
           </TR>
           <TR>
             <TD HEIGHT="23" BACKGROUND="/images/hrdBG.gif"><A HREF="/photogallery/main.htm"><IlatestnewsHrd.gifMG SRC="/images/babeweekHrd.gif" WIDTH="122" HEIGHT="15" HSPACE="11" BORDER="0"></A></TD>
@@ -30,7 +30,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
           <TR>
             <TD BACKGROUND="/images/mainBG.gif"><TABLE WIDTH="98%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD HEIGHT="28" COLSPAN="2" VALIGN="bottom"><A HREF="/forum/"><IMG SRC="/images/moviereviHrd.gif" WIDTH="94" HEIGHT="14" HSPACE="11" VSPACE="4" BORDER="0"></A></TD>
+                <TD HEIGHT="28" COLSPAN="2" VALIGN="bottom" class="yellowtxt"><b>&nbsp;BABC Interactive</b></TD>
               </TR>
               <TR>
 
@@ -41,7 +41,9 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
                 <TD HEIGHT="6" COLSPAN="2"><IMG SRC="/images/spacer.gif" WIDTH="1" HEIGHT="1"></TD>
               </TR>
               <TR>
-                <TD COLSPAN="2" CLASS="whitetxt" STYLE="padding-left:11px; padding-right:2px;"><SPAN CLASS="whitetxt" STYLE="padding-left:11px; padding-right:2px;"><SPAN STYLE="padding-left:11px;"><A HREF="/forum/"><IMG SRC="/images/movierevImg.jpg" WIDTH="83" HEIGHT="57" BORDER="0" ALIGN="LEFT"></A></SPAN></SPAN>Share your most  thrilling experiences of make-ups and break-ups through this exciting forum which may be in true sense 'one man's pain is another man's entertainment'.  </TD>
+                <TD COLSPAN="2" CLASS="whitetxt" STYLE="padding-left:11px; padding-right:2px;">
+                	Add <b>bollywoodabc1@appspot.com</b> as a friend to your Google Talk messenger and keep yourself updated on whats happening in Bollywood.
+                </TD>
               </TR>
 
               <TR ALIGN="right">
@@ -76,14 +78,14 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
               </TR>
               <TR>
                 <TD WIDTH="10%"><A HREF='/news/${top3item.id}/${top3item.titleUrl}.htm' style="text-decoration:none">
-                	<img width="70" height="70" src="/dimage/thumb/${top3item.pictureId}.htm" alt="" style="border-style: none"></A>
+                	<img width="70" height="70" src="/dimage/thumb/${top3item.pictureId}.jpeg" alt="" style="border-style: none"></A>
                 </TD>
                 <TD VALIGN="top" CLASS="whitetxt"><A HREF='/news/${top3item.id}/${top3item.titleUrl}.htm' CLASS="whitetxt">${top3item.intro}</A></TD>
               </TR>
               </c:forEach>
               
 			  <TR>
-                <TD COLSPAN="2" ALIGN="RIGHT" CLASS="yellowtxt"><A HREF="news/latest/1.htm" CLASS="yellowtxt">More >></A></TD>
+                <TD COLSPAN="2" ALIGN="RIGHT" CLASS="yellowtxt"><A HREF="news/latest/1.htm" CLASS="yellowtxt">More Stories>></A></TD>
               </TR>
               <TR>
                 <TD COLSPAN="2"></TD>
@@ -91,34 +93,12 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
               </TR></TABLE></TD>
           </TR>
           <TR>
-            <TD VALIGN="top" BGCOLOR="#434945"><TABLE WIDTH="98%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0">
-              <TR>
-                <TD HEIGHT="28" VALIGN="bottom"><IMG SRC="/images/weeklycolHrd.gif" WIDTH="135" HEIGHT="18" HSPACE="11" VSPACE="3"></TD>
-              </TR>
-              <TR>
-                <TD HEIGHT="2" BACKGROUND="/images/div3.gif"><IMG SRC="/images/spacer.gif"></TD>
-
-              </TR>
-              <TR>
-                <TD HEIGHT="136" VALIGN="top"><TABLE WIDTH="94%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0">
-                  <TR>
-                    <TD WIDTH="75%" CLASS="whitetxt"><STRONG><A HREF='/news/${page.data.babcExtra.id}/${page.data.babcExtra.titleUrl}.htm' CLASS='yellowtxt'>${page.data.babcExtra.title}</A></STRONG></TD>
-                    <TD WIDTH="25%"></TD>
+            <TD VALIGN="top" BGCOLOR="#434945"><TABLE WIDTH="98%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="1">
+                  <TR><TD>
+                  	<c:forEach var="recentPic" items="${page.data.recentPics}">
+                    	<A href="/photogallery/wallpaper/${recentPic.urlCaption}/${recentPic.id}.jpeg" style="border-style: none"><img src="/dimage/thumb/${recentPic.id}.jpeg" alt="${recentPic.caption}" /></A>
+                    </c:forEach></TD>
                   </TR>
-                  <TR>
-
-                    <TD CLASS="whitetxt"><A HREF='/news/${page.data.babcExtra.id}/${page.data.babcExtra.titleUrl}.htm' CLASS='whitetxt'>${page.data.babcExtra.intro}</A><P>&nbsp;</P></TD>
-                    <TD ALIGN="right"><A HREF='/news/${page.data.babcExtra.id}/${page.data.babcExtra.titleUrl}.htm' style="text-decoration:none">
-                	<img width="70" height="70" src="/dimage/thumb/${page.data.babcExtra.pictureId}.htm" alt="" style="border-style: none"></A></TD>
-                  </TR>
-                  <TR>
-                    <TD>&nbsp;</TD>
-                    <TD>&nbsp;</TD>
-                  </TR>
-                  
-                </TABLE></TD>
-
-              </TR>
             </TABLE></TD>
           </TR>
         </TABLE></TD>
@@ -133,7 +113,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
           <TR>
             <TD BGCOLOR="#434945"><TABLE WIDTH="98%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD HEIGHT="28" VALIGN="bottom"><IMG SRC="/images/bollywoodnewsHrd.gif" WIDTH="110" HEIGHT="19" HSPACE="11" VSPACE="3"></TD>
+                <TD HEIGHT="28" VALIGN="bottom" CLASS="yellowtxt">&nbsp;<b>Bollywood Tweets</b></TD>
               </TR>
               <TR>
                 <TD HEIGHT="2" BACKGROUND="/images/div3.gif"><IMG SRC="/images/spacer.gif"></TD>
@@ -150,7 +130,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
                   </c:forEach>
 
                     <TD WIDTH="15" VALIGN="top"></TD>
-                    <TD HEIGHT="30" ALIGN="RIGHT"><A HREF="/news/tweets/1.htm" CLASS="whitelink">More >></A></TD>
+                    <TD HEIGHT="30" ALIGN="RIGHT"><A HREF="/news/tweets/1.htm" CLASS="whitelink">More Tweets>></A></TD>
                   </TR>
                 </TABLE></TD>
               </TR>
@@ -160,30 +140,18 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
 
             <TD BACKGROUND="/images/mainBG.gif"><TABLE WIDTH="98%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0">
               <TR>
-                <TD HEIGHT="28" VALIGN="bottom"><IMG SRC="/images/hollynewsHrd.gif" WIDTH="110" HEIGHT="18" HSPACE="11" VSPACE="3"></TD>
+                <TD HEIGHT="28" VALIGN="bottom" class="yellowtxt"><b>Tag Cloud</b></TD>
               </TR>
               <TR>
                 <TD HEIGHT="2" BACKGROUND="/images/div2.gif"><IMG SRC="/images/spacer.gif"></TD>
               </TR>
               <TR>
-                <TD VALIGN="top"><TABLE WIDTH="96%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0">
-
-                    <tr>
-                      <td width="15" valign="top"><img src="/images/yellowArroow1.gif" width="12" height="7" vspace="4"></td>
-                      <td height="30"><a href="http://people.aol.com/people/galleries/0,19884,1203580,00.html" class="whitelink">Britney's Miami Retreat</a></td>
-                    </tr><tr>
-                      <td width="15" valign="top"><img src="/images/yellowArroow1.gif" width="12" height="7" vspace="4"></td>
-                      <td height="30"><a href="http://people.aol.com/people/articles/0,19736,1205279,00.html" class="whitelink">Jolie: 'Terrified' During Birth</a></td>
-                    </tr><tr>
-                      <td width="15" valign="top"><img src="/images/yellowArroow1.gif" width="12" height="7" vspace="4"></td>
-
-                      <td height="30"><a href="http://people.aol.com/people/galleries/0,19884,1201344_1203645,00.html" class="whitelink">Hottest Bachelors</a></td>
-                    </tr>
-					<TR>
-                      <TD WIDTH="15" VALIGN="top"></TD>
-                      <TD HEIGHT="30" ALIGN="RIGHT"><A HREF="hollywoodlinks-more.php" CLASS="whitelink">More >></A></TD>
-                    </TR>
-                </TABLE></TD>
+                <TD VALIGN="top" class="whitetxt">
+                	<A href="/t/575001/Aishwarya-Rai.htm" class="whitetxt">Aishwarya Rai</A> &nbsp; 
+                	<A href="/t/525002/Kareena-Kapoor.htm" class="whitetxt" style="font-size: large;">Kareena Kapoor</A> &nbsp;
+                	<A href="/t/542001/Deepika-Padukone.htm" class="whitetxt" style="font-size: x-large;">Deepika Padukone</A> &nbsp;
+                	<A href="/t/526001/Anushka-Sharma.htm" class="whitetxt" style="font-size: x-small;">Anushka Sharma </A> &nbsp;  
+                </TD>
               </TR>
 
             </TABLE></TD>

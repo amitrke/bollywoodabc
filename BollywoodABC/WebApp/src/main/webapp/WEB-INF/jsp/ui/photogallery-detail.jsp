@@ -14,7 +14,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><TABLE WIDTH="100%"  BORDER=
 		<c:forEach var="galleryRow" items="${page.data.gallery}">
 		<tr>
 			<c:forEach var="galleryElement" items="${galleryRow}">
-			<td width="1"><A href="/photogallery/wallpaper/${galleryElement.urlCaption}/${galleryElement.id}.htm" style="border-style: none"><img src="/dimage/thumb/${galleryElement.id}.htm" alt="${galleryElement.caption}" /></A></td>
+			<td width="1"><A href="/photogallery/wallpaper/${galleryElement.urlCaption}/${galleryElement.id}.htm" style="border-style: none"><img src="/dimage/thumb/${galleryElement.id}.jpeg" alt="${galleryElement.caption}" /></A></td>
 			</c:forEach>
 		</tr>
 		</c:forEach>
