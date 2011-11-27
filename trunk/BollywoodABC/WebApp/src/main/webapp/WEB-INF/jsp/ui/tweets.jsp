@@ -23,7 +23,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE id="tweetList" 
                   <tr>
                   	<td width="20%">
                   	<c:if test="${!empty tweet.facePic}"><A HREF='/t/${tweet.tagId}/${tweet.titleUrl}.htm' style="text-decoration:none" title="${tweet.tweetDesc}">
-                  	<IMG width="40" height="40" SRC="<c:out value="/dimage/${tweet.facePic}.htm"/>" HSPACE="1" VSPACE="1" ALIGN="left">
+                  	<IMG width="40" height="40" SRC="<c:out value="/dimage/thumb/${tweet.facePic}.jpeg"/>" HSPACE="1" VSPACE="1" ALIGN="left">
                   	</A>
                   	<br>
                   	</c:if>

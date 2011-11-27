@@ -16,7 +16,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@taglib prefix="form" uri=
 	<c:if test="${!empty pictureModel.existingPicId}">
 	<tr>
 		<td>Existing pic</td>
-		<td><img src="/dimage/${pictureModel.existingPicId}.htm"></td>
+		<td><img src="/dimage/${pictureModel.existingPicId}.jpeg"></td>
 	</tr>
 	</c:if>
 	<tr>

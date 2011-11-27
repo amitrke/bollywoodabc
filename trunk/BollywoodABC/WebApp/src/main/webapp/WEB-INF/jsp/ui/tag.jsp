@@ -34,7 +34,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
     </TR>
 	<TR>
               <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;">
-      <TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
+      <TABLE id="tagTable" WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
       	<tr valign="top">
       		<td valign="top">
       		<c:if test="${!empty page.data.facePic}">

@@ -55,7 +55,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
                   <TD VALIGN="top" STYLE="padding-left:12px; padding-right:12px;"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
                       <TR>
-                        <TD VALIGN="TOP"> <IMG SRC="<c:out value="/dimage/${page.data.picture.id}.htm"/>" HSPACE="5" VSPACE="5" ALIGN="right"><!--<SPAN CLASS="quote"> <c:out value="${page.data.author}"/> </SPAN><BR><BR>-->
+                        <TD VALIGN="TOP"> <IMG SRC="<c:out value="/dimage/${page.data.picture.id}.jpeg"/>" HSPACE="5" VSPACE="5" ALIGN="right"><!--<SPAN CLASS="quote"> <c:out value="${page.data.author}"/> </SPAN><BR><BR>-->
                           <SPAN CLASS="story"><c:out value="${page.data.bodyNl2br}" escapeXml="false" /></SPAN></TD>
                       </TR>
                   </TABLE></TD>
@@ -120,7 +120,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 			    		<B>Recent pics:</B><br>
 			    		<c:forEach var="picture" items="${page.data.tags.relatedPictures}">
 			    			<A HREF="/photogallery/wallpaper/${picture.urlCaption}/${picture.id}.htm" style="border-style: none"/>
-			    			<IMG SRC="<c:out value="/dimage/thumb/${picture.id}.htm"/>" HSPACE="5" VSPACE="5" ALIGN="left">
+			    			<IMG SRC="<c:out value="/dimage/thumb/${picture.id}.jpeg"/>" HSPACE="5" VSPACE="5" ALIGN="left">
 			    			</A>
 			    		</c:forEach>
 			    	</td>
