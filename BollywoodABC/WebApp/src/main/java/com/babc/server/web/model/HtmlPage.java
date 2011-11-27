@@ -1,7 +1,13 @@
 package com.babc.server.web.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class HtmlPage {
+	
+	private SimpleDateFormat htmlDateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z");
 	
 	private String title;
 	private String description;
@@ -11,11 +17,14 @@ public class HtmlPage {
 	private Object data;
 	
 	public HtmlPage(String title, String description, String keywords,
-			String expires, String author, Object data) {
+			int expires, String author, Object data) {
 		this.title = title;
 		this.description = description;
 		this.keywords = keywords;
-		this.expires = expires;
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.add(Calendar.DATE, expires);
+		this.expires = htmlDateFormat.format(c.getTime());
 		this.author = author;
 		this.data = data;
 	}

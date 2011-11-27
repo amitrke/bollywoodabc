@@ -41,6 +41,8 @@ public class PhotogalleryController {
 			byte[] bytes = pictureEntity.getData().getBytes();
 			OutputStream os = response.getOutputStream();
 			response.setContentType("image/jpg");
+			response.setDateHeader("Expires",
+					   System.currentTimeMillis(  ) + AppConstants.BROWSER_CACHE_DEF_EXPIRY);
 			os.write(bytes);
 		}
 	}
@@ -54,7 +56,7 @@ public class PhotogalleryController {
 		TagListVo tags = tagService.getTagsList(picId, TagCrossRefEntity.PICTURE);
 		data.put("tags", tags);
 		HtmlPage htmlPage = new HtmlPage(pictureEntity.getCaption(), pictureEntity.getCaption(), tags.tagCsv(), 
-				AppConstants.metaExpiryNextYear, "BollywoodABC", data);
+				10, "BollywoodABC", data);
 		return new ModelAndView("ui.photogallery.picpage", "page", htmlPage);
 	}
 	
@@ -68,7 +70,7 @@ public class PhotogalleryController {
 		HtmlPage htmlPage = new HtmlPage("Bollywood Photogallery - wallpapers, Hi resolution pictures", 
 				"Bollywood Photogallery - wallpapers, Hi resolution pictures of Deepika Padukone, Ashwariya Rai, Kareena Kapoor, Sonam Kapoor", 
 				"Wallpapers, Hi Resolution pics, Deepika Padukone, Ashwariya Rai, Kareena Kapoor, Sonam Kapoor", 
-				AppConstants.metaExpiryExpired, "BollywoodABC", home);
+				10, "BollywoodABC", home);
 		
 		return new ModelAndView("ui.photogallery.main", "page", htmlPage);
 	}
@@ -82,7 +84,7 @@ public class PhotogalleryController {
 		HtmlPage htmlPage = new HtmlPage(categoryVo.getName()+" Photogallery - wallpapers, Hi resolution pictures", 
 				categoryVo.getDescription()+" Photogallery - wallpapers, Hi resolution pictures", 
 				categoryVo.getName(), 
-				AppConstants.metaExpiryExpired, "BollywoodABC", home);
+				10, "BollywoodABC", home);
 		return new ModelAndView("ui.photogallery.detail", "page", htmlPage);
 	}
 	

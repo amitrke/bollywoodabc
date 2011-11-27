@@ -55,7 +55,7 @@ public abstract class AbstractAmfInput extends AmfIO implements ActionMessageInp
      */
     public void setInputStream(InputStream in)
     {
-        this.in = new DataInputStream(new java.io.BufferedInputStream( in ) );
+        this.in = new DataInputStream(in);
     }
 
     protected Object stringToDocument(String xml)

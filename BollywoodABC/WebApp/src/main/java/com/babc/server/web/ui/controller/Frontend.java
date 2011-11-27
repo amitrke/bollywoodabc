@@ -22,6 +22,7 @@ import com.babc.server.AppConstants;
 import com.babc.server.model.Paging;
 import com.babc.server.model.vo.StoryVo;
 import com.babc.server.service.CategoryService;
+import com.babc.server.service.PictureService;
 import com.babc.server.service.StoryService;
 import com.babc.server.service.TwitterService;
 import com.babc.server.web.admin.model.AdminUpdtStoryModel;
@@ -38,6 +39,7 @@ public class Frontend {
 	private @Autowired StoryService storyService;
 	private @Autowired CategoryService categoryService;
 	private @Autowired TwitterService twitterService;
+	private @Autowired PictureService pictureService;
 	
 	private final int noOfStoriesPerPage = 10;
 	private final int noOfTweetsPerPage = 20;
@@ -65,8 +67,7 @@ public class Frontend {
 		StoryVo storyVo = storyService.get(storyId, new Paging());
 		HtmlPage htmlPage = new HtmlPage(storyVo.getTitle(),
 				storyVo.getIntro(), "bollywood, news, gossip",
-				AppConstants.metaExpiryNextYear, 
-				"BollywoodABC", storyVo);
+				10, "BollywoodABC", storyVo);
 		return new ModelAndView("ui.story.display", "page", htmlPage);
 	}
 	
@@ -82,13 +83,13 @@ public class Frontend {
 		Map<String, Object> home = new HashMap<String, Object>();
 		home.put("date", new Date());
 		home.put("homePageStories", storyService.get(new Paging(AppConstants.noOfStoriesOnFirstPage, 0)));
-		home.put("babcExtra", (storyService.get(new Paging(1, AppConstants.noOfStoriesOnFirstPage+1))).get(0));
 		home.put("twitterTimeline", twitterService.getTimeline(3));
+		home.put("recentPics", pictureService.getAllPictures(new Paging(14, 0)));
 		
 		HtmlPage htmlPage = new HtmlPage("Bollywood News - Wallpapers, Songs, Videos, Movies, Stars", 
 				"Latest Bollywood gossip news. Get the latest celebrity gossip, entertainment gossip, celeb gossip news, new movie trailers, TV, movie reviews from Bollywood", 
 				"Bollywood, News, Hollywood, Wallpapers, Hi Resolution pics", 
-				AppConstants.metaExpiryExpired, "BollywoodABC", home);
+				1, "BollywoodABC", home);
 		return new ModelAndView("ui.homepage", "page", htmlPage);
 	}
 	
@@ -107,7 +108,7 @@ public class Frontend {
 		HtmlPage htmlPage = new HtmlPage("Bollywood Tweets", 
 				"Latest Bollywood gossip news. Get the latest celebrity gossip, entertainment gossip, celeb gossip news, new movie trailers, TV, movie reviews from Bollywood", 
 				"Bollywood, News, Hollywood, Wallpapers, Hi Resolution pics", 
-				AppConstants.metaExpiryExpired, "BollywoodABC", home);
+				1, "BollywoodABC", home);
 		return new ModelAndView("ui.tweet.display", "page", htmlPage);
 	}
 	
