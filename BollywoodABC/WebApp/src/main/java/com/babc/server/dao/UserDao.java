@@ -1,60 +1,30 @@
 package com.babc.server.dao;
 
-import java.util.List;
-
-import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
+import static com.google.appengine.api.datastore.Query.FilterOperator.EQUAL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.babc.server.model.Paging;
 import com.babc.server.model.UserEntity;
 import com.babc.server.utils.EntityCache;
 import com.babc.server.utils.QueryCache;
-
+import com.google.appengine.api.datastore.Query;
 @Repository("userDao")
-public class UserDao extends AbstractBaseDao{
+public class UserDao extends AbstractBaseDao<UserEntity>{
 	
 	@Autowired
 	public UserDao(EntityCache entityCache, QueryCache queryCache) {
 		super(entityCache, queryCache, UserEntity.class);
 	}
-	
-	/*
-	public UserEntity add(UserEntity category){
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		UserEntity response = null;
-		try {
-			response = pm.makePersistent(category);
-		} finally {
-			pm.close();
-		}
-		return response;
+
+	@Override
+	protected Query newQuery() {
+		return super.newQuery();
 	}
 	
-	public UserEntity get(Long id){
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		return pm.getObjectById(UserEntity.class, id);
+	public UserEntity getByEmail(String email){
+		Query query = newQuery();
+		query.addFilter("email", EQUAL, email);
+		return selectOne(query, "selectUserByEmailId", params(email));
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<UserEntity> get(Paging paging) {
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Query query = pm.newQuery(UserEntity.class);
-		setPagingParameterValues(query, paging);
-		List<UserEntity> results = null;
-		try {
-			results = (List<UserEntity>) query.execute();
-		} finally {
-			query.closeAll();
-		}
-		return results;
-	}
-	
-	public void delete(Long id){
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		pm.deletePersistent(pm.getObjectById(UserEntity.class, id));
-	}
-	*/
 }

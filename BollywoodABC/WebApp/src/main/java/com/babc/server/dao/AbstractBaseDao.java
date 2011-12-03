@@ -131,7 +131,8 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 	protected List<T> select(Query query, String queryId, Object[] params, int limit, int offset) {
 		List<T> result = (List<T>) getQueryCache().getQuery(clazz, queryId, 
 				params);
-		if (result == null) {
+		if (result == null || queryId.equals("selectUserByEmailId")) {
+			logger.debug("Query getting executed: "+query);
 			DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
 			PreparedQuery p = datastoreService.prepare(query);
 			result = createModels(p.asList(withLimit(limit).offset(offset)));
@@ -141,8 +142,7 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 		return result;
 	}
 	
-	protected List<T> selectNotCache(Query query, String queryId, 
-			Object[] params) {
+	protected List<T> selectNotCache(Query query) {
 		DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
 		PreparedQuery p = datastoreService.prepare(query);
 		int limit = p.countEntities() > 0 ? p.countEntities() : 1;
@@ -155,7 +155,7 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 	}
 	
 	protected T selectOne(Query query, String queryId, Object[] params) {
-		List<T> list = select(query, queryId, params, 0, 10);
+		List<T> list = select(query, queryId, params, 10, 0);
 		if (list.isEmpty()) {
 			return null;
 		}

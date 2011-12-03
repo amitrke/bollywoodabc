@@ -35,5 +35,19 @@ public class AppConstants {
 	public static final int ENTITY_STATUS_ENABLED = 65;
 	public static final int ENTITY_STATUS_DISABLED = 46;
 	
-	public static final long BROWSER_CACHE_DEF_EXPIRY = 7*24*60*60*1000;
+	public static final long BROWSER_CACHE_EXPIRY_ONE_DAY = 24*60*60*1000;
+	
+	/**
+	 * One Week expiry
+	 */
+	public static final long BROWSER_CACHE_DEF_EXPIRY = 7*BROWSER_CACHE_EXPIRY_ONE_DAY;
+		
+	public static final int MAIL_Q_STATUS_INQUEUE = 1;
+	public static final int MAIL_Q_STATUS_DELIVERED = 2;
+	
+	public static final int USER_TYPE_SUBSCRIBER = 1;
+	public static final int USER_TYPE_CJ = 2;
+	
+	public static final int SUBSCRIPTION_WEEKLY_NEWSLETTER = 1;
+	public static final int SUBSCRIPTION_WEEKLY_WALLPAPERS = 2;
 }

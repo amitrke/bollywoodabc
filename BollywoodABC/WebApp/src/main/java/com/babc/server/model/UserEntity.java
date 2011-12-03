@@ -1,48 +1,68 @@
 package com.babc.server.model;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import static com.babc.server.utils.EntityUtil.getDateProperty;
+import static com.babc.server.utils.EntityUtil.getIntegerProperty;
+import static com.babc.server.utils.EntityUtil.getStringProperty;
+import static com.babc.server.utils.EntityUtil.setProperty;
 
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class UserEntity {
+import java.io.Serializable;
+import java.util.Date;
+
+import com.babc.server.AppConstants;
+import com.google.appengine.api.datastore.Entity;
+
+public class UserEntity extends BaseEntityImpl implements Serializable{
 	
-	@PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private Long id;
-	
-	@Persistent
+	private static final long serialVersionUID = 1L;
+
 	private String name;
 	
-	@Persistent
 	private String email;
 	
-	@Persistent
-	private char status;
+	private int status;
 	
-	@Persistent
-	private String type;
-
-	public UserEntity(Long id) {
-		this.id = id;
-	}
-
+	private int type;
+	
+	private Date createDate;
+	
 	public UserEntity() {
 		super();
 	}
-
-	public UserEntity(String name, String email, char status, String type) {
-		super();
+	
+	public UserEntity(Long id) {
+		setId(id);
+	}
+	
+	public UserEntity(String name, String email) {
 		this.name = name;
 		this.email = email;
-		this.status = status;
-		this.type = type;
+		this.status = AppConstants.ENTITY_STATUS_ENABLED;
+		this.type = AppConstants.USER_TYPE_SUBSCRIBER;
+		createDate = new Date();
+	}
+	
+	@Override
+	public void save(Entity entity) {
+		super.save(entity);
+		setProperty(entity, "name", name, false);
+		setProperty(entity, "email", email, true);
+		setProperty(entity, "status", status, true);
+		setProperty(entity, "type", type, true);
+		setProperty(entity, "createDate", createDate, true);
 	}
 
-	public Long getId() {
-		return id;
+	@Override
+	public void load(Entity entity) {
+		super.load(entity);
+		name = getStringProperty(entity, "name");
+		email = getStringProperty(entity, "email");
+		status = getIntegerProperty(entity, "status", 0);
+		type = getIntegerProperty(entity, "type", 0);
+		createDate = getDateProperty(entity, "createDate");
+	}
+
+	public Date getCreateDate() {
+		return createDate;
 	}
 
 	public String getName() {
@@ -53,73 +73,43 @@ public class UserEntity {
 		return email;
 	}
 
-	public char getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserEntity other = (UserEntity) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("UserEntity [");
-		if (email != null) {
-			builder.append("email=");
-			builder.append(email);
-			builder.append(", ");
-		}
-		if (id != null) {
-			builder.append("id=");
-			builder.append(id);
-			builder.append(", ");
-		}
 		if (name != null) {
 			builder.append("name=");
 			builder.append(name);
 			builder.append(", ");
 		}
+		if (email != null) {
+			builder.append("email=");
+			builder.append(email);
+			builder.append(", ");
+		}
 		builder.append("status=");
 		builder.append(status);
+		builder.append(", type=");
+		builder.append(type);
 		builder.append(", ");
-		if (type != null) {
-			builder.append("type=");
-			builder.append(type);
+		if (createDate != null) {
+			builder.append("createDate=");
+			builder.append(createDate);
+			builder.append(", ");
+		}
+		if (getId() != null) {
+			builder.append("getId()=");
+			builder.append(getId());
 		}
 		builder.append("]");
 		return builder.toString();
-	}
-	
+	}	
 }

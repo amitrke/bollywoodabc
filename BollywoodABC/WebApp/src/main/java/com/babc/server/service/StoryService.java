@@ -91,7 +91,7 @@ public class StoryService {
 		CategoryVo categoryVo = categoryService.get(storyEntity.getCategoryId());
 		//TODO: Fix this later once I have users getting created.
 		//UserEntity userEntity = userDao.get(storyEntity.getAuthorId());
-		UserEntity userEntity = new UserEntity("Amit Kumar", "amitrke@gmail.com", 'A', "User");
+		UserEntity userEntity = new UserEntity("Amit Kumar", "amitrke@gmail.com");
 		PictureEntity pictureEntity = pictureDao.getById(storyEntity.getPictureId());
 		List<CommentVo> commentVos = new ArrayList<CommentVo>();
 		List<TagVo> tags = tagService.getTags(storyEntity.getId(), TagCrossRefEntity.STORY);
