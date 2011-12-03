@@ -48,6 +48,12 @@ public class ViewImage {
 		}
 	}
 	
+	@RequestMapping(value="/{imageId}.htm", method = RequestMethod.GET)
+	public void loadOldHtmImage(@PathVariable("imageId") Long picId,
+			HttpServletResponse response) throws Exception {
+		loadImage(picId, response);
+	}
+	
 	@RequestMapping(value="/thumb/{imageId}.jpeg", method = RequestMethod.GET)
 	public void loadThumb(@PathVariable("imageId") Long picId,
 			HttpServletResponse response) throws Exception {
@@ -78,12 +84,10 @@ public class ViewImage {
 		os.write(bytes);
 	}
 	
-	@RequestMapping(value="/cache.htm", method = RequestMethod.GET)
-	public ModelAndView cacheStats() throws Exception {
-		Map<String, CacheStat> map = new HashMap<String, CacheStat>();
-		map.put("entity", entityCache.getStat());
-		map.put("query", queryCache.getStat());
-		return new ModelAndView("admin/cacheStats", "data", map);
+	@RequestMapping(value="/thumb/{imageId}.htm", method = RequestMethod.GET)
+	public void loadOldHtmThumb(@PathVariable("imageId") Long picId,
+			HttpServletResponse response) throws Exception {
+		loadThumb(picId, response);
 	}
 	
 	@RequestMapping(value="/rmCacheStory.htm", method = RequestMethod.GET)

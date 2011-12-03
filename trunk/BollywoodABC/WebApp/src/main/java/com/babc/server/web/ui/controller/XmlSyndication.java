@@ -23,6 +23,7 @@ import com.babc.jaxb.rss.ImageType;
 import com.babc.jaxb.rss.ItemType;
 import com.babc.jaxb.rss.ObjectFactory;
 import com.babc.jaxb.rss.RssType;
+import com.babc.server.AppConstants;
 import com.babc.server.model.Paging;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.service.StoryService;
@@ -42,6 +43,8 @@ public class XmlSyndication{
 	@RequestMapping(value="/rss.htm", method = RequestMethod.GET)
 	public void rss(HttpServletResponse httpServletResponse) throws IOException{
 		PrintWriter out = httpServletResponse.getWriter();
+		httpServletResponse.setDateHeader("Expires",
+				   System.currentTimeMillis(  ) + AppConstants.BROWSER_CACHE_EXPIRY_ONE_DAY);
 		String rssData = null;
 		Object rssCachedData = entityCache.getEntity(String.class, "rss");
 		if (rssCachedData != null){

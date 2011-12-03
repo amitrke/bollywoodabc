@@ -1,44 +1,31 @@
 package com.babc.server.web.admin.controller;
 
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.babc.server.AppConstants;
-import com.babc.server.dao.TagCrossRefDao;
-import com.babc.server.dao.TagDao;
-import com.babc.server.model.TagCrossRefEntity;
-import com.babc.server.model.TagEntity;
+import com.babc.server.utils.CacheStat;
+import com.babc.server.utils.EntityCache;
+import com.babc.server.utils.QueryCache;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminHomeController {
 	
-	private @Autowired TagDao tagDao;
-	private @Autowired TagCrossRefDao tagCrossRefDao;
+	private @Autowired EntityCache entityCache;
+	private @Autowired QueryCache queryCache;
 	
 	@RequestMapping(value="/home.htm", method = RequestMethod.GET)
-	public String home() {
-		return "admin.homepage";
+	public ModelAndView home() {
+		Map<String, CacheStat> map = new HashMap<String, CacheStat>();
+		map.put("entity", entityCache.getStat());
+		map.put("query", queryCache.getStat());
+		return new ModelAndView("admin.homepage", "data", map);
 	}
 	
-	
-	@RequestMapping(value="/addTag.htm", method = RequestMethod.GET)
-	public String addTag() {
-		TagEntity tagEntity = tagDao.save(new TagEntity("Kareena Kapoor", TagEntity.ACTOR,
-				new Date(), "Actress Kareena Kapoor", AppConstants.ENTITY_STATUS_ENABLED));
-		TagCrossRefEntity crossRefEntity = tagCrossRefDao.save(new TagCrossRefEntity(1L, 1L, 1, new Date(), 
-				AppConstants.ENTITY_STATUS_ENABLED));
-		return "admin.homepage";
-	}
-	
-	@RequestMapping(value="/addTagCrossRef.htm", method = RequestMethod.GET)
-	public String addTagCrossRef() {
-		TagCrossRefEntity crossRefEntity = tagCrossRefDao.save(new TagCrossRefEntity(1L, 1L, 1, new Date(), 
-				AppConstants.ENTITY_STATUS_ENABLED));
-		return "admin.homepage";
-	}
 }
