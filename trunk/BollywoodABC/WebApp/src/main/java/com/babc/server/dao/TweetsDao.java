@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.babc.server.model.Paging;
-import com.babc.server.model.StoryEntity;
 import com.babc.server.model.TweetEntity;
 import com.babc.server.utils.EntityCache;
 import com.babc.server.utils.QueryCache;
