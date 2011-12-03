@@ -339,21 +339,13 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-				</configuration>
-			</plugin>
 			<!-- This plug-in "enhances" your domain model objects (i.e. makes them 
-				persistent for datanucleus) -->
+				persistent for datanucleus)
 			<plugin>
 				<groupId>org.datanucleus</groupId>
 				<artifactId>maven-datanucleus-plugin</artifactId>
 				<version>1.1.4</version>
 				<configuration>
-					<!-- Make sure this path contains your persistent classes! -->
 					<mappingIncludes>**/model/*.class</mappingIncludes>
 					<verbose>true</verbose>
 					<enhancerName>ASM</enhancerName>
@@ -391,7 +383,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
+			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -447,13 +439,13 @@
 
 		<!-- Specify AppEngine version for your project. It should match SDK version 
 			pointed to by ${gae.home} property (Typically, one used by your Eclipse plug-in) -->
-		<gae.version>1.4.3</gae.version>
+		<gae.version>1.5.2</gae.version>
 
 		<!-- Upload to http://test.latest.<applicationName>.appspot.com by default -->
 		<gae.application.version>test</gae.application.version>
 
 		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
-		<gae.home>/home/amit/me/apps/java/appengine-java-sdk-1.4.3</gae.home>
+		<gae.home>D:\amit\apps\java\appengine-java-sdk-1.5.2</gae.home>
 	</properties>
 
 	<profiles>
