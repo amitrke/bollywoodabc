@@ -5,4 +5,8 @@
         <property name="userId" direction="asc"/>
         <property name="createdAt" direction="desc"/>
     </datastore-index>
+    <datastore-index kind="PictureEntity" ancestor="false" source="manual">
+        <property name="status" direction="asc"/>
+        <property name="createDate" direction="desc"/>
+    </datastore-index>
 </datastore-indexes>

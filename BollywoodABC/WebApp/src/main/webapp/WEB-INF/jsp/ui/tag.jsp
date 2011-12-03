@@ -38,7 +38,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
       	<tr valign="top">
       		<td valign="top">
       		<c:if test="${!empty page.data.facePic}">
-      				<IMG SRC="<c:out value="/dimage/${page.data.facePic}.htm"/>" HSPACE="5" VSPACE="5" ALIGN="right">
+      				<IMG SRC="<c:out value="/dimage/${page.data.facePic}.jpeg"/>" HSPACE="5" VSPACE="5" ALIGN="right">
       			</c:if>
         	<c:if test="${!empty page.data.relatedPhotogalleries}">
         	<B>Photo Gallery:</B>
@@ -66,7 +66,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
     		<B>Recent pics:</B><br>
     		<c:forEach var="picture" items="${page.data.relatedPictures}">
     			<A HREF="/photogallery/wallpaper/${picture.urlCaption}/${picture.id}.htm" style="border-style: none"/>
-    			<IMG SRC="<c:out value="/dimage/thumb/${picture.id}.htm"/>" HSPACE="5" VSPACE="5" ALIGN="left">
+    			<IMG SRC="<c:out value="/dimage/thumb/${picture.id}.jpeg"/>" HSPACE="5" VSPACE="5" ALIGN="left">
     			</A>
     		</c:forEach>
     	</td>

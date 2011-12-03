@@ -96,7 +96,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
             <TD VALIGN="top" BGCOLOR="#434945"><TABLE WIDTH="98%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="1">
                   <TR><TD>
                   	<c:forEach var="recentPic" items="${page.data.recentPics}">
-                    	<A href="/photogallery/wallpaper/${recentPic.urlCaption}/${recentPic.id}.jpeg" style="border-style: none"><img src="/dimage/thumb/${recentPic.id}.jpeg" alt="${recentPic.caption}" /></A>
+                    	<A href="/photogallery/wallpaper/${recentPic.urlCaption}/${recentPic.id}.htm" style="border-style: none"><img src="/dimage/thumb/${recentPic.id}.jpeg" alt="${recentPic.caption}" /></A>
                     </c:forEach></TD>
                   </TR>
             </TABLE></TD>
