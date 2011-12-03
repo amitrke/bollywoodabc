@@ -32,4 +32,20 @@ public class TaskQueueController {
 		queue.add(TaskOptions.Builder.withUrl("/_ah/sessioncleanup?clear").method(Method.GET));
 		return new ModelAndView("admin.message", "message", "Batch Process Initiated.");
 	}
+	
+	@RequestMapping(value="/processDayMailQueue.htm", method = RequestMethod.POST)
+	public ModelAndView processDayMailQueue(){
+		Queue queue = QueueFactory.getDefaultQueue();
+		logger.debug("Batch Process to process day mail queue Initiated.");
+		queue.add(TaskOptions.Builder.withUrl("/batch/processDayMailQueue.htm"));
+		return new ModelAndView("admin.message", "message", "Batch Process Initiated.");
+	}
+	
+	@RequestMapping(value="/processNightMailQueue.htm", method = RequestMethod.POST)
+	public ModelAndView processNightMailQueue(){
+		Queue queue = QueueFactory.getDefaultQueue();
+		logger.debug("Batch Process to process night mail queue Initiated.");
+		queue.add(TaskOptions.Builder.withUrl("/batch/processNightMailQueue.htm"));
+		return new ModelAndView("admin.message", "message", "Batch Process Initiated.");
+	}
 }
