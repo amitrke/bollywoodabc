@@ -36,7 +36,16 @@
 	  <servlet-name>_ah_sessioncleanup</servlet-name>
 	  <url-pattern>/_ah/sessioncleanup</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+	  <servlet-name>catchallhandler</servlet-name>
+	  <servlet-class>com.babc.server.servlet.CatchAllMailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>catchallhandler</servlet-name>
+	  <url-pattern>/_ah/mail/*</url-pattern>
+	</servlet-mapping>
+	
 	<!-- Default page to serve -->
 	<welcome-file-list>
 		<welcome-file>news/home.htm</welcome-file>

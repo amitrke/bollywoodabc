@@ -54,6 +54,14 @@
 	<put-attribute name="content" value="/WEB-INF/jsp/ui/disclaimer.jsp" cascade="true"/>
 </definition>
 
+<definition name="ui.user.register" extends="ui.base.white">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/register.jsp" cascade="true"/>
+</definition>
+
+<definition name="ui.user.account" extends="ui.base.white">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/account.jsp" cascade="true"/>
+</definition>
+
 <!-- Photogallery -->
 <definition name="ui.photogallery.main" extends="ui.base.red">
 	<put-attribute name="content" value="/WEB-INF/jsp/ui/photogallery-main.jsp" cascade="true"/>

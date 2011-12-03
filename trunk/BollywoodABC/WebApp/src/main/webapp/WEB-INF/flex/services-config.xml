@@ -6,7 +6,7 @@
         <service-include file-path="proxy-config.xml" />
         <service-include file-path="messaging-config.xml" />        
     </services>
-
+ 
     <security>
         <login-command class="flex.messaging.security.TomcatLoginCommand" server="Tomcat"/>
         <!-- Uncomment the correct app server
@@ -32,11 +32,12 @@
     <channels>
 
         <channel-definition id="my-amf" class="mx.messaging.channels.AMFChannel">
-            <endpoint url="http://{server.name}:{server.port}/{context.root}/messagebroker/amf" class="flex.messaging.endpoints.AMFEndpoint"/>
-            <properties>
+		    <endpoint url="http://localhost:8080/messagebroker/amf" 
+		    	class="flex.messaging.endpoints.AMFEndpoint"/>
+		    <properties>
 		        <polling-enabled>false</polling-enabled>
 		    </properties>
-        </channel-definition>
+		</channel-definition>
 
         <channel-definition id="my-secure-amf" class="mx.messaging.channels.SecureAMFChannel">
             <endpoint url="https://{server.name}:{server.port}/{context.root}/messagebroker/amfsecure" class="flex.messaging.endpoints.SecureAMFEndpoint"/>
@@ -68,7 +69,7 @@
     </channels>
 
     <logging>
-        <target class="flex.messaging.log.ConsoleTarget" level="Debug">
+        <target class="flex.messaging.log.ConsoleTarget" level="Error">
             <properties>
                 <prefix>[BlazeDS] </prefix>
                 <includeDate>false</includeDate>
@@ -85,7 +86,6 @@
     </logging>
 
     <system>
-    	<manageable>false</manageable>
         <redeploy>
             <enabled>false</enabled>
             <!-- 
