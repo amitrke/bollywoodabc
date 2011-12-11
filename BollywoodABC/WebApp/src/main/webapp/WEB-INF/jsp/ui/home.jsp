@@ -42,7 +42,8 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
               </TR>
               <TR>
                 <TD COLSPAN="2" CLASS="whitetxt" STYLE="padding-left:11px; padding-right:2px;">
-                	Add <b>bollywoodabc1@appspot.com</b> as a friend to your Google Talk messenger and keep yourself updated on whats happening in Bollywood.
+                	Subscribe to newsletter send an email to subscribe@ bollyabc.appspotmail.com with subject "subscribe". 
+                	Add <b>bollyabc@appspot.com</b> as a friend to your Google Talk messenger.
                 </TD>
               </TR>
 

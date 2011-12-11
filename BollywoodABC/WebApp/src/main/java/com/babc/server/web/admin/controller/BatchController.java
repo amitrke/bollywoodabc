@@ -1,7 +1,7 @@
 package com.babc.server.web.admin.controller;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +15,6 @@ import com.babc.server.service.TwitterService;
 @RequestMapping("/batch")
 public class BatchController {
 	
-	private static transient final Log logger = LogFactory.getLog(BatchController.class);
-	
 	private @Autowired TwitterService twitterService;
 	private @Autowired MailService mailService;
 	
@@ -26,15 +24,16 @@ public class BatchController {
 		return new ModelAndView("admin.message", "message", "Batch Process Completed.");
 	}
 	
-	@RequestMapping(value="/processDayMailQueue.htm", method = RequestMethod.POST)
-	public ModelAndView processDayMailQueue(){
-		mailService.processDayMailQueue();		
+	@RequestMapping(value="/processMailQueue.htm", method = RequestMethod.POST)
+	public ModelAndView processMailQueue(HttpServletRequest request){
+		int priority = Integer.parseInt(request.getParameter("priority"));
+		mailService.processMailQueue(priority);
 		return new ModelAndView("admin.message", "message", "Batch Process Completed.");
 	}
 	
-	@RequestMapping(value="/processNightMailQueue.htm", method = RequestMethod.POST)
-	public ModelAndView processNightMailQueue(){
-		mailService.processNightMailQueue();
+	@RequestMapping(value="/createNewsletter.htm", method = RequestMethod.POST)
+	public ModelAndView createNewsletter(){
+		mailService.sendWeeklyNewsletter();
 		return new ModelAndView("admin.message", "message", "Batch Process Completed.");
 	}
 }

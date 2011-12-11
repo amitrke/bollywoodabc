@@ -103,7 +103,7 @@ public class CacheService implements Cache {
 	
 	public void clear() {
 		localCache.clear();
-		cache.clear();		
+		cache.clear();
 	}
 
 	
@@ -129,16 +129,24 @@ public class CacheService implements Cache {
 
 	
 	public Object get(Object arg0) {
-		if (localCache.containsKey(arg0)) {
-			localHits++;
-			return localCache.get(arg0);
+		try{
+			if (localCache.containsKey(arg0)) {
+				localHits++;
+				return localCache.get(arg0);
+			}
+			Object value = cache.get(arg0);
+			if (value != null) {
+				cacheHits++;
+				localCache.put((String)arg0, value);
+			}
+	
+			return value;
 		}
-		Object value = cache.get(arg0);
-		if (value != null) {
-			cacheHits++;
-			localCache.put((String)arg0, value);
+		catch(Exception e){
+			LOGGER.error(e);
+			clear();
 		}
-		return value;
+		return null;
 	}
 
 	
@@ -162,8 +170,8 @@ public class CacheService implements Cache {
 		try{
 			o = cache.put(arg0, arg1);
 		}
-		catch(MemcacheServiceException memcacheServiceException){
-			LOGGER.error(memcacheServiceException.getMessage());
+		catch(Exception e){
+			LOGGER.error(e);
 		}
 		return o;
 	}

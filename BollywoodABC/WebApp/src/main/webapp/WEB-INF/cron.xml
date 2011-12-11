@@ -14,5 +14,20 @@
     <url>/mq/sessionCleanup.htm</url>
     <description>Clean up sessions</description>
     <schedule>every day 00:00</schedule>
-  </cron> 
+  </cron>
+  <cron>
+    <url>/mq/processMailQueue.htm?priority=2</url>
+    <description>Process Day Mail Queue</description>
+    <schedule>every 2 hours from 9:00 to 22:00</schedule>
+  </cron>
+  <cron>
+    <url>/mq/processMailQueue.htm?priority=10</url>
+    <description>Process Night Mail Queue</description>
+    <schedule>every day 23:00</schedule>
+  </cron>
+  <cron>
+    <url>/mq/createWeeklyNewsletter.htm</url>
+    <description>Send Weekly Newsletter</description>
+    <schedule>every sunday 21:00</schedule>
+  </cron>
 </cronentries>

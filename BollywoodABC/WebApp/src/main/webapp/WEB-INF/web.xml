@@ -38,6 +38,22 @@
 	</servlet-mapping>
 	
 	<servlet>
+	  <servlet-name>subscribeNewsLetterHandler</servlet-name>
+	  <servlet-class>com.babc.server.servlet.SubscribeNewsletterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>subscribeNewsLetterHandler</servlet-name>
+	  <url-pattern>/_ah/mail/subscribe*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+	  <servlet-name>unsubscribeNewsLetterHandler</servlet-name>
+	  <servlet-class>com.babc.server.servlet.UnSubscribeNewsletterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>subscribeNewsLetterHandler</servlet-name>
+	  <url-pattern>/_ah/mail/unsubscribe*</url-pattern>
+	</servlet-mapping>
+	<servlet>
 	  <servlet-name>catchallhandler</servlet-name>
 	  <servlet-class>com.babc.server.servlet.CatchAllMailServlet</servlet-class>
 	</servlet>
