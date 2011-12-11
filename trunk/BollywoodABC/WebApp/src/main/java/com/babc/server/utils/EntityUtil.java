@@ -185,6 +185,10 @@ public class EntityUtil {
 			entity.setUnindexedProperty(name, value);
 		}
 	}
+	
+	public static void setProperty(Entity entity, String name, Text value) {
+		entity.setUnindexedProperty(name, value);
+	}
 
 	public static void setTextProperty(Entity entity, String name, 
 			String value) {
