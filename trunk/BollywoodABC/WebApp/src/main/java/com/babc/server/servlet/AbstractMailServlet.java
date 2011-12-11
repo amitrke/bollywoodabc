@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 
 import com.babc.server.service.MailService;
-import com.babc.server.service.XmppService;
 import com.babc.server.utils.ApplicationContextProvider;
 
 public abstract class AbstractMailServlet extends HttpServlet {

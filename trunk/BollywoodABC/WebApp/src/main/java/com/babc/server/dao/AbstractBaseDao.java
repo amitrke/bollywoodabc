@@ -131,7 +131,7 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 	protected List<T> select(Query query, String queryId, Object[] params, int limit, int offset) {
 		List<T> result = (List<T>) getQueryCache().getQuery(clazz, queryId, 
 				params);
-		if (result == null || queryId.equals("selectUserByEmailId")) {
+		if (result == null) {
 			logger.debug("Query getting executed: "+query);
 			DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
 			PreparedQuery p = datastoreService.prepare(query);
@@ -146,7 +146,9 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 		DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
 		PreparedQuery p = datastoreService.prepare(query);
 		int limit = p.countEntities() > 0 ? p.countEntities() : 1;
-		return createModels(p.asList(withLimit(limit)));
+		List<T> result = createModels(p.asList(withLimit(limit)));
+		logger.debug("Data Read from DB:"+result.toString());
+		return result;
 	}
 	
 	public List<T> get(Paging paging) {

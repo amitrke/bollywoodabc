@@ -1,8 +1,16 @@
 package com.babc.server.model;
 
+import static com.babc.server.utils.EntityUtil.getDateProperty;
+import static com.babc.server.utils.EntityUtil.getTextProperty;
+import static com.babc.server.utils.EntityUtil.getIntegerProperty;
+import static com.babc.server.utils.EntityUtil.getLongProperty;
+import static com.babc.server.utils.EntityUtil.getStringProperty;
+import static com.babc.server.utils.EntityUtil.setProperty;
+
 import java.util.Date;
 
 import com.babc.server.AppConstants;
+import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Text;
 
 public class MailQueueEntity extends BaseEntityImpl {
@@ -25,6 +33,9 @@ public class MailQueueEntity extends BaseEntityImpl {
 	
 	private int priority;
 	
+	public MailQueueEntity() {
+	}
+
 	/**
 	 * @param userId
 	 * @param body
@@ -33,17 +44,45 @@ public class MailQueueEntity extends BaseEntityImpl {
 	 * @param deliveryDate
 	 * @param priority
 	 */
-	public MailQueueEntity(Long userId, Text body, String encoding,
+	public MailQueueEntity(Long userId, String body, String encoding,
 			String subject, int priority) {
 		super();
 		this.userId = userId;
-		this.body = body;
+		this.body = new Text(body);
 		this.encoding = encoding;
 		this.subject = subject;
 		this.createDate = new Date();
 		this.status = AppConstants.MAIL_Q_STATUS_INQUEUE;
 		this.priority = priority;
 	}
+	
+	@Override
+	public void save(Entity entity) {
+		super.save(entity);
+		setProperty(entity, "userId", userId, false);
+		setProperty(entity, "body", body);
+		setProperty(entity, "encoding", encoding, false);
+		setProperty(entity, "subject", subject, false);
+		setProperty(entity, "createDate", createDate, true);
+		setProperty(entity, "status", status, true);
+		setProperty(entity, "priority", priority, true);
+		setProperty(entity, "deliveryDate", deliveryDate, false);
+	}
+
+
+	@Override
+	public void load(Entity entity) {
+		super.load(entity);
+		userId = getLongProperty(entity, "userId");
+		body = new Text(getTextProperty(entity, "body"));
+		encoding = getStringProperty(entity, "encoding");
+		subject = getStringProperty(entity, "subject");
+		createDate = getDateProperty(entity, "createDate");
+		status = getIntegerProperty(entity, "status", 0);
+		priority = getIntegerProperty(entity, "prority", 0);
+		deliveryDate = getDateProperty(entity, "deliveryDate");
+	}
+
 
 	public void setStatus(int status) {
 		this.status = status;

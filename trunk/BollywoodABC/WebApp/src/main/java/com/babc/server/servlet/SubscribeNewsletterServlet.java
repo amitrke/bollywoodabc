@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import javax.mail.MessagingException;
 import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +23,9 @@ public class SubscribeNewsletterServlet extends AbstractMailServlet {
         Session session = Session.getDefaultInstance(props, null); 
         try {
 			MimeMessage message = new MimeMessage(session, req.getInputStream());
-			System.out.println(message.getSender().getType());
+			mailService.subscribeForNewsletter(new InternetAddress(message.getFrom()[0].toString()));
 		} catch (MessagingException e) {
 			LOGGER.error(e);
 		}
 	}
-	
-	
 }
