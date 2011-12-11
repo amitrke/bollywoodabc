@@ -3,6 +3,7 @@ package com.babc.server.dao;
 import static com.google.appengine.api.datastore.Query.FilterOperator.EQUAL;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import com.babc.server.model.StoryEntity;
 import com.babc.server.utils.EntityCache;
 import com.babc.server.utils.QueryCache;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
 
 @Repository("storyDao")
@@ -115,6 +117,14 @@ public class StoryDao extends AbstractBaseDao<StoryEntity> {
 		query.addSort("createDate", SortDirection.DESCENDING);
 		query.addSort("priority", SortDirection.DESCENDING);
 		return query;
+	}
+	
+	public List<StoryEntity> get(Date startDate, Date endDate) {
+		Query q = newQuery();
+		q.addFilter("createDate",FilterOperator.GREATER_THAN_OR_EQUAL, startDate);
+		q.addFilter("createDate",FilterOperator.LESS_THAN_OR_EQUAL, endDate);
+		List<StoryEntity> result = select(q, "getStoriesByDateRange", params(startDate, endDate), AppConstants.DATA_DEFAULT_LIMIT, 0);
+		return result;
 	}
 	
 	public List<StoryEntity> get(Long category, Paging paging) {

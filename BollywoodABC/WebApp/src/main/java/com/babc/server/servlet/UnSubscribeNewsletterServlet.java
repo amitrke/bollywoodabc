@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CatchAllMailServlet extends AbstractMailServlet {
+public class UnSubscribeNewsletterServlet extends AbstractMailServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,16 +23,9 @@ public class CatchAllMailServlet extends AbstractMailServlet {
         Session session = Session.getDefaultInstance(props, null); 
         try {
 			MimeMessage message = new MimeMessage(session, req.getInputStream());
-			if (message.getSubject().equalsIgnoreCase("subscribe")){
-				mailService.subscribeForNewsletter(new InternetAddress(message.getFrom()[0].toString()));
-			}
-			else if (message.getSubject().equalsIgnoreCase("unsubscribe")){
-				mailService.unsubscribeNewsletter(new InternetAddress(message.getFrom()[0].toString()));
-			}
+			mailService.unsubscribeNewsletter(new InternetAddress(message.getFrom()[0].toString()));
 		} catch (MessagingException e) {
 			LOGGER.error(e);
 		}
 	}
-	
-	
 }

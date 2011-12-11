@@ -10,7 +10,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.babc.server.AppConstants;
 import com.babc.server.model.Paging;
 import com.babc.server.model.Photogallery;
 import com.babc.server.utils.EntityCache;
