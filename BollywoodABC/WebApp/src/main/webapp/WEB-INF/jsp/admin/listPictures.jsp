@@ -12,7 +12,7 @@
  	<tr>
  		<td>${picture.id}</td>
  		<td>${picture.caption}</td>
- 		<td><img src="/dimage/thumb/${picture.id}.htm" width="50" height="50"></td>
+ 		<td><img src="/dimage/thumb/${picture.id}.jpeg" width="50" height="50"></td>
  		<td>Groups</td>
  		<td>[ <a href="/admin/picture/update/${picture.id}.htm">Update</a>] [<a href="/admin/picture/delete/${picture.id}.htm">Delete</a>] </td>
  	</tr>

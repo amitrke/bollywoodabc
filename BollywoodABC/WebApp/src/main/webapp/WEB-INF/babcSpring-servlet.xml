@@ -18,7 +18,6 @@
 	
 	<!-- <flex:message-broker /> -->
 	
-	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
 	
 	<context:annotation-config/>

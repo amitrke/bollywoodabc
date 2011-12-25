@@ -3,7 +3,37 @@
     PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
-<web-app>
+<web-app>	
+	<!-- Filters -->
+	<filter>
+        <filter-name>ServerSideCache</filter-name>
+        <filter-class>com.babc.server.servlet.CacheFilter</filter-class>
+        <init-param>
+			<param-name>excludePatterns</param-name>
+			<param-value>/admin/*</param-value>
+	    </init-param>
+        <description>
+            Server Side compression filter.
+        </description>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>ServerSideCache</filter-name>
+        <url-pattern>*.htm</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ServerSideCache</filter-name>
+        <url-pattern>*.gif</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ServerSideCache</filter-name>
+        <url-pattern>*.css</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ServerSideCache</filter-name>
+        <url-pattern>*.js</url-pattern>
+    </filter-mapping>
+	
 	<!-- Servlets -->
 	
 	<!-- GAE Data Export - Start -->
@@ -24,9 +54,9 @@
 	              <role-name>admin</role-name>
 	       </auth-constraint>
 	</security-constraint>
-	
 	<!-- GAE Data Export - Ends -->
 	
+	<!-- Session cleanup servlet -->
 	<servlet>
 	  <servlet-name>_ah_sessioncleanup</servlet-name>
 	  <servlet-class>com.google.apphosting.utils.servlet.SessionCleanupServlet</servlet-class>
@@ -37,6 +67,42 @@
 	  <url-pattern>/_ah/sessioncleanup</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Spring Dispatcher servlet -->
+	<servlet>
+		<servlet-name>babcSpring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>log4j-properties-location</param-name>
+			<param-value>WEB-INF/classes/log4j.properties</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>babcSpring</servlet-name>
+		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>babcSpring</servlet-name>
+		<url-pattern>*.jpeg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>babcSpring</servlet-name>
+		<url-pattern>*.php</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>babcSpring</servlet-name>
+		<url-pattern>/messagebroker/amf</url-pattern>
+	</servlet-mapping>
+	<security-constraint>
+        <web-resource-collection>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+	
+	<!-- Mail fetch servlets -->
 	<servlet>
 	  <servlet-name>subscribeNewsLetterHandler</servlet-name>
 	  <servlet-class>com.babc.server.servlet.SubscribeNewsletterServlet</servlet-class>
@@ -62,63 +128,18 @@
 	  <url-pattern>/_ah/mail/*</url-pattern>
 	</servlet-mapping>
 	
-	<!-- Default page to serve -->
-	<welcome-file-list>
-		<welcome-file>news/home.htm</welcome-file>
-	</welcome-file-list>
-	
+	<!-- XMPP incoming servlet -->
 	<servlet>
   		<servlet-name>xmppreceiver</servlet-name>
     	<servlet-class>com.babc.server.xmpp.XMPPReceiverServlet</servlet-class>
   	</servlet>
-  
-	<servlet>
-		<servlet-name>babcSpring</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>log4j-properties-location</param-name>
-			<param-value>WEB-INF/classes/log4j.properties</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	    
-	 <security-constraint>
-        <web-resource-collection>
-            <url-pattern>/admin/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>admin</role-name>
-        </auth-constraint>
-    </security-constraint>
-    
-    <servlet-mapping>
+	<servlet-mapping>
     	<servlet-name>xmppreceiver</servlet-name>
     	<url-pattern>/_ah/xmpp/message/chat/</url-pattern>
   	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>babcSpring</servlet-name>
-		<url-pattern>*.htm</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>babcSpring</servlet-name>
-		<url-pattern>*.jpeg</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>babcSpring</servlet-name>
-		<url-pattern>*.php</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>babcSpring</servlet-name>
-		<url-pattern>/messagebroker/amf</url-pattern>
-	</servlet-mapping>
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>applicationContext-service.xml</param-value>
-	</context-param>
-	<context-param>
-		<param-name>
-			contextConfigLocation </param-name>
-		<param-value>/WEB-INF/applicationContext-service.xml</param-value>
-	</context-param>
-	
+  	
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>index.htm</welcome-file>
+	</welcome-file-list>
 </web-app>

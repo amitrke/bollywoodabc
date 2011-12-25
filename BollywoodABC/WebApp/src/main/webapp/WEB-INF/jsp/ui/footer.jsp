@@ -15,8 +15,7 @@
             <TD WIDTH="78%" HEIGHT="40" VALIGN="bottom" CLASS="whitetxt" STYLE="padding-left:14px; ">Copyright &copy; 2005-2010 BollywoodABC.com. All rights reserved. <BR>
 			Designed & developed by <a href="http://quadnext.appspot.com">QuadNext Technologies</a><br>             
       Reproduction in whole or in part in any form or medium without express written permission is prohibited.</TD>
-            <TD WIDTH="22%" ALIGN="right" VALIGN="bottom" STYLE="padding-right:5px;"><img src="http://code.google.com/appengine/images/appengine-silver-120x30.gif"
-alt="Powered by Google App Engine" /><img alt="Built by Maven" src="http://maven.apache.org/images/logos/maven-feather.png"/></TD>
+            <TD WIDTH="22%" ALIGN="right" VALIGN="bottom" STYLE="padding-right:5px;"></TD>
           </TR>
 
         </TABLE>

@@ -16,7 +16,7 @@
  		<td>${story.id}</td>
  		<td>${story.title}</td>
  		<td>${story.intro}</td>
- 		<td><img src="/dimage/thumb/${story.pictureId}.htm" width="50" height="50"></td>
+ 		<td><img src="/dimage/thumb/${story.pictureId}.jpeg" width="50" height="50"></td>
  	</tr>
 	 </c:forEach>
 </table>
