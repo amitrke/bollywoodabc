@@ -29,6 +29,9 @@ public class CatchAllMailServlet extends AbstractMailServlet {
 			else if (message.getSubject().equalsIgnoreCase("unsubscribe")){
 				mailService.unsubscribeNewsletter(new InternetAddress(message.getFrom()[0].toString()));
 			}
+			else{
+				LOGGER.info("Mail Subject could not be recognized:"+message.toString());
+			}
 		} catch (MessagingException e) {
 			LOGGER.error(e);
 		}

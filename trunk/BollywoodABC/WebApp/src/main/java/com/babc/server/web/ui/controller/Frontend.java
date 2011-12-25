@@ -39,7 +39,6 @@ public class Frontend {
 	private @Autowired StoryService storyService;
 	private @Autowired CategoryService categoryService;
 	private @Autowired TwitterService twitterService;
-	private @Autowired PictureService pictureService;
 	
 	private final int noOfStoriesPerPage = 10;
 	private final int noOfTweetsPerPage = 20;
@@ -78,20 +77,7 @@ public class Frontend {
 	    out.close();
 	}
 	
-	@RequestMapping(value="/home.htm", method = RequestMethod.GET)
-	public ModelAndView displayHomePage(){
-		Map<String, Object> home = new HashMap<String, Object>();
-		home.put("date", new Date());
-		home.put("homePageStories", storyService.get(new Paging(AppConstants.noOfStoriesOnFirstPage, 0)));
-		home.put("twitterTimeline", twitterService.getTimeline(3));
-		home.put("recentPics", pictureService.getAllPictures(new Paging(14, 0)));
-		
-		HtmlPage htmlPage = new HtmlPage("Bollywood News - Wallpapers, Songs, Videos, Movies, Stars", 
-				"Latest Bollywood gossip news. Get the latest celebrity gossip, entertainment gossip, celeb gossip news, new movie trailers, TV, movie reviews from Bollywood", 
-				"Bollywood, News, Hollywood, Wallpapers, Hi Resolution pics", 
-				1, "BollywoodABC", home);
-		return new ModelAndView("ui.homepage", "page", htmlPage);
-	}
+	
 	
 	@RequestMapping(value="/tweets/{pageNo}.htm", method = RequestMethod.GET)
 	public ModelAndView displayTweets(@PathVariable("pageNo") int pageNo){

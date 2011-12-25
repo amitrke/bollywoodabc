@@ -10,6 +10,7 @@ import com.babc.server.dao.ImportDataDao;
 import com.babc.server.dao.PictureDao;
 import com.babc.server.dao.StoryDao;
 import com.babc.server.model.DataImportKey;
+import com.babc.server.model.PageCache;
 import com.babc.server.model.Paging;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
@@ -20,6 +21,7 @@ import com.babc.server.model.vo.CommentVo;
 import com.babc.server.model.vo.StoryVo;
 import com.babc.server.model.vo.TagVo;
 import com.babc.server.model.vo.TweetsVo;
+import com.babc.server.utils.EntityCache;
 
 @Service("storyService")
 public class StoryService {
@@ -29,6 +31,7 @@ public class StoryService {
 	private @Autowired CategoryService categoryService;
 	private @Autowired TagService tagService;
 	private @Autowired ImportDataDao importDataDao;
+	private @Autowired EntityCache entityCache;
 	
 	/**
 	 * Gets the total number of stores in the database.
@@ -40,6 +43,9 @@ public class StoryService {
 	}
 	
 	public StoryEntity add(StoryVo storyVo){
+		
+		entityCache.removeEntities(PageCache.class);
+		
 		if (storyVo.getPicture().getData() != null){ //New image.
 			storyVo.setPicture(pictureDao.save(storyVo.getPicture()));
 		}
