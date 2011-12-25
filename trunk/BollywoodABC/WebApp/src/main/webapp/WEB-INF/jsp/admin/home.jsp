@@ -7,8 +7,8 @@
 </head>
 <body>
 <p align="center">
-	Story [ <A HREF='/admin/addStory.htm'>Add New</A>, <A HREF='/admin/listStory.htm'>List All</A> ]<br>
-	Category [ <A HREF='/admin/category/new.htm'>Add New</A>, <A HREF='/admin/category/list.htm'>List All</A> ]
+	Entity Cache Hits/Calls:<c:out value="${data.entity.hits}"/>/<c:out value="${data.entity.calls}"/>
+	Query Cache Hits/Calls:<c:out value="${data.query.hits}"/>/<c:out value="${data.query.calls}"/>
 </p>
 </body>
 </html>

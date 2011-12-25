@@ -11,7 +11,7 @@
 	 <c:forEach var="picture" items="${galleryModel}">
  	<tr>
  		<td>${picture}</td>
- 		<td><img src="/dimage/thumb/${picture.picId}.htm" width="50" height="50"></td>
+ 		<td><img src="/dimage/thumb/${picture.picId}.jpeg" width="50" height="50"></td>
  		<td>[ <a href="/admin/picture/update/${picture.picId}.htm">Update</a>] [<a href="#">Remove From Gallery</a>] </td>
  	</tr>
 	 </c:forEach>
