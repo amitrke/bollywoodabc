@@ -137,7 +137,6 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 			PreparedQuery p = datastoreService.prepare(query);
 			result = createModels(p.asList(withLimit(limit).offset(offset)));
 			getQueryCache().putQuery(clazz, queryId, params, result);
-			logger.debug("Data Read from DB:"+result.toString());
 		}
 		return result;
 	}
@@ -147,7 +146,6 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 		PreparedQuery p = datastoreService.prepare(query);
 		int limit = p.countEntities() > 0 ? p.countEntities() : 1;
 		List<T> result = createModels(p.asList(withLimit(limit)));
-		logger.debug("Data Read from DB:"+result.toString());
 		return result;
 	}
 	
