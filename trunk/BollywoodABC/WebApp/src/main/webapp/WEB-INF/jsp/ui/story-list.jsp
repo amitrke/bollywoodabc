@@ -17,7 +17,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
 		</tr>
 		<tr>
 			<td width="1"><img src="/dimage/thumb/${story.pictureId}.jpeg" alt="" /></td>
-			<td valign="top" class="whitetxt">${story.intro}</td>
+			<td valign="top" class="whitetxt">${story.createDateAsString} : ${story.intro}</td>
 		</tr>
 		</c:forEach>
   <TR >

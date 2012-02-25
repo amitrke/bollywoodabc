@@ -5,10 +5,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
         <TD WIDTH="190"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
 
           <TR>
-            <TD><A HREF="/photogallery/main.htm"><IMG SRC="/dimage/14001.jpeg" WIDTH="190" HEIGHT="295" BORDER="0"></A></TD>
+            <TD><A HREF="/photogallery/main.htm"><IMG SRC="/dimage/14001.jpeg" WIDTH="214" HEIGHT="305" BORDER="0"></A></TD>
           </TR>
           <TR>
-            <TD HEIGHT="23" BACKGROUND="/images/hrdBG.gif"><A HREF="/photogallery/main.htm"><IlatestnewsHrd.gifMG SRC="/images/babeweekHrd.gif" WIDTH="122" HEIGHT="15" HSPACE="11" BORDER="0"></A></TD>
+            <TD HEIGHT="23" BACKGROUND="/images/hrdBG.gif"><A HREF="/photogallery/main.htm"><IMG SRC="/images/babeweekHrd.gif" WIDTH="122" HEIGHT="15" HSPACE="11" BORDER="0"></A></TD>
           </TR>
           <TR>
             <TD HEIGHT="116" ALIGN="center" BGCOLOR="#434945"><A HREF="/photogallery/main.htm"><IMG SRC="/images/hotgallImmg.jpg" WIDTH="156" HEIGHT="97" BORDER="0" CLASS="whiteBrdImg"></A></TD>
@@ -81,12 +81,12 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
                 <TD WIDTH="10%"><A HREF='/news/${top3item.id}/${top3item.titleUrl}.htm' style="text-decoration:none">
                 	<img width="70" height="70" src="/dimage/thumb/${top3item.pictureId}.jpeg" alt="" style="border-style: none"></A>
                 </TD>
-                <TD VALIGN="top" CLASS="whitetxt"><A HREF='/news/${top3item.id}/${top3item.titleUrl}.htm' CLASS="whitetxt">${top3item.intro}</A></TD>
+                <TD VALIGN="top" CLASS="whitetxt">${top3item.createDateAsString} : <A HREF='/news/${top3item.id}/${top3item.titleUrl}.htm' CLASS="whitetxt">${top3item.intro}</A></TD>
               </TR>
               </c:forEach>
               
 			  <TR>
-                <TD COLSPAN="2" ALIGN="RIGHT" CLASS="yellowtxt"><A HREF="news/latest/1.htm" CLASS="yellowtxt">More Stories>></A></TD>
+                <TD COLSPAN="2" ALIGN="RIGHT" CLASS="yellowtxt"><A HREF="/news/latest/1.htm" CLASS="yellowtxt">More Stories>></A></TD>
               </TR>
               <TR>
                 <TD COLSPAN="2"></TD>
@@ -97,7 +97,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
             <TD VALIGN="top" BGCOLOR="#434945"><TABLE WIDTH="98%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="1">
                   <TR><TD>
                   	<c:forEach var="recentPic" items="${page.data.recentPics}">
-                    	<A href="/photogallery/wallpaper/${recentPic.urlCaption}/${recentPic.id}.htm" style="border-style: none"><img src="/dimage/thumb/${recentPic.id}.jpeg" alt="${recentPic.caption}" /></A>
+                    	<A href="/photogallery/wallpaper/${recentPic.urlCaption}/${recentPic.id}.htm" title="${recentPic.caption}" style="border-style: none"><img src="/dimage/thumb/${recentPic.id}.jpeg" alt="${recentPic.caption}" /></A>
                     </c:forEach></TD>
                   </TR>
             </TABLE></TD>
