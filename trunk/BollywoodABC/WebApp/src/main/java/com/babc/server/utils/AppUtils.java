@@ -1,12 +1,15 @@
 package com.babc.server.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class AppUtils {
 	
-	private static String urlValidPattern = "[^a-zA-z0-9\\.\\s]";
+	private static final String urlValidPattern = "[^a-zA-z0-9\\.\\s]";
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, ''yy");
 	
 	public static List<List<Long>> photoGalleryGrid(List<Long> values, int x){
 		List<List<Long>> returnData = new ArrayList<List<Long>>();
@@ -41,8 +44,12 @@ public class AppUtils {
 		
 	}
 	
-	public static String getKind(Class clazz) {
+	public static String getKind(@SuppressWarnings("rawtypes") Class clazz) {
 		String name = clazz.getName();
 		return name.substring(name.lastIndexOf('.') + 1);
+	}
+	
+	public static String formatDate(Date date){
+		return dateFormat.format(date);
 	}
 }

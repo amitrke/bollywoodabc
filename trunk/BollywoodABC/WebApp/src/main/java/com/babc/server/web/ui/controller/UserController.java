@@ -23,7 +23,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends AbstractBaseController{
 	
 	private @Autowired UserDao userDao;
 	

@@ -26,7 +26,7 @@ import com.babc.server.web.model.HtmlPage;
 
 @Controller
 @RequestMapping("/photogallery")
-public class PhotogalleryController {
+public class PhotogalleryController extends AbstractBaseController{
 	
 	private @Autowired CategoryService categoryService;
 	private @Autowired PictureService pictureService;
