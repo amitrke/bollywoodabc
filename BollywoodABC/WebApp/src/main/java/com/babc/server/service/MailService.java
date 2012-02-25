@@ -25,6 +25,7 @@ import com.babc.server.dao.SubscriptionDao;
 import com.babc.server.dao.UserDao;
 import com.babc.server.model.MailQueueEntity;
 import com.babc.server.model.Paging;
+import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
 import com.babc.server.model.SubscriptionEntity;
 import com.babc.server.model.UserEntity;
@@ -38,6 +39,7 @@ public class MailService {
 	private @Autowired SubscriptionDao subscriptionDao;
 	private @Autowired StoryDao storyDao;
 	private @Autowired TwitterService twitterService;
+	private @Autowired PictureService pictureService;
 	
 	private static transient final Log LOGGER = LogFactory.getLog(MailService.class);
 	
@@ -188,6 +190,13 @@ public class MailService {
 			nl.append("</b> ");
 			nl.append(tweetListVo.getTweet());
 			nl.append("</p>");
+		}
+		
+		nl.append("<p><b>Recent Pics:</b></p>");
+		List<PictureEntity> pictureEntities = pictureService.getAllPictures(new Paging(20, 0));
+		for(PictureEntity recentPic: pictureEntities){
+			nl.append("<A href='http://www.bollywoodabc.com/photogallery/wallpaper/"+recentPic.getUrlCaption()+"/"+recentPic.getId()+".htm' title='"+recentPic.getCaption()+
+					"' style='border-style: none'><img src='http://www.bollywoodabc.com/dimage/thumb/"+recentPic.getId()+".jpeg' alt='"+recentPic.getCaption()+"' /></A> &nbsp;");
 		}
 		
 		nl.append(getMailFooter());

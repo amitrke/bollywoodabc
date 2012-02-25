@@ -31,7 +31,7 @@ import com.babc.server.utils.EntityCache;
 
 @Controller
 @RequestMapping("/feed")
-public class XmlSyndication{
+public class XmlSyndication extends AbstractBaseController{
 	
 	private transient static final Logger LOGGER = Logger.getLogger(XmlSyndication.class.getName());
 	

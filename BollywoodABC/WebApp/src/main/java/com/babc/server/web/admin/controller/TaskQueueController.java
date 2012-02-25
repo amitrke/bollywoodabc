@@ -51,4 +51,12 @@ public class TaskQueueController {
 		queue.add(TaskOptions.Builder.withUrl("/batch/createNewsletter.htm").method(Method.POST));
 		return new ModelAndView("admin.message", "message", "Batch Process Initiated.");
 	}
+	
+	@RequestMapping(value="/clearCache.htm", method = RequestMethod.GET)
+	public ModelAndView clearCache(){
+		Queue queue = QueueFactory.getDefaultQueue();
+		logger.debug("Batch Process to clear cache Initiated.");
+		queue.add(TaskOptions.Builder.withUrl("/batch/clearCache.htm").method(Method.POST));
+		return new ModelAndView("admin.message", "message", "Batch Process Initiated.");
+	}
 }

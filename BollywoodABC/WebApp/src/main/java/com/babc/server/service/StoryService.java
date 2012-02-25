@@ -10,7 +10,7 @@ import com.babc.server.dao.ImportDataDao;
 import com.babc.server.dao.PictureDao;
 import com.babc.server.dao.StoryDao;
 import com.babc.server.model.DataImportKey;
-import com.babc.server.model.PageCache;
+import com.babc.server.model.PageCacheEntity;
 import com.babc.server.model.Paging;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
@@ -44,7 +44,7 @@ public class StoryService {
 	
 	public StoryEntity add(StoryVo storyVo){
 		
-		entityCache.removeEntities(PageCache.class);
+		entityCache.removeEntities(PageCacheEntity.class);
 		
 		if (storyVo.getPicture().getData() != null){ //New image.
 			storyVo.setPicture(pictureDao.save(storyVo.getPicture()));
