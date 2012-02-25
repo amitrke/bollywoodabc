@@ -15,8 +15,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><!DOCTYPE html PUBLIC 
 	<LINK HREF="/style.css" REL="stylesheet" TYPE="text/css">
 </HEAD>
 <BODY>
-	<tiles:insertAttribute name="googleAnalytics"/>
-	
 	<TABLE WIDTH="1000" BORDER="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0" BGCOLOR="#FFFFFF">
 		<TR>
 		  <TD><tiles:insertAttribute name="header"/></TD>
@@ -30,5 +28,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><!DOCTYPE html PUBLIC 
 			<td><tiles:insertAttribute name="footer"/></td>
 		</tr>
 	</TABLE>
+	
+	<tiles:insertAttribute name="googleAnalytics"/>
 </BODY>
 </HTML>
