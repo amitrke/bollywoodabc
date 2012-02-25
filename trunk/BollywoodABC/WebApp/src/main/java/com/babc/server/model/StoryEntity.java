@@ -116,6 +116,10 @@ public class StoryEntity extends BaseEntityImpl implements Serializable {
 		this.categoryId = storyVo.getCategory().getId();
 	}
 	
+	public String getCreateDateAsString(){
+		return AppUtils.formatDate(createDate);
+	}
+	
 	public String getTitleUrl(){
 		return AppUtils.urlFormat(title);
 	}
@@ -127,7 +131,7 @@ public class StoryEntity extends BaseEntityImpl implements Serializable {
 	public Long getId() {
 		return id;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
