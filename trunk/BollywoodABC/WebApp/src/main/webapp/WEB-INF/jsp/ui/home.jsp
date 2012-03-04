@@ -2,7 +2,7 @@
 prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%@taglib 
 uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
       <TR>
-        <TD WIDTH="190"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
+        <TD WIDTH="190" valign="top"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
 
           <TR>
             <TD><A HREF="/photogallery/main.htm"><IMG SRC="/dimage/14001.jpeg" WIDTH="214" HEIGHT="305" BORDER="0"></A></TD>
@@ -59,104 +59,74 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
 
         <TD VALIGN="top"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
           <TR VALIGN="TOP">
-            <TD HEIGHT="458" BACKGROUND="/images/mainBG.gif" STYLE="padding-left:12px; padding-right:12px;"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
+            <TD BACKGROUND="/images/mainBG.gif" STYLE="padding-left:12px; padding-right:12px;"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
               
               <TR>
-                <TD HEIGHT="32" VALIGN="bottom" width="10"><IMG SRC="/images/latestnewsHrd.gif" WIDTH="85" HEIGHT="16" VSPACE="3"></TD>
+                <TD width="160"><h1>Top Stories</h1></TD>
                 <TD HEIGHT="32" ALIGN="right" VALIGN="middle" CLASS="yellowtxt"><g:plusone></g:plusone> &nbsp;
                 <A HREF='/feed/rss.htm' style="text-decoration:none">
                 	<img width="28" height="28" src="/images/feed-icon-28x28.png" alt="RSS Feed" style="border-style: none"></A>
                  </TD>
               </TR>
 
-			 <c:forEach var="top3item" items="${page.data.homePageStories}">
-			
 			  <tr> 
-			  	<td height="1" colspan="2" background="/images/dotHorizontal.gif"></td>
-              </tr>			
-              <TR>
-                <TD HEIGHT="31" COLSPAN="2" CLASS="yellowtxt"><STRONG><A HREF='/news/${top3item.id}/${top3item.titleUrl}.htm' CLASS='yellowtxt'>${top3item.title}</A></STRONG></TD>
-              </TR>
-              <TR>
-                <TD WIDTH="10%"><A HREF='/news/${top3item.id}/${top3item.titleUrl}.htm' style="text-decoration:none">
-                	<img width="70" height="70" src="/dimage/thumb/${top3item.pictureId}.jpeg" alt="" style="border-style: none"></A>
-                </TD>
-                <TD VALIGN="top" CLASS="whitetxt">${top3item.createDateAsString} : <A HREF='/news/${top3item.id}/${top3item.titleUrl}.htm' CLASS="whitetxt">${top3item.intro}</A></TD>
-              </TR>
-              </c:forEach>
-              
+			  	<td height="1" colspan="3">
+			  	<div ID="storyListDiv">
+			  		<c:forEach var="top3item" items="${page.data.homePageStories}">
+			  		<hr>
+			  		<div ID="storyListElement" onClick="window.location='/news/${top3item.id}/${top3item.titleUrl}.htm';">
+                	<img src="data:image/jpeg;base64,${top3item.picture.thumbBase64}" alt="" style="border-style: none;" height="70" width="70">
+                 	<h2><a href="/news/${top3item.id}/${top3item.titleUrl}.htm">${top3item.title}</a></h2>
+                	${top3item.createDateAsString} : ${top3item.intro}
+                	</div>
+                	</c:forEach>
+			  	</div>
+			  	
+			  	</td>
+              </tr>	
 			  <TR>
-                <TD COLSPAN="2" ALIGN="RIGHT" CLASS="yellowtxt"><A HREF="/news/latest/1.htm" CLASS="yellowtxt">More Stories>></A></TD>
+                <TD COLSPAN="2" ALIGN="RIGHT" CLASS="yellowtxt"><A HREF="/news/latest/1.htm" CLASS="yellowtxt">More Stories>></A>
+                <br>
+                </TD>
               </TR>
               <TR>
                 <TD COLSPAN="2"></TD>
-
               </TR></TABLE></TD>
           </TR>
           <TR>
             <TD VALIGN="top" BGCOLOR="#434945"><TABLE WIDTH="98%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="1">
                   <TR><TD>
+                  <div style="width: 595px; height: 137px; overflow: hidden;">
                   	<c:forEach var="recentPic" items="${page.data.recentPics}">
-                    	<A href="/photogallery/wallpaper/${recentPic.urlCaption}/${recentPic.id}.htm" title="${recentPic.caption}" style="border-style: none"><img src="/dimage/thumb/${recentPic.id}.jpeg" alt="${recentPic.caption}" /></A>
-                    </c:forEach></TD>
+                    	<A href="/photogallery/wallpaper/${recentPic.urlCaption}/${recentPic.id}.htm" title="${recentPic.caption}" style="border-style: none">
+                    	<img src="data:image/jpeg;base64,${recentPic.thumbBase64}" alt="${recentPic.caption}" /></A>
+                    </c:forEach>
+                    </div>
+                    </TD>
                   </TR>
             </TABLE></TD>
           </TR>
         </TABLE></TD>
-        <TD WIDTH="190" VALIGN="top" BGCOLOR="#D93E25"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
-          <TR>
-            <TD><A HREF="/photogallery/main.htm"><IMG SRC="/images/showcaseImg.jpg" WIDTH="190" HEIGHT="177" BORDER="0"></A></TD>
-          </TR>
-          <TR>
-
-            <TD HEIGHT="23" ALIGN="right" BACKGROUND="/images/hrdBG.gif"><A HREF="/photogallery/main.htm"><IMG SRC="/images/showcaseBtn.gif" ALT="BollywoodABC Gallery" WIDTH="170" HEIGHT="19" HSPACE="4" BORDER="0"></A></TD>
-          </TR>
-          <TR>
-            <TD BGCOLOR="#434945"><TABLE WIDTH="98%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0">
-              <TR>
-                <TD HEIGHT="28" VALIGN="bottom" CLASS="yellowtxt">&nbsp;<b>Bollywood Tweets</b></TD>
-              </TR>
-              <TR>
-                <TD HEIGHT="2" BACKGROUND="/images/div3.gif"><IMG SRC="/images/spacer.gif"></TD>
-
-              </TR>
-              
-              <TR>
-                <TD HEIGHT="228" VALIGN="top"><TABLE WIDTH="96%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0">
-                  <c:forEach var="tweet" items="${page.data.twitterTimeline}">
-                  <tr>
-                    <td width="15" valign="top"><img src="/images/yellowArrow.gif" width="12" height="7" vspace="4"></td>
-                    <td height="30" CLASS="yellowtxt">${tweet}</td>
-                  </tr>
-                  </c:forEach>
-
-                    <TD WIDTH="15" VALIGN="top"></TD>
-                    <TD HEIGHT="30" ALIGN="RIGHT"><A HREF="/news/tweets/1.htm" CLASS="whitelink">More Tweets>></A></TD>
-                  </TR>
-                </TABLE></TD>
-              </TR>
-            </TABLE></TD>
-          </TR>
-          <TR>
-
-            <TD BACKGROUND="/images/mainBG.gif"><TABLE WIDTH="98%"  border="0" ALIGN="center" CELLPADDING="0" CELLSPACING="0">
-              <TR>
-                <TD HEIGHT="28" VALIGN="bottom" class="yellowtxt"><b>Tag Cloud</b></TD>
-              </TR>
-              <TR>
-                <TD HEIGHT="2" BACKGROUND="/images/div2.gif"><IMG SRC="/images/spacer.gif"></TD>
-              </TR>
-              <TR>
-                <TD VALIGN="top" class="whitetxt">
-                	<A href="/t/575001/Aishwarya-Rai.htm" class="whitetxt">Aishwarya Rai</A> &nbsp; 
-                	<A href="/t/525002/Kareena-Kapoor.htm" class="whitetxt" style="font-size: large;">Kareena Kapoor</A> &nbsp;
-                	<A href="/t/542001/Deepika-Padukone.htm" class="whitetxt" style="font-size: x-large;">Deepika Padukone</A> &nbsp;
-                	<A href="/t/526001/Anushka-Sharma.htm" class="whitetxt" style="font-size: x-small;">Anushka Sharma </A> &nbsp;  
-                </TD>
-              </TR>
-
-            </TABLE></TD>
-          </TR>
-        </TABLE></TD>
+        <TD WIDTH="190" VALIGN="top" BGCOLOR="#D93E25">
+            <div id="homeTweetsDiv">
+        	<h1>Tweets</H1>
+        	<hr>
+        	<div id="homeTweetsContentDiv">
+        	<c:forEach var="tweet" items="${page.data.twitterTimeline}">
+        	<p>${tweet}</p>
+        	</c:forEach>
+        	</div>
+        	<a href="/news/tweets/1.htm" class="whitelink">More Tweets&gt;&gt;</a>
+        </div>
+        
+        <div id="homeTagCloud">
+        	<h1>Tag Cloud</H1>
+        	<hr>
+        	<a href="/t/575001/Aishwarya-Rai.htm" class="whitetxt">Aishwarya Rai</a> &nbsp; 
+        	<a href="/t/525002/Kareena-Kapoor.htm" class="whitetxt" style="font-size: large;">Kareena Kapoor</a> &nbsp;
+        	<a href="/t/542001/Deepika-Padukone.htm" class="whitetxt" style="font-size: x-large;">Deepika Padukone</a> &nbsp;
+        	<a href="/t/526001/Anushka-Sharma.htm" class="whitetxt" style="font-size: x-small;">Anushka Sharma </a> &nbsp; 
+        </div>
+          </TD>
       </TR>
     </TABLE>

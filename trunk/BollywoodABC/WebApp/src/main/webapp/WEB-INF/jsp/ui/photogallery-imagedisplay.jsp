@@ -48,7 +48,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 		<td>
 		<c:forEach var="picture" items="${page.data.tags.relatedPictures}">
 			<A HREF="/photogallery/wallpaper/${picture.urlCaption}/${picture.id}.htm" style="border-style: none"/>
-   			<IMG SRC="<c:out value="/dimage/thumb/${picture.id}.jpeg"/>" HSPACE="5" VSPACE="5" ALIGN="left">
+   			<IMG SRC="data:image/jpeg;base64,${picture.thumbBase64}" HSPACE="5" VSPACE="5" ALIGN="left">
    			</A>
 		</c:forEach>
 		<p>
