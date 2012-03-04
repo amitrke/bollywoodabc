@@ -15,6 +15,9 @@ public enum PageType {
 			pageId = getPageId(url);
 			LOGGER.debug("url="+url+";pageId="+pageId);
 		}
+		else if(this == HOME){
+			pageId = 1L;
+		}
 		String firstDigit = Integer.toString(this.ordinal());
 		String restOfTheDigits = pageId.toString();
 		Long pageCacheId = Long.parseLong(firstDigit+restOfTheDigits);

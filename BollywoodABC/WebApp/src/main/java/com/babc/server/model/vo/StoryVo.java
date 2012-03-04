@@ -73,7 +73,11 @@ public class StoryVo {
 		this.comments = commentVos;
 		this.tags = new TagListVo(tags);
 	}
-
+	
+	public String getCreateDateAsString(){
+		return AppUtils.formatDate(createDate);
+	}
+	
 	public List<TweetsVo> getTweetsVos() {
 		return tweetsVos;
 	}

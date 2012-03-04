@@ -24,6 +24,7 @@ public class CacheFilter extends AbstractFilter {
 	private EntityCache entityCache;
 	private PageCacheDao pageCacheDao;
 	private transient static final Logger LOGGER = Logger.getLogger(CacheFilter.class.getName());
+	private boolean cacheEnabled = true;
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -42,7 +43,7 @@ public class CacheFilter extends AbstractFilter {
 					   System.currentTimeMillis(  ) + AppConstants.BROWSER_CACHE_DEF_EXPIRY);
 			LOGGER.debug("Static headers attacted.");
 		}
-		else if (url.contains("/news/") && !url.contains("/disclaimer.htm") && !url.contains("/jetty.htm")){
+		else if (cacheEnabled && url.contains("/news/") && !url.contains("/disclaimer.htm") && !url.contains("/jetty.htm")){
 			PageType pageType;
 			
 			if (url.contains("/latest/")){
@@ -70,7 +71,7 @@ public class CacheFilter extends AbstractFilter {
 			out.print(pageCacheEntity.getData());
 			return;
 		}
-		else if (url.contains("/photogallery/")){
+		else if (cacheEnabled && url.contains("/photogallery/")){
 			
 			PageType pageType;
 			
@@ -89,7 +90,7 @@ public class CacheFilter extends AbstractFilter {
 			out.print(pageCacheEntity.getData());
 			return;
 		}
-		else if(url.contains("/t/")){
+		else if(cacheEnabled && url.contains("/t/")){
 			PageType pageType = PageType.TAG_DETAIL;
 			LOGGER.debug("PageType identified as "+pageType.name());
 			Long pageCacheId = pageType.getPageCacheId(url);
