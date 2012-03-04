@@ -25,7 +25,7 @@ public class AppConstants {
 	public static final int IMAGE_THUMB_X = 90;
 	public static final int IMAGE_THUMB_Y = 65;
 	
-	public static final int noOfStoriesOnFirstPage = 4;
+	public static final int noOfStoriesOnFirstPage = 5;
 	
 	public static final Long CAT_HOLLYWOOD = 141009L;
 	public static final Long CAT_BOLLYWOOD = 1001L;

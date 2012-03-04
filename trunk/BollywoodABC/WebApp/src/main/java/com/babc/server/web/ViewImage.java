@@ -1,8 +1,6 @@
 package com.babc.server.web;
 
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,13 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.babc.server.AppConstants;
 import com.babc.server.dao.PictureDao;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
-import com.babc.server.utils.CacheStat;
 import com.babc.server.utils.EntityCache;
 import com.babc.server.utils.QueryCache;
 

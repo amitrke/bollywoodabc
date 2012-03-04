@@ -2,6 +2,18 @@
 
 body{margin:0px; background-image:url('images/bodyBG.gif')}
 
+h1 {
+	font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px;  font-weight:normal; color:#FFFFFF; text-decoration:none;
+	margin:0px 1px;
+	text-shadow: 2px 2px 2px #000;
+}
+
+hr
+{
+	border: 1px dotted #00FFFF; border-style: none none dotted;
+	margin:2px 1px;
+}
+
 td {font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#333333; text-decoration:none;}
 
 .input{font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; color:#333333; text-decoration:none;}
@@ -78,4 +90,77 @@ img
 #tagTable a
 {
 	color: #B20000;
+}
+
+#storyListDiv
+{
+	color:#FFFFFF;
+	text-decoration: none;
+}
+
+#storyListElement
+{
+	height: 72px;
+	cursor:pointer;
+}
+
+#storyListElement:hover
+{
+	background-color:FFFFFF;
+}
+
+#storyListDiv hr
+{
+	border: 1px dotted #00FFFF; border-style: none none dotted;
+	margin:5px 1px;
+}
+
+#storyListDiv img
+{
+	display:inline;margin:0px 2px;float:left;
+}
+
+#storyListDiv a
+{
+	text-decoration: none;
+	color:#F9FFCF;
+}
+
+#storyListDiv h2
+{
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:12px; color:#F9FFCF; text-decoration:none;
+	margin:3px 2px;
+}
+
+
+#homeTweetsDiv
+{
+	color:#F9FFCF;
+	background-color: #434945;
+	margin:0px 2px;
+}
+
+#homeTweetsDiv h1
+{
+	font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px;  font-weight:normal; color:#FFFFFF; text-decoration:none;
+	margin:0px 6px 4px 6px;
+	text-shadow: 2px 2px 2px #000;
+}
+
+#homeTweetsContentDiv
+{
+	height:415px;
+	overflow: hidden;
+	margin:2px 2px;
+}
+
+#homeTweetsDiv hr
+{
+	border: 1px dotted #00FFFF; border-style: none none dotted;
+	margin:14px 1px 1px;
+}
+
+#homeTagCloud
+{
+	margin:2px 2px;
 }

@@ -76,8 +76,13 @@ public class StoryService {
 		return storyDao.get(paging);
 	}
 	
-	public List<StoryEntity> getByCategory(Long category, Paging paging){
-		return storyDao.get(category, paging);
+	public List<StoryVo> getByCategory(Long category, Paging paging){
+		List<StoryVo> storyVos = new ArrayList<StoryVo>();
+		List<StoryEntity> storyEntities = storyDao.get(category, paging);
+		for(StoryEntity storyEntity: storyEntities){
+			storyVos.add(entityToVoOnlyImages(storyEntity));
+		}
+		return storyVos;
 	}
 	
 	public List<StoryVo> get(Paging storyPaging, Paging commentPaging){
@@ -85,6 +90,15 @@ public class StoryService {
 		List<StoryEntity> storyEntities = storyDao.get(storyPaging);
 		for(StoryEntity storyEntity: storyEntities){
 			storyVos.add(entityToVo(storyEntity, commentPaging));
+		}
+		return storyVos;
+	}
+	
+	public List<StoryVo> getStoryAndImages(Paging storyPaging){
+		List<StoryVo> storyVos = new ArrayList<StoryVo>();
+		List<StoryEntity> storyEntities = storyDao.get(storyPaging);
+		for(StoryEntity storyEntity: storyEntities){
+			storyVos.add(entityToVoOnlyImages(storyEntity));
 		}
 		return storyVos;
 	}
@@ -112,4 +126,10 @@ public class StoryService {
 		return storyVo;
 	}
 	
+	private StoryVo entityToVoOnlyImages(StoryEntity storyEntity){
+		UserEntity userEntity = new UserEntity("Amit Kumar", "amitrke@gmail.com");
+		PictureEntity pictureEntity = pictureDao.getById(storyEntity.getPictureId());
+		StoryVo storyVo = new StoryVo(storyEntity,null, userEntity, pictureEntity, null, null);
+		return storyVo;
+	}
 }

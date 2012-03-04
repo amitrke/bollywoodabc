@@ -56,9 +56,9 @@ public class Frontend extends AbstractBaseController{
 	public ModelAndView displayHomePage(){
 		Map<String, Object> home = new HashMap<String, Object>();
 		home.put("date", new Date());
-		home.put("homePageStories", storyService.get(new Paging(AppConstants.noOfStoriesOnFirstPage, 0)));
-		home.put("twitterTimeline", twitterService.getTimeline(2));
-		home.put("recentPics", pictureService.getAllPictures(new Paging(14, 0)));
+		home.put("homePageStories", storyService.getStoryAndImages(new Paging(AppConstants.noOfStoriesOnFirstPage, 0)));
+		home.put("twitterTimeline", twitterService.getTimeline(10));
+		home.put("recentPics", pictureService.getAllPictures(new Paging(22, 0)));
 		
 		HtmlPage htmlPage = new HtmlPage("Bollywood News - Wallpapers, Songs, Videos, Movies, Stars", 
 				"Latest Bollywood gossip news. Get the latest celebrity gossip, entertainment gossip, celeb gossip news, new movie trailers, TV, movie reviews from Bollywood", 
@@ -123,7 +123,7 @@ public class Frontend extends AbstractBaseController{
 		uiPaging.setStoryUiPaging(pageNo, noOfStoriesPerPage, storyCount);
 		home.put("paging", uiPaging);
 		Paging paging = new Paging(noOfStoriesPerPage, (((pageNo-1)*noOfStoriesPerPage))+AppConstants.noOfStoriesOnFirstPage);
-		home.put("storyList", storyService.get(paging));
+		home.put("storyList", storyService.getStoryAndImages(paging));
 		return new ModelAndView("ui.story.list", "page", home);
 	}
 	

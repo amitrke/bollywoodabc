@@ -2,51 +2,38 @@ package com.babc.server.model;
 
 import static com.babc.server.utils.EntityUtil.getBlobProperty;
 import static com.babc.server.utils.EntityUtil.getDateProperty;
-import static com.babc.server.utils.EntityUtil.getStringProperty;
 import static com.babc.server.utils.EntityUtil.getIntegerProperty;
+import static com.babc.server.utils.EntityUtil.getStringProperty;
+import static com.babc.server.utils.EntityUtil.setProperty;
 
 import java.util.Date;
-
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-
-import static com.babc.server.utils.EntityUtil.setProperty;
 
 import com.babc.server.AppConstants;
 import com.babc.server.utils.AppUtils;
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.repackaged.org.apache.commons.codec.binary.Base64;
 
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class PictureEntity extends BaseEntityImpl{
 	
 	private static final long serialVersionUID = 1L;
 
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long id;
 	
-	@Persistent
 	private String filename;
 	
-	@Persistent
 	private String caption;
 	
-	@Persistent
 	private Blob data;
 	
-	@Persistent
 	private Blob thumbData;
 	
-	@Persistent
 	private int status;
 	
-	@Persistent
 	private Date createDate;
+	
+	private Base64 base64 = new Base64();
 	
 	public PictureEntity() {}
 
@@ -60,6 +47,14 @@ public class PictureEntity extends BaseEntityImpl{
 		this.data = data;
 		this.status = status;
 		this.createDate = new Date();
+	}
+	
+	public String getBase64(){
+		return base64.encodeToString(getData().getBytes());
+	}
+	
+	public String getThumbBase64(){
+		return base64.encodeToString(getThumbData().getBytes());
 	}
 
 	public void setId(Long id) {
