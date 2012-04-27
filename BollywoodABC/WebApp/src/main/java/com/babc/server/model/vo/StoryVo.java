@@ -33,8 +33,6 @@ public class StoryVo {
 	
 	private String video;
 	
-	private List<CommentVo> comments;
-	
 	private TagListVo tags;
 	
 	private List<TweetsVo> tweetsVos;
@@ -57,7 +55,7 @@ public class StoryVo {
 	
 	
 	public StoryVo(StoryEntity storyEntity, CategoryVo categoryVo, UserEntity userEntity,
-			PictureEntity pictureEntity, List<CommentVo> commentVos, List<TagVo> tags) {
+			PictureEntity pictureEntity, List<TagVo> tags) {
 		super();
 		this.id = storyEntity.getId();
 		this.title = storyEntity.getTitle();
@@ -70,7 +68,6 @@ public class StoryVo {
 		this.status = storyEntity.getStatus();
 		this.picture = pictureEntity;
 		this.video = storyEntity.getVideo();
-		this.comments = commentVos;
 		this.tags = new TagListVo(tags);
 	}
 	
@@ -100,10 +97,6 @@ public class StoryVo {
 		return body.toString().replace("\n","<br>");
 	}
 	
-	public List<CommentVo> getComments() {
-		return comments;
-	}
-
 	public Long getId() {
 		return id;
 	}

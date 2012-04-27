@@ -35,6 +35,10 @@ public class CategoryService {
 		return entityToVo(categoryEntity);
 	}
 	
+	public CategoryEntity getEntity(Long id){
+		return categoryDao.getById(id);
+	}
+	
 	public List<CategoryVo> get(Paging paging){
 		List<CategoryEntity> categoryEntities = categoryDao.get(paging);
 		return entityToVo(categoryEntities);

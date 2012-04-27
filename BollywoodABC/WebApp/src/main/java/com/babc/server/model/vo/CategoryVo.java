@@ -15,8 +15,6 @@ public class CategoryVo {
 	
 	private PictureEntity picture;
 	
-	private int status;
-	
 	public CategoryVo(Long id) {
 		this.id = id;
 	}
@@ -28,7 +26,6 @@ public class CategoryVo {
 		this.description = description;
 		this.type = type;
 		this.picture = picture;
-		this.status = status;
 	}
 
 	public CategoryVo(CategoryEntity categoryEntity, PictureEntity picture) {
@@ -38,7 +35,6 @@ public class CategoryVo {
 		this.description = categoryEntity.getDescription();
 		this.type = categoryEntity.getType();
 		this.picture = picture;
-		this.status = categoryEntity.getStatus();
 	}
 	
 	public String getTitleUrl(){
@@ -65,10 +61,6 @@ public class CategoryVo {
 		return picture;
 	}
 
-	public int getStatus() {
-		return status;
-	}
-
 	
 	public void setPicture(PictureEntity picture) {
 		this.picture = picture;
@@ -83,7 +75,6 @@ public class CategoryVo {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
-		result = prime * result + status;
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -117,8 +108,6 @@ public class CategoryVo {
 				return false;
 		} else if (!picture.equals(other.picture))
 			return false;
-		if (status != other.status)
-			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;
@@ -146,8 +135,6 @@ public class CategoryVo {
 			builder.append(picture);
 			builder.append(", ");
 		}
-		builder.append("status=");
-		builder.append(status);
 		builder.append(", ");
 		if (type != null) {
 			builder.append("type=");

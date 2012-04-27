@@ -1,5 +1,7 @@
 package com.babc.server.model.vo;
 
+import java.util.Date;
+
 import com.babc.server.utils.AppUtils;
 
 public class TweetListVo {
@@ -8,6 +10,7 @@ public class TweetListVo {
 	private Long tagId;
 	private String tweet;
 	private String tweetDesc;
+	private Date createdAt;
 
 	/**
 	 * @param name
@@ -17,15 +20,30 @@ public class TweetListVo {
 	 * @param tweetDesc
 	 */
 	public TweetListVo(String name, Long facePic, Long tagId, String tweet,
-			String tweetDesc) {
+			String tweetDesc, Date createdAt) {
 		super();
 		this.name = name;
 		this.facePic = facePic;
 		this.tagId = tagId;
 		this.tweet = tweet;
 		this.tweetDesc = tweetDesc;
+		this.createdAt = createdAt;
 	}
 	
+	public String getFormattedCreatedAt(){
+		return AppUtils.formatDate(createdAt);
+	}
+	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+
 	public String getTitleUrl(){
 		return AppUtils.urlFormat(name);
 	}

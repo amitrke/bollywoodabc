@@ -76,12 +76,12 @@ public class TwitterService {
 				tagService.setFacePic(tagVo);
 				TweetListVo tweetListVo = new TweetListVo(twitterUserDetailEntity.getName(),
 						tagVo.getFacePic(), tagId, tweetEntity.getText(),
-						twitterUserDetailEntity.getDescription());
+						twitterUserDetailEntity.getDescription(), tweetEntity.getCreatedAt());
 				tweetListVos.add(tweetListVo);
 			}
 			else{
 				TweetListVo tweetListVo = new TweetListVo(twitterUserDetailEntity.getName(), null, null, 
-						tweetEntity.getText(), twitterUserDetailEntity.getDescription());
+						tweetEntity.getText(), twitterUserDetailEntity.getDescription(), tweetEntity.getCreatedAt());
 				tweetListVos.add(tweetListVo);
 			}
 		}

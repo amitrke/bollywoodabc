@@ -74,7 +74,6 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 		model.save(entity);
 		DatastoreServiceFactory.getDatastoreService().put(entity);
 		model.setKey(entity.getKey());
-		logger.debug("Object persisted: "+model.toString());
 		return model;
 	}
 	
@@ -171,6 +170,7 @@ public abstract class AbstractBaseDao<T extends BaseEntity> {
 		for (Entity entity : list) {
 			result.add(createModel(entity));
 		}
+		logger.debug("DB Call, Create models:"+result);
 		return result;
 	}
 	
