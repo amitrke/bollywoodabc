@@ -5,7 +5,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
         <TD WIDTH="190" valign="top"><TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
 
           <TR>
-            <TD><A HREF="/photogallery/main.htm"><IMG SRC="/dimage/14001.jpeg" WIDTH="214" HEIGHT="305" BORDER="0"></A></TD>
+            <TD><A HREF="/photogallery/main.htm"><img src="data:image/jpeg;base64,${page.data.mainPic.base64}" alt="${page.data.mainPic.caption}" WIDTH="214" HEIGHT="305" BORDER="0"/></A></TD>
           </TR>
           <TR>
             <TD HEIGHT="23" BACKGROUND="/images/hrdBG.gif"><A HREF="/photogallery/main.htm"><IMG SRC="/images/babeweekHrd.gif" WIDTH="122" HEIGHT="15" HSPACE="11" BORDER="0"></A></TD>
