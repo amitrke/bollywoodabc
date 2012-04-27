@@ -41,7 +41,7 @@ public class AppConstants {
 	 * One Week expiry
 	 */
 	public static final long BROWSER_CACHE_DEF_EXPIRY = 7*BROWSER_CACHE_EXPIRY_ONE_DAY;
-	public static final long PAGE_DB_CACHE_DEF_EXPIRY = 7*BROWSER_CACHE_EXPIRY_ONE_DAY;
+	public static final long PAGE_DB_CACHE_DEF_EXPIRY = 30*BROWSER_CACHE_EXPIRY_ONE_DAY;
 		
 	public static final int MAIL_Q_STATUS_INQUEUE = 1;
 	public static final int MAIL_Q_STATUS_DELIVERED = 2;
@@ -51,4 +51,9 @@ public class AppConstants {
 	
 	public static final int SUBSCRIPTION_WEEKLY_NEWSLETTER = 1;
 	public static final int SUBSCRIPTION_WEEKLY_WALLPAPERS = 2;
+	
+	public static final Long HOME_PAGE_MAIN_PIC = 14001L;
+	
+	public static final Long HOME_PAGE_PAGECACHE_ID = 1L;
+	
 }

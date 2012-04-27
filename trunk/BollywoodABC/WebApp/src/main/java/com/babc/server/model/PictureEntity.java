@@ -8,12 +8,13 @@ import static com.babc.server.utils.EntityUtil.setProperty;
 
 import java.util.Date;
 
+import org.apache.commons.codec.binary.Base64;
+
 import com.babc.server.AppConstants;
 import com.babc.server.utils.AppUtils;
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.repackaged.org.apache.commons.codec.binary.Base64;
 
 public class PictureEntity extends BaseEntityImpl{
 	
@@ -33,7 +34,7 @@ public class PictureEntity extends BaseEntityImpl{
 	
 	private Date createDate;
 	
-	private Base64 base64 = new Base64();
+	private Base64 base64  = new Base64();
 	
 	public PictureEntity() {}
 
@@ -50,11 +51,11 @@ public class PictureEntity extends BaseEntityImpl{
 	}
 	
 	public String getBase64(){
-		return base64.encodeToString(getData().getBytes());
+		return new String(base64.encode(getData().getBytes()));
 	}
 	
 	public String getThumbBase64(){
-		return base64.encodeToString(getThumbData().getBytes());
+		return new String(base64.encode(getThumbData().getBytes()));
 	}
 
 	public void setId(Long id) {

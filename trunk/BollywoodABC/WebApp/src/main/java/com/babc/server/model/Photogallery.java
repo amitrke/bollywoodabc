@@ -4,35 +4,22 @@ import static com.babc.server.utils.EntityUtil.getIntegerProperty;
 import static com.babc.server.utils.EntityUtil.getLongProperty;
 import static com.babc.server.utils.EntityUtil.setProperty;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-
 import com.babc.server.AppConstants;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Photogallery extends BaseEntityImpl{
 	
 	private static final long serialVersionUID = 1L;
 
-	@PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Long id;
 	
-	@Persistent
 	private Long categoryId;
 	
-	@Persistent
 	private Long picId;
 	
-	@Persistent
 	private int hits;
 	
-	@Persistent
 	private int status;
 
 	public Photogallery() {

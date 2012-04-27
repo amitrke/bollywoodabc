@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.babc.server.AppConstants;
 import com.babc.server.dao.CategoryDao;
+import com.babc.server.dao.PageCacheDao;
 import com.babc.server.dao.PictureDao;
 import com.babc.server.dao.StoryDao;
 import com.babc.server.dao.TagCrossRefDao;
 import com.babc.server.dao.TagDao;
 import com.babc.server.model.CategoryEntity;
+import com.babc.server.model.PageType;
 import com.babc.server.model.Paging;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
@@ -32,6 +34,7 @@ public class TagService {
 	private @Autowired StoryDao storyDao;
 	private @Autowired PictureDao pictureDao;
 	private @Autowired TwitterService twitterService;
+	private @Autowired PageCacheDao pageCacheDao;
 	
 	/**
 	 * Get tags
@@ -74,6 +77,14 @@ public class TagService {
 				crossRefEntity.getEntityId(), crossRefEntity.getEntityType());
 		TagCrossRefEntity refEntity;
 		if (existingRecs!=null && existingRecs.size()<1){
+			
+			//Remove related cache
+			Long pageId = crossRefEntity.getTagId();
+			String mostSigDigits = Integer.toString(PageType.TAG_DETAIL.ordinal()*10);
+			String restOfTheDigits = pageId.toString();
+			Long pageCacheId = Long.parseLong(mostSigDigits+restOfTheDigits);
+			pageCacheDao.remove(pageCacheId);
+			
 			refEntity = tagCrossRefDao.save(crossRefEntity);
 		}
 		else{
@@ -213,7 +224,7 @@ public class TagService {
 			if (tag.getFacePic()!=null && crossRefEntity.getEntityId().equals(tag.getFacePic())){
 				continue;
 			}
-			if (pictureEntities.size() >= 10){
+			if (pictureEntities.size() >= 15){
 				break;
 			}
 			pictureEntities.add(pictureDao.getById(crossRefEntity.getEntityId()));

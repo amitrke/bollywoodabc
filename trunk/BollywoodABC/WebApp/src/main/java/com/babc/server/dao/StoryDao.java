@@ -93,8 +93,9 @@ public class StoryDao extends AbstractBaseDao<StoryEntity> {
 	 * @return
 	 */
 	private Integer getCountFromDatabase(Long category){
-		List<StoryEntity> storyEntities = get(category, new Paging(Integer.MAX_VALUE,0));
-		return storyEntities.size();
+		return 20;
+//		List<StoryEntity> storyEntities = get(category, new Paging(Integer.MAX_VALUE,0));
+//		return storyEntities.size();
 	}	
 	
 	public DataImportKey addDataImportKey(DataImportKey dataImportKey){
@@ -124,6 +125,14 @@ public class StoryDao extends AbstractBaseDao<StoryEntity> {
 		q.addFilter("createDate",FilterOperator.GREATER_THAN_OR_EQUAL, startDate);
 		q.addFilter("createDate",FilterOperator.LESS_THAN_OR_EQUAL, endDate);
 		List<StoryEntity> result = select(q, "getStoriesByDateRange", params(startDate, endDate), AppConstants.DATA_DEFAULT_LIMIT, 0);
+		return result;
+	}
+	
+	public List<StoryEntity> getAll(Date startDate, Date endDate) {
+		Query q = newQuery();
+		q.addFilter("createDate",FilterOperator.GREATER_THAN_OR_EQUAL, startDate);
+		q.addFilter("createDate",FilterOperator.LESS_THAN_OR_EQUAL, endDate);
+		List<StoryEntity> result = select(q, "getStoriesByDateRange", params(startDate, endDate), Integer.MAX_VALUE, 0);
 		return result;
 	}
 	

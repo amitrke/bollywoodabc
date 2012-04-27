@@ -1,17 +1,9 @@
 package com.babc.server.model;
 
 import static com.babc.server.utils.EntityUtil.getLongProperty;
-import static com.babc.server.utils.EntityUtil.getIntegerProperty;
 import static com.babc.server.utils.EntityUtil.getStringProperty;
 import static com.babc.server.utils.EntityUtil.setProperty;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-
-import com.babc.server.AppConstants;
 import com.babc.server.model.vo.CategoryVo;
 import com.babc.server.utils.AppUtils;
 import com.google.appengine.api.datastore.Entity;
@@ -22,39 +14,27 @@ import com.google.appengine.api.datastore.Key;
  * @author Amit_K06
  *
  */
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class CategoryEntity extends BaseEntityImpl {
 	
 	private static final long serialVersionUID = 1L;
 
-	@PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Long id;
 	
-	@Persistent
 	private String name;
 	
-	@Persistent
 	private String description;
 	
-	@Persistent
 	private String type;
 	
-	@Persistent
 	private Long picId;
 	
-	@Persistent
-	private int status;
-
 	public CategoryEntity() {}
 
-	public CategoryEntity(String name, String description, String type, Long picId,
-			char status) {
+	public CategoryEntity(String name, String description, String type, Long picId) {
 		this.name = name;
 		this.description = description;
 		this.type = type;
 		this.picId = picId;
-		this.status = status;
 	}
 	
 	public CategoryEntity(CategoryEntity categoryEntity) {
@@ -62,7 +42,6 @@ public class CategoryEntity extends BaseEntityImpl {
 		this.description = categoryEntity.getDescription();
 		this.type = categoryEntity.getType();
 		this.picId = categoryEntity.getId();
-		this.status = categoryEntity.getStatus();
 	}
 	
 	@Override
@@ -77,7 +56,6 @@ public class CategoryEntity extends BaseEntityImpl {
 		this.description = categoryVo.getDescription();
 		this.type = categoryVo.getType();
 		this.picId = categoryVo.getPicture().getId();
-		this.status = categoryVo.getStatus();
 	}
 	
 	@Override
@@ -87,7 +65,6 @@ public class CategoryEntity extends BaseEntityImpl {
 		setProperty(entity, "name", name, false);
 		setProperty(entity, "description", description, false);
 		setProperty(entity, "type", type, true);
-		setProperty(entity, "status", status, true);
 	}
 
 	@Override
@@ -97,7 +74,6 @@ public class CategoryEntity extends BaseEntityImpl {
 		name = getStringProperty(entity, "name");
 		description = getStringProperty(entity, "description");
 		type = getStringProperty(entity, "type");
-		status = getIntegerProperty(entity, "status", AppConstants.ENTITY_STATUS_ENABLED);
 		picId = getLongProperty(entity, "picId");
 		
 	}
@@ -120,10 +96,6 @@ public class CategoryEntity extends BaseEntityImpl {
 
 	public Long getPicId() {
 		return picId;
-	}
-
-	public int getStatus() {
-		return status;
 	}
 	
 	public String getGalleryUrl(){
@@ -179,11 +151,6 @@ public class CategoryEntity extends BaseEntityImpl {
 		if (name != null) {
 			builder.append("name=");
 			builder.append(name);
-			builder.append(", ");
-		}
-		if (status != ' ') {
-			builder.append("status=");
-			builder.append(status);
 			builder.append(", ");
 		}
 		if (type != null) {
