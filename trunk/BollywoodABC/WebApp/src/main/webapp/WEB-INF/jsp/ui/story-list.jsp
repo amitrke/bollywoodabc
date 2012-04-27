@@ -5,8 +5,14 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
            <TD  VALIGN="top" BACKGROUND="/images/mainBG.gif" STYLE="padding-left:12px; padding-right:12px;">
            
            <div id="storyListDiv">
-	  <h1>Top Stories</h1>
-	  <g:plusone></g:plusone>
+      <div>
+           <div style="width: 100px;float: left;clear: none;">
+	  			<h1>Top Stories</h1>
+	  		</div>
+	  		<div align="right">
+	  			<g:plusone></g:plusone>
+	  		</div>
+	  	</div>
 	  
 	  <c:forEach var="story" items="${page.storyList}">
 	  	<hr>

@@ -10,9 +10,9 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE WIDTH="100%"  b
         		<TABLE WIDTH="100%"  border="0" CELLSPACING="0" CELLPADDING="0">
             		<TR>
               			<TD  VALIGN="top" bgcolor='<tiles:insertAttribute name="backgroundColor"/>' STYLE="padding-left:12px; padding-right:12px;">
-              				<div id='<tiles:insertAttribute name="contentStyle"/>'>
+              				
               				<tiles:insertAttribute name="content" />
-              				</div>
+              				
               			</TD>
             		</TR>
         		</TABLE>

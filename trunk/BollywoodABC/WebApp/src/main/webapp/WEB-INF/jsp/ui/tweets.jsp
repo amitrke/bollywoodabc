@@ -29,7 +29,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %><TABLE id="tweetList" 
                   	</c:if>
                   	<c:out value="${tweet.name}"/>
                   	</td>
-                  	<td><c:out value="${tweet.tweet}"/></td>
+                  	<td>${tweet.formattedCreatedAt} : <c:out value="${tweet.tweet}"/></td>
                   </tr>
                   </c:forEach>
                   </table>
