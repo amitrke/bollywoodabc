@@ -8,7 +8,7 @@
   <cron>
     <url>/mq/downloadTwitterTimeline.htm</url>
     <description>Download Twitter timeline to DB</description>
-    <schedule>every 2 hours from 9:30 to 18:25</schedule>
+    <schedule>every 4 hours from 9:30 to 18:25</schedule>
   </cron>
   <cron>
     <url>/mq/sessionCleanup.htm</url>

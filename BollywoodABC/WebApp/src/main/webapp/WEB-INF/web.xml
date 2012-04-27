@@ -12,6 +12,10 @@
 			<param-name>excludePatterns</param-name>
 			<param-value>/admin/*</param-value>
 	    </init-param>
+	    <init-param>
+			<param-name>excludePatterns</param-name>
+			<param-value>/appstats/*</param-value>
+	    </init-param>
         <description>
             Server Side compression filter.
         </description>
@@ -21,6 +25,7 @@
         <filter-name>ServerSideCache</filter-name>
         <url-pattern>*.htm</url-pattern>
     </filter-mapping>
+    <!-- 
     <filter-mapping>
         <filter-name>ServerSideCache</filter-name>
         <url-pattern>*.gif</url-pattern>
@@ -33,9 +38,29 @@
         <filter-name>ServerSideCache</filter-name>
         <url-pattern>*.js</url-pattern>
     </filter-mapping>
-	
+	 -->
 	<!-- Servlets -->
 	
+	<!-- Appstats -->
+	<servlet>
+        <servlet-name>appstats</servlet-name>
+        <servlet-class>com.google.appengine.tools.appstats.AppstatsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>appstats</servlet-name>
+        <url-pattern>/appstats/*</url-pattern>
+    </servlet-mapping>
+
+    <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/appstats/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
 	<!-- GAE Data Export - Start -->
 	<servlet>
       <servlet-name>remoteapi</servlet-name>
