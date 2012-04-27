@@ -2,11 +2,15 @@ package com.babc.server.web.ui.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.babc.server.AppConstants;
+import com.babc.server.model.CategoryEntity;
 import com.babc.server.model.Paging;
+import com.babc.server.model.StoryEntity;
 import com.babc.server.model.vo.StoryVo;
 import com.babc.server.service.CategoryService;
 import com.babc.server.service.PictureService;
@@ -59,7 +65,7 @@ public class Frontend extends AbstractBaseController{
 		home.put("homePageStories", storyService.getStoryAndImages(new Paging(AppConstants.noOfStoriesOnFirstPage, 0)));
 		home.put("twitterTimeline", twitterService.getTimeline(10));
 		home.put("recentPics", pictureService.getAllPictures(new Paging(22, 0)));
-		
+		home.put("mainPic", pictureService.getPicture(AppConstants.HOME_PAGE_MAIN_PIC));
 		HtmlPage htmlPage = new HtmlPage("Bollywood News - Wallpapers, Songs, Videos, Movies, Stars", 
 				"Latest Bollywood gossip news. Get the latest celebrity gossip, entertainment gossip, celeb gossip news, new movie trailers, TV, movie reviews from Bollywood", 
 				"Bollywood, News, Hollywood, Wallpapers, Hi Resolution pics", 
@@ -96,15 +102,18 @@ public class Frontend extends AbstractBaseController{
 	
 	
 	@RequestMapping(value="/tweets/{pageNo}.htm", method = RequestMethod.GET)
-	public ModelAndView displayTweets(@PathVariable("pageNo") int pageNo){
-		
-		Integer tweetCount = twitterService.getTweetList(new Paging(Integer.MAX_VALUE, 0)).size();
+	public ModelAndView displayTweets(@PathVariable("pageNo") int pageNo, HttpServletResponse response){
+		if (pageNo > 2){
+			response.setHeader("Location", "/news/archive.htm");
+			response.setStatus(301);
+			return null;
+		}
+		Integer tweetCount = 40;//twitterService.getTweetList(new Paging(Integer.MAX_VALUE, 0)).size();
 		Map<String, Object> home = new HashMap<String, Object>();
 		UiPaging uiPaging = new UiPaging();
 		uiPaging.setTweetsUiPaging(pageNo, noOfTweetsPerPage, tweetCount);
 		home.put("paging", uiPaging);
 		Paging paging = new Paging(noOfTweetsPerPage, ((pageNo-1)*noOfTweetsPerPage));
-		home.put("storyList", storyService.getByCategory(AppConstants.CAT_HOLLYWOOD, paging));
 		home.put("date", new Date());
 		home.put("tweets", twitterService.getTweetList(paging));
 		HtmlPage htmlPage = new HtmlPage("Bollywood Tweets", 
@@ -116,8 +125,13 @@ public class Frontend extends AbstractBaseController{
 	
 	
 	@RequestMapping(value="/latest/{pageNo}.htm", method = RequestMethod.GET)
-	public ModelAndView listStories(@PathVariable("pageNo") int pageNo){
-		Integer storyCount = storyService.get(new Paging(Integer.MAX_VALUE, 0)).size();
+	public ModelAndView listStories(@PathVariable("pageNo") int pageNo, HttpServletResponse response){
+		if (pageNo > 2){
+			response.setHeader("Location", "/news/archive.htm");
+			response.setStatus(301);
+			return null;
+		}
+		Integer storyCount = 20;//storyService.get(new Paging(Integer.MAX_VALUE, 0)).size();
 		Map<String, Object> home = new HashMap<String, Object>();
 		UiPaging uiPaging = new UiPaging();
 		uiPaging.setStoryUiPaging(pageNo, noOfStoriesPerPage, storyCount);
@@ -128,9 +142,13 @@ public class Frontend extends AbstractBaseController{
 	}
 	
 	@RequestMapping(value="/hollywood/{pageNo}.htm", method = RequestMethod.GET)
-	public ModelAndView listHollywoodStories(@PathVariable("pageNo") int pageNo){
-		Integer storyCount = storyService.getByCategory(AppConstants.CAT_HOLLYWOOD, 
-				new Paging(Integer.MAX_VALUE, 0)).size();
+	public ModelAndView listHollywoodStories(@PathVariable("pageNo") int pageNo, HttpServletResponse response){
+		if (pageNo > 2){
+			response.setHeader("Location", "/news/archive.htm");
+			response.setStatus(301);
+			return null;
+		}
+		Integer storyCount = 20;//storyService.getByCategory(AppConstants.CAT_HOLLYWOOD, new Paging(Integer.MAX_VALUE, 0)).size();
 		Map<String, Object> home = new HashMap<String, Object>();
 		UiPaging uiPaging = new UiPaging();
 		uiPaging.setStoryUiPaging(pageNo, noOfStoriesPerPage, storyCount);
@@ -141,9 +159,13 @@ public class Frontend extends AbstractBaseController{
 	}
 	
 	@RequestMapping(value="/bollywood/{pageNo}.htm", method = RequestMethod.GET)
-	public ModelAndView listBollywoodStories(@PathVariable("pageNo") int pageNo){
-		Integer storyCount =storyService.getByCategory(AppConstants.CAT_BOLLYWOOD, 
-				new Paging(Integer.MAX_VALUE, 0)).size();
+	public ModelAndView listBollywoodStories(@PathVariable("pageNo") int pageNo, HttpServletResponse response){
+		if (pageNo > 2){
+			response.setHeader("Location", "/news/archive.htm");
+			response.setStatus(301);
+			return null;
+		}
+		Integer storyCount = 20;//storyService.getByCategory(AppConstants.CAT_BOLLYWOOD, new Paging(Integer.MAX_VALUE, 0)).size();
 		Map<String, Object> home = new HashMap<String, Object>();
 		UiPaging uiPaging = new UiPaging();
 		uiPaging.setStoryUiPaging(pageNo, noOfStoriesPerPage, storyCount);
@@ -151,6 +173,37 @@ public class Frontend extends AbstractBaseController{
 		Paging paging = new Paging(noOfStoriesPerPage, (((pageNo-1)*noOfStoriesPerPage))+AppConstants.noOfStoriesOnFirstPage);
 		home.put("storyList", storyService.getByCategory(AppConstants.CAT_BOLLYWOOD, paging));
 		return new ModelAndView("ui.story.list", "page", home);
+	}
+	
+	@RequestMapping(value="/archive-{quarter}-{year}.htm", method = RequestMethod.GET)
+	public ModelAndView archive(@PathVariable("quarter") String quarter,
+			@PathVariable("year") String year){
+		
+		DateRange dateRange = quarterToDateRange(quarter, year);
+		
+		List<StoryEntity> storyEntities = storyService.getLite(dateRange.startDate, dateRange.endDate);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMM yy");
+		
+		Map<String, Object> home = new HashMap<String, Object>();
+		home.put("storyList", storyEntities);
+		home.put("range", dateFormat.format(dateRange.startDate)+" to "+dateFormat.format(dateRange.endDate));
+		return new ModelAndView("ui.archive.story.detail", "page", home);
+	}
+	
+	@RequestMapping(value="/archive.htm", method = RequestMethod.GET)
+	public ModelAndView archiveHome(){
+		int startYear = 2006;
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		
+		List<Integer> years = new ArrayList<Integer>();
+		for (int i=startYear; i<= currentYear; i++){
+			years.add(i);
+		}
+				
+		Map<String, Object> home = new HashMap<String, Object>();
+		home.put("years", years);
+		return new ModelAndView("ui.archive.story.home", "page", home);
 	}
 	
 	private void authCheck(HttpServletRequest request, HttpServletResponse response){
@@ -163,5 +216,37 @@ public class Frontend extends AbstractBaseController{
 			response.setHeader("Location", userService.createLoginURL(thisURL));
 			response.setStatus(301);
 		}
+	}
+	
+	
+	private DateRange quarterToDateRange(String quarter, String year){
+		Calendar calendar = Calendar.getInstance();
+		
+		if (quarter.equals("Q1")){
+			return setDateRange(calendar, Integer.parseInt(year), Calendar.JANUARY, Calendar.MARCH);
+		}
+		else if (quarter.equals("Q2")){
+			return setDateRange(calendar, Integer.parseInt(year), Calendar.APRIL, Calendar.JUNE);
+		}
+		else if (quarter.equals("Q3")){
+			return setDateRange(calendar, Integer.parseInt(year), Calendar.JULY, Calendar.SEPTEMBER);
+		}
+		else {
+			return setDateRange(calendar, Integer.parseInt(year), Calendar.OCTOBER, Calendar.DECEMBER);
+		}
+	}
+	
+	private DateRange setDateRange(Calendar calendar, int year, int startMonth, int endMonth){
+		DateRange dateRange = new DateRange();
+		calendar.set(year, startMonth, 1, 00, 00);
+		dateRange.startDate = new Date(calendar.getTimeInMillis());
+		calendar.set(year, endMonth, 31, 23, 59);
+		dateRange.endDate = new Date(calendar.getTimeInMillis());
+		return dateRange;
+	}
+	
+	class DateRange{
+		Date startDate;
+		Date endDate;
 	}
 }
