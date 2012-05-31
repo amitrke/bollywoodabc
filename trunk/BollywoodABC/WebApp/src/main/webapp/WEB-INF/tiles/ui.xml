@@ -23,12 +23,10 @@
 
 <definition name="ui.base.white" extends="ui.baseLayoutWithDefaultMenu">
 	<put-attribute name="backgroundColor" value="#FFFFFF" cascade="true"/>
-	<put-attribute name="contentStyle" value="whitecontent" cascade="true"/>
 </definition>
 
 <definition name="ui.base.red" extends="ui.baseLayoutWithDefaultMenu">
 	<put-attribute name="backgroundColor" value="#DB3F26" cascade="true"/>
-	<put-attribute name="contentStyle" value="redcontent" cascade="true"/>
 </definition>
 
 <!-- Home page -->
@@ -64,6 +62,16 @@
 
 <definition name="ui.error" extends="ui.base.white">
 	<put-attribute name="content" value="/WEB-INF/jsp/ui/error.jsp" cascade="true"/>
+</definition>
+
+<!-- Archive -->
+
+<definition name="ui.archive.story.detail" extends="ui.base.red">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/story-archive.jsp" cascade="true"/>
+</definition>
+
+<definition name="ui.archive.story.home" extends="ui.base.red">
+	<put-attribute name="content" value="/WEB-INF/jsp/ui/story-archive-home.jsp" cascade="true"/>
 </definition>
 
 <!-- Photogallery -->
