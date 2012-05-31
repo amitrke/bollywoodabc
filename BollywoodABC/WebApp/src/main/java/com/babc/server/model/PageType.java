@@ -13,8 +13,7 @@ public enum PageType {
 		Long pageId = new Long(0);
 		Long pageCacheId = new Long(0);
 		if (this == STORY || this == PHOTOGALLERY_DETAIL || this == PHOTO_DETAIL || this == TAG_DETAIL ){
-			pageId = getPageId(url);
-			pageCacheId = pageId;
+			pageCacheId = getPageId(url);
 		}
 		else if(this == BOLLYWOOD_LIST || this == STORY_ALL_LIST || this == HOLLYWOOD_LIST || this == TWEET_LIST || this == STORY_ARCHIVE){
 			pageId = getPageId(url);
