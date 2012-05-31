@@ -153,6 +153,17 @@
 	  <url-pattern>/_ah/mail/*</url-pattern>
 	</servlet-mapping>
 	
+	<!-- SOAP servlet -->
+	<servlet>
+  		<servlet-name>soapservlet</servlet-name>
+    	<servlet-class>com.babc.server.web.soap.SoapServlet</servlet-class>
+  	</servlet>
+	<servlet-mapping>
+    	<servlet-name>soapservlet</servlet-name>
+    	<url-pattern>/soapservice</url-pattern>
+  	</servlet-mapping>
+  	
+  	
 	<!-- XMPP incoming servlet -->
 	<servlet>
   		<servlet-name>xmppreceiver</servlet-name>

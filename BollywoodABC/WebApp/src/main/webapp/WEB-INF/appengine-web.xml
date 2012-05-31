@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
 	<application>bollyabc</application>
-	<version>babc-10-7</version>
+	<version>babc-soap-1</version>
 	<sessions-enabled>true</sessions-enabled>
 	<!-- Configure java.util.logging -->
 	<system-properties>
@@ -23,6 +23,8 @@
         <include path="/sitemap.xml" />
         <include path="/y_key_8c1641c49bd9e1ba.html" />
         <include path="/BingSiteAuth.xml" />
+        <include path="/SoapService.wsdl" />
+        <include path="/SoapService_schema1.xsd" />
     </static-files>
     
   	<threadsafe>true</threadsafe>

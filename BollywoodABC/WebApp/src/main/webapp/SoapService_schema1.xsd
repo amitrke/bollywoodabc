@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://soap.web.server.babc.com/" xmlns:tns="http://soap.web.server.babc.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="getRelatedStories" type="tns:getRelatedStories"/>
+
+  <xs:element name="getRelatedStoriesResponse" type="tns:getRelatedStoriesResponse"/>
+
+  <xs:element name="getTweets" type="tns:getTweets"/>
+
+  <xs:element name="getTweetsResponse" type="tns:getTweetsResponse"/>
+
+  <xs:element name="version" type="tns:version"/>
+
+  <xs:element name="versionResponse" type="tns:versionResponse"/>
+
+  <xs:complexType name="getTweets">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTweetsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRelatedStories">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRelatedStoriesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:story" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="story">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="version">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="versionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
