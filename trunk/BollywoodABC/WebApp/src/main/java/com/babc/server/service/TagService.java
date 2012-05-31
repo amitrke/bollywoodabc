@@ -14,7 +14,6 @@ import com.babc.server.dao.StoryDao;
 import com.babc.server.dao.TagCrossRefDao;
 import com.babc.server.dao.TagDao;
 import com.babc.server.model.CategoryEntity;
-import com.babc.server.model.PageType;
 import com.babc.server.model.Paging;
 import com.babc.server.model.PictureEntity;
 import com.babc.server.model.StoryEntity;
@@ -80,10 +79,7 @@ public class TagService {
 			
 			//Remove related cache
 			Long pageId = crossRefEntity.getTagId();
-			String mostSigDigits = Integer.toString(PageType.TAG_DETAIL.ordinal()*10);
-			String restOfTheDigits = pageId.toString();
-			Long pageCacheId = Long.parseLong(mostSigDigits+restOfTheDigits);
-			pageCacheDao.remove(pageCacheId);
+			pageCacheDao.remove(pageId);
 			
 			refEntity = tagCrossRefDao.save(crossRefEntity);
 		}
@@ -245,6 +241,20 @@ public class TagService {
 			}
 		}
 		tag.setRelatedStories(relatedStories);
+	}
+	
+	public List<StoryEntity> getRelatedStories(Long tagId){
+		List<StoryEntity> relatedStories = new ArrayList<StoryEntity>();
+		List<TagCrossRefEntity> crossRefEntities = tagCrossRefDao.getByTagId(tagId, 
+				TagCrossRefEntity.STORY, 10);
+		
+		for(TagCrossRefEntity crossRefEntity: crossRefEntities){
+			StoryEntity storyEntity = storyDao.getById(crossRefEntity.getEntityId());
+			if (!relatedStories.contains(storyEntity) &&  storyEntity!=null){
+				relatedStories.add(storyEntity);
+			}
+		}
+		return relatedStories;
 	}
 	
 	/**

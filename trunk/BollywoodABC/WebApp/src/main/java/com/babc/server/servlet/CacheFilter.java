@@ -105,12 +105,12 @@ public class CacheFilter extends AbstractFilter {
 			FilterChain chain, PrintWriter out) throws IOException, ServletException{
 		Long pageCacheId = pageType.getPageCacheId(url);
 		LOGGER.debug("PageType identified as " + pageType.name()+", pageCacheId="+pageCacheId);
-		PageCacheEntity pageCacheEntity = getCache(pageCacheId, request,
+		PageCacheEntity pageCacheEntity = getCache(pageType, pageCacheId, request,
 				response, chain);
 		out.print(pageCacheEntity.getData());
 	}
 	
-	private PageCacheEntity getCache(Long pageCacheId, ServletRequest request,
+	private PageCacheEntity getCache(PageType pageType, Long pageCacheId, ServletRequest request,
 			ServletResponse response, FilterChain chain) throws IOException,
 			ServletException {
 		boolean dbReadOverQuota = false;
@@ -138,7 +138,7 @@ public class CacheFilter extends AbstractFilter {
 //				pageCacheEntity = new PageCacheEntity(pageCacheId,
 //						gzip(responseWrapper.toString()));
 				pageCacheEntity = new PageCacheEntity(pageCacheId,
-						responseWrapper.toString());
+						responseWrapper.toString(), pageType.name());
 
 				if(!dbReadOverQuota){
 
