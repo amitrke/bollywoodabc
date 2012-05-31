@@ -2,6 +2,7 @@ package com.babc.server.model;
 
 import static com.babc.server.utils.EntityUtil.getDateProperty;
 import static com.babc.server.utils.EntityUtil.getTextProperty;
+import static com.babc.server.utils.EntityUtil.getStringProperty;
 import static com.babc.server.utils.EntityUtil.setProperty;
 
 import java.util.Date;
@@ -15,6 +16,7 @@ public class PageCacheEntity extends BaseEntityImpl{
 	private static final long serialVersionUID = 1L;
 	
 	private Date createDate;
+	private String pageType;
 	private String data;
 	
 
@@ -26,6 +28,7 @@ public class PageCacheEntity extends BaseEntityImpl{
 		super.save(entity);
 		setProperty(entity, "createDate", createDate, true);
 		setProperty(entity, "data", new Text(data));
+		setProperty(entity, "pageType", pageType, true);
 	}
 
 	@Override
@@ -33,13 +36,15 @@ public class PageCacheEntity extends BaseEntityImpl{
 		super.load(entity);
 		createDate = getDateProperty(entity, "createDate");
 		data = getTextProperty(entity, "data");
+		pageType = getStringProperty(entity, pageType);
 	}
 
-	public PageCacheEntity(Long pageCacheId, String data) {
+	public PageCacheEntity(Long pageCacheId, String data, String pageType) {
 		super();
 		this.setId(pageCacheId);
 		this.data = data;
 		this.createDate = new Date();
+		this.pageType = pageType;
 	}
 	
 	public boolean isValid(){
