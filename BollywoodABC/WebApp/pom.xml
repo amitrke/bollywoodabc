@@ -334,11 +334,6 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.restlet.jse</groupId>
-			<artifactId>org.restlet.ext.gwt</artifactId>
-			<version>2.0.0</version>
-		</dependency>
 	</dependencies>
 
 	<build>
