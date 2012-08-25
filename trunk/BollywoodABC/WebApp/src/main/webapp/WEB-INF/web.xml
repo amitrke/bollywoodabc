@@ -131,21 +131,6 @@
         </auth-constraint>
     </security-constraint>
 	
-	<!-- REST -->
-	<servlet>
-		<servlet-name>restserver</servlet-name>
-		<servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
-		<init-param>
-			<param-name>org.restlet.application</param-name>
-			<param-value>org.restlet.example.serialization.gae.server.TestServerApplication</param-value>
-		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>restserver</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
-	
 	<!-- Mail fetch servlets -->
 	<servlet>
 	  <servlet-name>subscribeNewsLetterHandler</servlet-name>
